@@ -1,7 +1,6 @@
 .grid-home {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 3em;
 }
 .buttons {
   display: grid;
@@ -22,7 +21,10 @@
   padding: 1.2em 4em;
 }
 .spacing {
-  margin: 5em;
+  margin: 6em;
+}
+.left {
+  margin-left: 8em;
 }
 .overview-wrapper {
   display: flex;

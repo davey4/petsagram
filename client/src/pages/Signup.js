@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
 
-const Signup = () => {
+const Signup = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
@@ -32,6 +32,14 @@ const Signup = () => {
     e.preventDefault();
     if (name && email && userName && password) {
       try {
+        const data = {
+          name,
+          email,
+          userName,
+          password,
+        };
+        //await __RegisterUser(data)
+        props.history.push("/login");
       } catch (error) {
         throw error;
       }
@@ -39,7 +47,6 @@ const Signup = () => {
       setFormError(true);
     }
   };
-
   return (
     <section className="signup">
       <form onSubmit={handleSubmit}>
