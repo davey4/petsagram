@@ -8,7 +8,7 @@ const Home = () => {
       <header className="home-header">
         <h1>Petsagram</h1>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9IVfRqOYKYMRpf8tQ0_KCHP_VRo1O6xL2ow&usqp=CAU"
+          src="https://cdn.pixabay.com/photo/2014/04/03/11/50/paw-312322__340.png"
           alt="logo"
         />
       </header>
@@ -28,7 +28,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="overview-wrapper">
+        <div className="overview-wrapper spacing">
           Petstagram is an online photo-sharing app that allows you to share
           your favorite photos of your pets to your followers. Petstagram will
           allow you to follow any of the users on our application by simply

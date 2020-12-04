@@ -1,7 +1,3 @@
-body {
-  background-image: url();
-}
-
 .grid-home {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -26,7 +22,7 @@ body {
   padding: 1.2em 4em;
 }
 .spacing {
-  margin: 5em 10em;
+  margin: 5em;
 }
 .overview-wrapper {
   display: flex;

@@ -4,22 +4,14 @@ import TextInput from "../components/TextInput";
 import "../styles/Login.css";
 
 const Login = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(false);
 
   const handleChange = ({ target }) => {
     switch (true) {
-      case target.name === "name":
-        setName(target.value);
-        break;
       case target.name === "email":
         setEmail(target.value);
-        break;
-      case target.name === "userName":
-        setUserName(target.value);
         break;
       case target.name === "password":
         setPassword(target.value);
@@ -42,27 +34,11 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
         <TextInput
-          placeholder="NAME"
-          title="NAME"
-          name="name"
-          type="text"
-          value={name}
-          onChange={handleChange}
-        />
-        <TextInput
           placeholder="Email"
           title="EMAIL"
           name="email"
           type="email"
           value={email}
-          onChange={handleChange}
-        />
-        <TextInput
-          placeholder="USERNAME"
-          title="USERNAME"
-          name="userName"
-          type="text"
-          value={userName}
           onChange={handleChange}
         />
         <TextInput
