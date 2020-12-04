@@ -17,7 +17,7 @@ const Home = () => {
           <h3>Getting Started</h3>
           <div className="hero buttons">
             <div>
-              <div className="hero-action spacing">
+              <div className="hero-action left spacing">
                 {<Link to="/login">Login</Link>}
               </div>
             </div>
