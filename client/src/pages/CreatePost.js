@@ -1,6 +1,6 @@
-import react from "react";
+import React from "react";
 
-const CreatePost = () => {
+const CreatePost = (props) => {
   return (
     <section>
       <div>Create Post</div>
