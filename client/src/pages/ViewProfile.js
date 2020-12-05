@@ -1,6 +1,6 @@
 import React from "react";
 
-const ViewProfile = () => {
+const ViewProfile = (props) => {
   return (
     <section>
       <div>View Profile</div>

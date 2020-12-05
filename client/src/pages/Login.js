@@ -30,7 +30,7 @@ const Login = (props) => {
       };
       //const loginData = await __LoginUser(data)
       // this.props.toggleAuthenticated(true, loginData.user, () =>
-      props.history.push("/feed");
+      props.history.push("/explore");
       // );
     } catch (error) {
       setFormError(true);
