@@ -56,6 +56,15 @@ const Router = () => {
               </Layout>
             )}
           />
+          <Route
+            auth={auth}
+            path="/profile/:user_id"
+            component={(props) => (
+              <Layout currentUser={currentUser} auth={auth}>
+                <ViewProfile {...props} currentUser={currentUser} />
+              </Layout>
+            )}
+          />
         </Switch>
       )}
     </main>

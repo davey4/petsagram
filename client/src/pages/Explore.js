@@ -7,16 +7,21 @@ const Explore = (props) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    // getPosts()
+    // getRecentPosts()
   }, []);
 
   const handleChange = ({ target }) => {
     setSearch(target.value);
   };
 
+  const goToProfile = (user) => {
+    // console.log(user)
+    // props.history.push(`/profile/${user_id}`)
+  };
+
   return (
-    <section>
-      <div className="center">
+    <section className="center">
+      <div>
         <form>
           <TextInput
             type="text"
@@ -27,15 +32,14 @@ const Explore = (props) => {
           />
         </form>
       </div>
-      {posts
+      {posts.length > 1
         ? posts.map((element) => (
-            <div key={element.id}>
+            <div key={element.id} onClick={() => goToProfile(element.user_id)}>
               <Posts
                 img={element.image}
                 userName={element.userName}
                 description={element.description}
-                commentId={element.commentId}
-                postId={element.postId}
+                postId={element.id}
                 currentUser={props.currentUser}
               />
             </div>
