@@ -36,10 +36,7 @@ button {
   transition: all 0.2s ease;
   cursor: pointer;
 }
-.flex {
-  display: flexbox;
-  flex-direction: column;
-}
+
 .text-input {
   justify-content: center;
   align-items: center;
@@ -48,4 +45,12 @@ button {
   font-weight: 650;
   width: 2em;
   margin-bottom: -4em;
+}
+.center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  padding: 0;
 }
