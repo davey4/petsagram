@@ -2,12 +2,10 @@ const { Like } = require("../models");
 
 const CreateLike = async (req, res) => {
   try {
-    let postId = parseInt(req.params.post_id);
-    let likeBody = {
-      postId,
-      ...req.body,
-    };
-    let like = await Like.create(likeBody);
+    const like = await Like.create({
+      user_id: req.params.user_id,
+      post_id: req.params.post_id,
+    });
     res.send(like);
   } catch (error) {
     throw error;
@@ -16,7 +14,7 @@ const CreateLike = async (req, res) => {
 
 const GetLikes = async (req, res) => {
   try {
-    const likes = await Like.findOne({
+    const likes = await Like.findAll({
       where: { post_id: req.params.post_id },
     });
     res.send(likes);

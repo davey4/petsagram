@@ -12,6 +12,6 @@ Router.get("/following/:user_id", controller.GetFollowing);
 
 Router.post("/register", controller.CreateUser);
 Router.post("/login", controller.LoginUser);
-Router.get("/refresh", controller.RefreshSession);
+Router.get("/refresh/session", controller.RefreshSession);
 
 module.exports = Router;
