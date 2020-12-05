@@ -65,6 +65,15 @@ const Router = () => {
               </Layout>
             )}
           />
+          <Route
+            auth={auth}
+            path="/create/post"
+            component={(props) => (
+              <Layout currentUser={currentUser} auth={auth}>
+                <CreatePost {...props} currentUser={currentUser} />
+              </Layout>
+            )}
+          />
         </Switch>
       )}
     </main>
