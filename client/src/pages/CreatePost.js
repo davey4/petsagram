@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Uploader from "../components/Uploader";
 import Images from "../components/Images";
 import TextInput from "../components/TextInput";
-// import e from "express";
+import "../styles/Posts.css";
 
 const CreatePost = (props) => {
   const [image, setImage] = useState("");

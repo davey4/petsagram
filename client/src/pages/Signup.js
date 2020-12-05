@@ -38,7 +38,7 @@ const Signup = (props) => {
           userName,
           password,
         };
-        //await __RegisterUser(data)
+        //CreateUser(data)
         props.history.push("/login");
       } catch (error) {
         throw error;
