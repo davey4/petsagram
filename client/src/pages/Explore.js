@@ -7,8 +7,17 @@ const Explore = (props) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    // getRecentPosts()
+    getRecentPosts();
   }, []);
+
+  const getRecentPosts = async () => {
+    try {
+      // const data =
+      // setPosts(data)
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const handleChange = ({ target }) => {
     setSearch(target.value);
@@ -16,7 +25,7 @@ const Explore = (props) => {
 
   const goToProfile = (user) => {
     // console.log(user)
-    // props.history.push(`/profile/${user_id}`)
+    // props.history.push(`/profile/${user}`)
   };
 
   return (
