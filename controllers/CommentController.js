@@ -15,7 +15,7 @@ const CreateComment = async (req, res) => {
 
 const GetComments = async (req, res) => {
   try {
-    const comment = await Comment.findOne({
+    const comment = await Comment.findAll({
       where: { post_id: req.params.post_id },
     });
     res.send(comment);

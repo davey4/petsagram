@@ -22,7 +22,7 @@ const GetAllPosts = async (req, res) => {
 
 const GetPostsByUserId = async (req, res) => {
   try {
-    const post = await Post.findOne({
+    const post = await Post.findAll({
       where: { user_id: req.params.user_id },
     });
     res.send(post);
