@@ -36,6 +36,21 @@ export const __GetAllPostsAndOrderByRecent = async () => {
   }
 };
 
+export const __GetPostsOfUserFollowings = async (
+  userId,
+  followingId,
+  postId
+) => {
+  try {
+    const res = await ApiClient.get(
+      `/posts/${userId}/${followingId}/${postId}`
+    );
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const __UpdatePost = async (formData, postId) => {
   try {
     const res = await ApiClient.put(`/posts/${postId}`, formData);
