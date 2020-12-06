@@ -66,7 +66,7 @@ export const __CreateUser = async (formData) => {
 export const __LoginUser = async (formData) => {
   try {
     const res = await ApiClient.post("/users/login", formData);
-    // localStorage.setItem('token', res.data.token)
+    localStorage.setItem("token", res.data.token);
     return res.data;
   } catch (error) {
     throw error;

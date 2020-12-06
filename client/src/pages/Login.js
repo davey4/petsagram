@@ -29,7 +29,7 @@ const Login = (props) => {
         password,
       };
       //const loginData = await __LoginUser(data)
-      // this.props.toggleAuthenticated(true, loginData.user, () =>
+      // props.toggleAuthenticated(true, loginData.user, () =>
       props.history.push("/explore");
       // );
     } catch (error) {
