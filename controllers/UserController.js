@@ -1,4 +1,5 @@
 const { User, Post, Follower } = require("../models");
+const { hashPassword, passwordValid, createToken } = require("../middleware");
 
 const GetAllUsers = async (req, res) => {
   try {
@@ -87,7 +88,9 @@ const GetFollowing = async (req, res) => {
 
 const CreateUser = async (req, res) => {
   try {
-    const { name, email, user_name, password_digest } = req.body;
+    const { name, email, userName, password } = req.body;
+    const user_name = userName;
+    const password_digest = await hashPassword(password);
     const user = await User.create({ name, email, user_name, password_digest });
     res.send(user);
   } catch (error) {
@@ -99,15 +102,16 @@ const LoginUser = async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
+      raw: true
     });
-    if (user && req.body.password_digest === user.password_digest) {
+    if (user && (await passwordValid(req.body.password === user.password_digest))) {
       const payload = {
-        _id: user.id,
+        id: user.id,
+        userName = user.user_name
       };
-      res.locals.payload = payload;
-      return next();
+      let token = createToken(payload)
+      return res.send({user, token})
     }
-    res.send(user);
   } catch (error) {
     throw error;
   }
@@ -115,6 +119,11 @@ const LoginUser = async (req, res, next) => {
 
 const RefreshSession = async (req, res) => {
   try {
+    const {token} = res.locals
+    const user = await User.findbyPk(token.id, {
+      attributes: ['id', 'name', 'user_name', 'email']
+    })
+    res.send({user, status: 'OK'})
   } catch (error) {
     throw error;
   }

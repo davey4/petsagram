@@ -15,7 +15,7 @@ const CreateComment = async (req, res) => {
 
 const GetComments = async (req, res) => {
   try {
-    const comment = await Comment.findOne({
+    const comment = await Comment.findAll({
       where: { post_id: req.params.post_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
