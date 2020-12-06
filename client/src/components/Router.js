@@ -74,10 +74,10 @@ const Router = () => {
             )}
           />
           <Route
-            auth={auth}
+            authenticated={authenticated}
             path="/profile"
             component={(props) => (
-              <Layout currentUser={currentUser} auth={auth}>
+              <Layout currentUser={currentUser} authenticated={authenticated}>
                 <UserProfile {...props} currentUser={currentUser} />
               </Layout>
             )}
