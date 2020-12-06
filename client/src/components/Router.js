@@ -13,17 +13,35 @@ import ViewProfile from "../pages/ViewProfile";
 const Router = () => {
   const [loading, updateLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState("Dave");
-  const [auth, setAuth] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     updateLoading(false);
-    verifyTokenValid();
+    // verifyTokenValid();
   }, []);
 
-  const verifyTokenValid = async () => {};
+  // verifyTokenValid = async () => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     try {
+  //       const session = await __CheckSession();
+  //       // console.log("session", session);
+  //       this.setState(
+  //         {
+  //           currentUser: session.user,
+  //           authenticated: true,
+  //         },
+  //         () => this.props.history.push("/profile")
+  //       );
+  //     } catch (error) {
+  //       this.setState({ currentUser: null, authenticated: false });
+  //       localStorage.clear();
+  //     }
+  //   }
+  // };
 
   // const toggleAuth = (value, user, done) => {
-  //   setAuth(value), setCurrentUser(user), () => done();
+  //   setAuthenticated(value), setCurrentUser(user), () => done();
   // };
 
   return (
@@ -37,12 +55,20 @@ const Router = () => {
             path="/register"
             component={(props) => <Signup {...props} />}
           />
-          <Route path="/login" component={(props) => <Login {...props} />} />
           <Route
-            auth={auth}
+            path="/login"
+            component={(props) => (
+              <Login
+                // toggleAuthenticated={toggleAuthenticated}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            authenticated={authenticated}
             path="/explore"
             component={(props) => (
-              <Layout currentUser={currentUser} auth={auth}>
+              <Layout currentUser={currentUser} authenticated={authenticated}>
                 <Explore {...props} currentUser={currentUser} />
               </Layout>
             )}
@@ -57,19 +83,19 @@ const Router = () => {
             )}
           />
           <Route
-            auth={auth}
+            authenticated={authenticated}
             path="/profile/:user_id"
             component={(props) => (
-              <Layout currentUser={currentUser} auth={auth}>
+              <Layout currentUser={currentUser} authenticated={authenticated}>
                 <ViewProfile {...props} currentUser={currentUser} />
               </Layout>
             )}
           />
           <Route
-            auth={auth}
+            authenticated={authenticated}
             path="/create/post"
             component={(props) => (
-              <Layout currentUser={currentUser} auth={auth}>
+              <Layout currentUser={currentUser} authenticated={authenticated}>
                 <CreatePost {...props} currentUser={currentUser} />
               </Layout>
             )}
