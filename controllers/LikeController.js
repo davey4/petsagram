@@ -1,4 +1,4 @@
-const { Like } = require("../models");
+const { User, Like } = require("../models");
 
 const CreateLike = async (req, res) => {
   try {
@@ -16,6 +16,9 @@ const GetLikes = async (req, res) => {
   try {
     const likes = await Like.findAll({
       where: { post_id: req.params.post_id },
+      include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+      ],
     });
     res.send(likes);
   } catch (error) {

@@ -1,4 +1,4 @@
-const { Comment } = require("../models");
+const { User, Comment } = require("../models");
 
 const CreateComment = async (req, res) => {
   try {
@@ -17,6 +17,9 @@ const GetComments = async (req, res) => {
   try {
     const comment = await Comment.findOne({
       where: { post_id: req.params.post_id },
+      include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+      ],
     });
     res.send(comment);
   } catch (error) {

@@ -2,7 +2,11 @@ const { User, Post, Follower } = require("../models");
 
 const GetAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+      ],
+    });
     res.send(users);
   } catch (error) {
     throw error;
@@ -13,6 +17,7 @@ const GetUser = async (req, res) => {
   try {
     const user = await User.findbyPk(req.params.user_id, {
       include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
         { model: Post, as: "posts" },
         { model: User, as: "followers" },
         { model: User, as: "following" },
@@ -56,6 +61,9 @@ const GetFollowers = async (req, res) => {
   try {
     const followers = await Follower.findAll({
       where: { following_id: req.params.following_id },
+      include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+      ],
     });
     res.send(followers);
   } catch (error) {
@@ -67,6 +75,9 @@ const GetFollowing = async (req, res) => {
   try {
     const following = await Follower.findAll({
       where: { user_id: req.params.user_id },
+      include: [
+        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+      ],
     });
     res.send(following);
   } catch (error) {
