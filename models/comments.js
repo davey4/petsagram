@@ -20,17 +20,34 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Comments.init(
-    {
-      description: DataTypes.STRING,
-      post_id: DataTypes.INTEGER,
-      user_id: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "Comments",
-      tableName: "comments",
-    }
-  );
-  return Comments;
 };
+Comments.init(
+  {
+    description: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    post_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: "posts",
+        key: "id",
+      },
+    },
+    user_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    modelName: "Comments",
+    tableName: "comments",
+  }
+);
+return Comments;

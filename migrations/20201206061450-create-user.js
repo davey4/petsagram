@@ -10,23 +10,32 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: true,
+        },
       },
       user_name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       password_digest: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
     });
   },
@@ -34,3 +43,4 @@ module.exports = {
     await queryInterface.dropTable("users");
   },
 };
+//referencing

@@ -22,8 +22,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   Followers.init(
     {
-      user_id: DataTypes.INTEGER,
-      following_id: DataTypes.INTEGER,
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      following_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
@@ -33,3 +43,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Followers;
 };
+//referencing
