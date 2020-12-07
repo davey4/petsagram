@@ -2,10 +2,9 @@ const { User, Likes } = require("../models");
 //working
 const CreateLike = async (req, res) => {
   try {
-    let like_id = parseInt(req.params.like_id);
     let user_id = parseInt(req.params.user_id);
     let post_id = parseInt(req.params.post_id);
-    let likeBody = { like_id, user_id, post_id };
+    let likeBody = { user_id, post_id };
     const like = await Likes.create(likeBody);
     res.send(like);
   } catch (error) {
