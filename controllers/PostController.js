@@ -52,7 +52,7 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
         { model: Comments },
-        { model: Likes },
+        { model: Likes, include: [{ model: User, attributes: ["user_name"] }] },
       ],
     });
     res.send(recents);

@@ -2,13 +2,13 @@ const { User, Comments } = require("../models");
 //working
 const CreateComment = async (req, res) => {
   try {
-    let comment_id = parseInt(req.params.comment_id);
     let user_id = parseInt(req.params.user_id);
     let post_id = parseInt(req.params.post_id);
-    let description = req.body.description;
-    let commentBody = { comment_id, description, user_id, post_id };
-    const comment = await Comments.create(commentBody);
-    res.send(comment);
+    let description = req.body;
+    console.log("body", req.body);
+    let commentBody = { user_id, post_id };
+    // const comment = await Comments.create(commentBody);
+    res.send("comment");
   } catch (error) {
     throw error;
   }

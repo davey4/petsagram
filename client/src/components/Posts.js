@@ -6,20 +6,15 @@ import { __CreateComment } from "../services/CommentService";
 export default (props) => {
   const [comments, setComments] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [addComment, setAddComment] = useState("");
+  const [description, setAddComment] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  console.log(props.post);
+  console.log(props.post.id);
 
   useEffect(() => {
-    // getComments()
-    // getLikes()
+    setComments(props.post.Comments);
+    setLikes(props.post.Likes);
   }, []);
-
-  const handleGetComments = (e) => {
-    e.preventDefault();
-    setClicked(true);
-  };
 
   const handleCommentChange = ({ target }) => {
     setAddComment(target.value);
@@ -27,8 +22,9 @@ export default (props) => {
 
   const handleAddComment = async (e) => {
     e.preventDefault();
+    // console.log(description);
     try {
-      // await __CreateComment(props.currentUser, props.postId, createComment)
+      await __CreateComment(props.currentUser, props.post.id, description);
     } catch (error) {
       throw error;
     }
@@ -64,7 +60,7 @@ export default (props) => {
       <div>
         <button>Like</button>
         {displayLikes}
-        <button onClick={handleGetComments}>Comments</button>
+        <button onClick={() => setClicked(true)}>Comments</button>
         <button onClick={() => setCreateComment(true)}>Add Comment</button>
       </div>
       {createComment ? (
@@ -72,7 +68,7 @@ export default (props) => {
           <TextInput
             type="text"
             name="comment"
-            value={addComment}
+            value={description}
             onChange={handleCommentChange}
             placeholder="add comment"
           />
@@ -84,7 +80,7 @@ export default (props) => {
           <div id={element.id}>
             <Comment
               commentor={element.id}
-              description={element.desccription}
+              description={element.description}
               postid={props.postId}
               currentUser={props.currentUser}
             />
