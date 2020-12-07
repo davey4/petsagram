@@ -1,38 +1,38 @@
-
 const { User, Comments } = require("../models");
-
+//working
 const CreateComment = async (req, res) => {
   try {
-    const comment = await Comments.create({
-      ...req.body,
-      userId: req.body.user_id,
-      postId: req.body.post_id,
-    });
+    let comment_id = parseInt(req.params.comment_id);
+    let user_id = parseInt(req.params.user_id);
+    let post_id = parseInt(req.params.post_id);
+    let description = req.body.description;
+    let commentBody = { comment_id, description, user_id, post_id };
+    const comment = await Comments.create(commentBody);
     res.send(comment);
   } catch (error) {
     throw error;
   }
 };
-
+//working
 const GetComments = async (req, res) => {
   try {
     const comment = await Comments.findAll({
       where: { post_id: req.params.post_id },
-      include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-      ],
+      include: [{ model: User, attributes: ["id", "name", "user_name"] }],
     });
     res.send(comment);
   } catch (error) {
     throw error;
   }
 };
-
+//working
 const UpdateComment = async (req, res) => {
   try {
-    let commentId = parseInt(req.params.comment_id);
-    let updatedComment = await Comments.update(req.body, {
-      where: { id: commentId },
+    let comment_id = parseInt(req.params.comment_id);
+    let description = req.body.description;
+    let commentBody = { comment_id, description };
+    let updatedComment = await Comments.update(commentBody, {
+      where: { id: comment_id },
       returning: true,
     });
     res.send(updatedComment);
@@ -40,7 +40,7 @@ const UpdateComment = async (req, res) => {
     throw error;
   }
 };
-
+//working
 const DeleteComment = async (req, res) => {
   try {
     await Comments.destroy({

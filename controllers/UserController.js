@@ -1,11 +1,11 @@
 const { User, Post, Followers } = require("../models");
-
 const {
   hashPassword,
   passwordValid,
   createToken,
 } = require("../middleware/index");
 
+// working
 const GetAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();

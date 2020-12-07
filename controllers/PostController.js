@@ -1,5 +1,4 @@
 const { User, Post, Comments, Likes } = require("../models");
-
 // working
 const CreatePost = async (req, res) => {
   try {
@@ -80,12 +79,15 @@ const GetPostsOfUserFollowings = async (req, res) => {
     throw error;
   }
 };
-
+//working
 const UpdatePost = async (req, res) => {
   try {
-    let postId = parseInt(req.params.post_id);
-    let updatedPost = await Post.update(req.body, {
-      where: { id: postId },
+    let post_id = parseInt(req.params.post_id);
+    let image = req.body.image;
+    let description = req.body.description;
+    let postBody = { post_id, image, description };
+    let updatedPost = await Post.update(postBody, {
+      where: { id: post_id },
       returning: true,
     });
     res.send(updatedPost);
@@ -93,7 +95,7 @@ const UpdatePost = async (req, res) => {
     throw error;
   }
 };
-
+//working
 const DeletePost = async (req, res) => {
   try {
     let postId = parseInt(req.params.post_id);
