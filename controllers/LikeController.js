@@ -2,7 +2,7 @@ const { User, Likes } = require("../models");
 
 const CreateLike = async (req, res) => {
   try {
-    const like = await Like.create({
+    const like = await Likes.create({
       user_id: req.params.user_id,
       post_id: req.params.post_id,
     });
@@ -14,7 +14,7 @@ const CreateLike = async (req, res) => {
 
 const GetLikes = async (req, res) => {
   try {
-    const likes = await Like.findAll({
+    const likes = await Likes.findAll({
       where: { post_id: req.params.post_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
@@ -29,7 +29,7 @@ const GetLikes = async (req, res) => {
 const DeleteLikes = async (req, res) => {
   try {
     let likeId = parseInt(req.params.like_id);
-    await Like.destroy({ where: { id: likeId } });
+    await Likes.destroy({ where: { id: likeId } });
     res.send({ message: `Like #${likeId} deleted.` });
   } catch (error) {
     throw error;
