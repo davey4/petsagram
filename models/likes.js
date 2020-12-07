@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         onUpdate: "cascade",
       });
+
       Likes.belongsTo(models.Post, {
         foreignKey: "post_id",
         onDelete: "cascade",
