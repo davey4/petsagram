@@ -4,6 +4,7 @@ const { readToken, verifyJwt } = require("../middleware");
 
 Router.get("/allusers", controller.GetAllUsers);
 Router.get("/:user_id", controller.GetUser);
+Router.get("/name/:user_name", controller.GetUserByName);
 
 Router.post("/follow/:user_id/:user_following_id", controller.FollowUser);
 Router.delete("/unfollow/:user_id/:user_following_id", controller.UnfollowUser);

@@ -9,6 +9,15 @@ export const __GetAllUsers = async () => {
   }
 };
 
+export const __GetUserByName = async (userName) => {
+  try {
+    const res = await ApiClient.get(`/users/name/${userName}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const __GetUser = async (userId) => {
   try {
     const res = await ApiClient.get(`/users/${userId}`);
@@ -20,7 +29,7 @@ export const __GetUser = async (userId) => {
 
 export const __FollowUser = async (userId, followingId) => {
   try {
-    const res = await ApiClient.put(`/users/follow/${userId}/${followingId}`);
+    const res = await ApiClient.post(`/users/follow/${userId}/${followingId}`);
     return res.data;
   } catch (error) {
     throw error;
@@ -29,7 +38,9 @@ export const __FollowUser = async (userId, followingId) => {
 
 export const __UnfollowUser = async (userId, followingId) => {
   try {
-    const res = await ApiClient.put(`/users/unfollow/${userId}/${followingId}`);
+    const res = await ApiClient.delete(
+      `/users/unfollow/${userId}/${followingId}`
+    );
     return res.data;
   } catch (error) {
     throw error;

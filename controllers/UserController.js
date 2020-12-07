@@ -14,6 +14,23 @@ const GetAllUsers = async (req, res) => {
     throw error;
   }
 };
+
+const GetUserByName = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { user_name: req.params.user_name },
+      include: [
+        { model: Post },
+        { model: User, as: "followers" },
+        { model: User, as: "following" },
+      ],
+    });
+    res.send(user);
+  } catch (error) {
+    throw error;
+  }
+};
+
 // working
 const GetUser = async (req, res) => {
   try {
@@ -43,13 +60,13 @@ const FollowUser = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const UnfollowUser = async (req, res) => {
   try {
     await Followers.destroy({
       where: {
         user_id: req.params.user_following_id,
-        follower_id: req.params.user_id,
+        following_id: req.params.user_id,
       },
     });
     res.send({
@@ -144,4 +161,5 @@ module.exports = {
   CreateUser,
   LoginUser,
   RefreshSession,
+  GetUserByName,
 };

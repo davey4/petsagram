@@ -45,7 +45,7 @@ const UserProfile = (props) => {
             <div key={element.id}>
               <Posts
                 img={element.image}
-                userName={element.userName}
+                userName={name}
                 description={element.description}
                 postId={element.postId}
                 currentUser={props.currentUser}
