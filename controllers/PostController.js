@@ -16,6 +16,8 @@ const GetAllPosts = async (req, res) => {
     const posts = await Post.findAll({
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(posts);
@@ -27,9 +29,12 @@ const GetAllPosts = async (req, res) => {
 const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
+      order: [["created_at", "DESC"]],
       where: { user_id: req.params.user_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(post);
@@ -44,6 +49,8 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
       order: [["created_at", "DESC"]],
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(recents);
