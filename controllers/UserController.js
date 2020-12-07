@@ -107,9 +107,9 @@ const GetFollowing = async (req, res) => {
 // working
 const CreateUser = async (req, res) => {
   try {
-    const { name, email, user_name, password_digest } = req.body;
-    // const user_name = userName;
-    // const password_digest = await hashPassword(password);
+    const { name, email, userName, password } = req.body;
+    const user_name = userName;
+    const password_digest = await hashPassword(password);
     const user = await User.create({ name, email, user_name, password_digest });
     res.send(user);
   } catch (error) {
