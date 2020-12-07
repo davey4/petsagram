@@ -9,11 +9,11 @@ export default (props) => {
   const [description, setAddComment] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  console.log(props.post);
+  console.log(props.post.id);
 
   useEffect(() => {
-    setComments(props.post.Comments)
-    setLikes(props.post.Likes)
+    setComments(props.post.Comments);
+    setLikes(props.post.Likes);
   }, []);
 
   const handleCommentChange = ({ target }) => {
@@ -22,8 +22,9 @@ export default (props) => {
 
   const handleAddComment = async (e) => {
     e.preventDefault();
+    // console.log(description);
     try {
-      await __CreateComment(props.currentUser, props.post.id, description)
+      await __CreateComment(props.currentUser, props.post.id, description);
     } catch (error) {
       throw error;
     }
