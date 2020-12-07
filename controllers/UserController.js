@@ -1,4 +1,4 @@
-const { User, Post, Follower } = require("../models");
+const { User, Post, Followers } = require("../models");
 const { hashPassword, passwordValid, createToken } = require("../middleware");
 
 const GetAllUsers = async (req, res) => {
@@ -32,7 +32,7 @@ const GetUser = async (req, res) => {
 
 const FollowUser = async (req, res) => {
   try {
-    const followers = await Follower.create({
+    const followers = await Followers.create({
       user_id: req.params.user_id,
       follower_id: req.params.user_following_id,
     });
@@ -44,7 +44,7 @@ const FollowUser = async (req, res) => {
 
 const UnfollowUser = async (req, res) => {
   try {
-    await Follower.destroy({
+    await Followers.destroy({
       where: {
         user_id: req.params.user_following_id,
         follower_id: req.params.user_id,
@@ -60,7 +60,7 @@ const UnfollowUser = async (req, res) => {
 
 const GetFollowers = async (req, res) => {
   try {
-    const followers = await Follower.findAll({
+    const followers = await Followers.findAll({
       where: { following_id: req.params.following_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
@@ -74,7 +74,7 @@ const GetFollowers = async (req, res) => {
 
 const GetFollowing = async (req, res) => {
   try {
-    const following = await Follower.findAll({
+    const following = await Followers.findAll({
       where: { user_id: req.params.user_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },

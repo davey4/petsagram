@@ -1,4 +1,4 @@
-const { User, Post, Comment } = require("../models");
+const { User, Post, Comments } = require("../models");
 
 const CreatePost = async (req, res) => {
   try {
@@ -62,7 +62,7 @@ const GetPostsOfUserFollowings = async (req, res) => {
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
         { model: Post, as: "posts", attributes: [] },
-        { model: Comment, as: "comments", attributes: [] },
+        { model: Comments, as: "comments", attributes: [] },
       ],
     });
     res.send(followingPost);
