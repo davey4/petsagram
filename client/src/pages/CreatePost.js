@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Uploader from "../components/Uploader";
 import Images from "../components/Images";
 import TextInput from "../components/TextInput";
 import "../styles/Posts.css";
 import { __CreatePost } from "../services/PostService";
-
+import { __GetUser } from "../services/UserService";
 
 const CreatePost = (props) => {
+  const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    getUser();
+  });
+
+  const getUser = async () => {
+    const user = await __GetUser(props.currentUser);
+    setName(user.user_name);
+  };
 
   const createPost = async (e) => {
     e.preventDefault();
     try {
       const data = { image, description };
       await __CreatePost(data, props.currentUser);
-      // props.history.push('/ex')
+      // props.history.push('/prolife')
 
       console.log("clicked");
     } catch (error) {
@@ -34,7 +43,7 @@ const CreatePost = (props) => {
 
   return (
     <section>
-      <h4>{props.currentUser}</h4>
+      <h4>{name}</h4>
       <div className="center">
         <div className="pic-buttons">
           <Uploader setImage={setImage} />
@@ -48,7 +57,6 @@ const CreatePost = (props) => {
             />
 
             <button type="submit">Post</button>
-
           </form>
         </div>
       </div>

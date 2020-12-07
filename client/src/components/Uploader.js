@@ -3,8 +3,6 @@ const CLOUD_NAME = "davey4";
 const UPLOAD_PRESET = "kstt8ubl";
 
 const Uploader = (props) => {
-  console.log(UPLOAD_PRESET);
-
   const widget = window.cloudinary.createUploadWidget(
     {
       cloudName: CLOUD_NAME,

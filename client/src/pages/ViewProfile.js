@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
+import { __GetUser } from "../services/UserService";
 
 const ViewProfile = (props) => {
   const [posts, setPosts] = useState([]);
@@ -13,36 +14,9 @@ const ViewProfile = (props) => {
 
   const getUser = async () => {
     try {
-      // const data =
+      // const data = await __GetUser(user);
       // setProfile(data)
       // getPostsByUser(profile.id)
-      getFollowers();
-      getFollowing();
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getPostsByUser = async () => {
-    try {
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getFollowers = async () => {
-    try {
-      // const data =
-      // setFollowers(data)
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getFollowing = async () => {
-    try {
-      // const data =
-      // setFollowings(data)
     } catch (error) {
       throw error;
     }
