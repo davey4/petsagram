@@ -1,4 +1,6 @@
+
 const { User, Post, Followers } = require("../models");
+
 const { hashPassword, passwordValid, createToken } = require("../middleware");
 
 const GetAllUsers = async (req, res) => {

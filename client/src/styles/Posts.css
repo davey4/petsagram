@@ -1,0 +1,40 @@
+.image-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.cloudPic {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  display: flex;
+  color: #61dafb;
+}
+
+.title img {
+  height: 15vh;
+  margin: auto 0 auto 0;
+}
+
+.pic-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5vw;
+}
+
+.pic-buttons button {
+  margin: 10px auto;
+  color: #d1f5ff;
+}
+
+.imgComponent {
+  color: white;
+}
+
+.cloudy {
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+}
