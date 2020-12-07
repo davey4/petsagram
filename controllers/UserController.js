@@ -1,27 +1,25 @@
-
 const { User, Post, Followers } = require("../models");
 
-const { hashPassword, passwordValid, createToken } = require("../middleware");
+const {
+  hashPassword,
+  passwordValid,
+  createToken,
+} = require("../middleware/index");
 
 const GetAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll({
-      include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-      ],
-    });
+    const users = await User.findAll();
     res.send(users);
   } catch (error) {
     throw error;
   }
 };
-
+// working
 const GetUser = async (req, res) => {
   try {
-    const user = await User.findbyPk(req.params.user_id, {
+    const user = await User.findByPk(req.params.user_id, {
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Post, as: "posts" },
+        { model: Post },
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
@@ -31,12 +29,14 @@ const GetUser = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const FollowUser = async (req, res) => {
+  const user_id = req.params.user_id;
+  const following_id = req.params.user_following_id;
   try {
     const followers = await Followers.create({
-      user_id: req.params.user_id,
-      follower_id: req.params.user_following_id,
+      user_id,
+      following_id,
     });
     res.send(followers);
   } catch (error) {
@@ -87,7 +87,7 @@ const GetFollowing = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const CreateUser = async (req, res) => {
   try {
     const { name, email, userName, password } = req.body;
@@ -99,33 +99,36 @@ const CreateUser = async (req, res) => {
     throw error;
   }
 };
-
-const LoginUser = async (req, res, next) => {
+// working
+const LoginUser = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
-      raw: true
+      raw: true,
     });
-    if (user && (await passwordValid(req.body.password === user.password_digest))) {
-      const payload = {
+    if (
+      user &&
+      (await passwordValid(req.body.password, user.password_digest))
+    ) {
+      let payload = {
         id: user.id,
-        userName = user.user_name
+        name: user.name,
       };
-      let token = createToken(payload)
-      return res.send({user, token})
+      let token = createToken(payload);
+      return res.send({ user, token });
     }
   } catch (error) {
     throw error;
   }
 };
-
+// working
 const RefreshSession = async (req, res) => {
   try {
-    const {token} = res.locals
-    const user = await User.findbyPk(token.id, {
-      attributes: ['id', 'name', 'user_name', 'email']
-    })
-    res.send({user, status: 'OK'})
+    const { token } = res.locals;
+    const user = await User.findByPk(token.id, {
+      attributes: ["id"], // Find a user by the id encoded in the json web token, only include the id, name and email fields
+    });
+    res.send({ user, status: "OK" });
   } catch (error) {
     throw error;
   }

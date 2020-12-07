@@ -4,7 +4,6 @@ import TextInput from "../components/TextInput";
 
 import { __CreateUser } from "../services/UserService";
 
-
 const Signup = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,7 +41,7 @@ const Signup = (props) => {
           password,
         };
 
-        // await __CreateUser(data);
+        await __CreateUser(data);
 
         props.history.push("/login");
       } catch (error) {

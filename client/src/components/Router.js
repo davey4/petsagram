@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { __CheckSession } from "../services/UserService";
+
+import ProtectedRoute from "./ProtectedRoute";
 
 import Layout from "../pages/Layout";
 import CreatePost from "../pages/CreatePost";
@@ -10,39 +13,35 @@ import Signup from "../pages/Signup";
 import UserProfile from "../pages/UserProfile";
 import ViewProfile from "../pages/ViewProfile";
 
-const Router = () => {
+const Router = (props) => {
   const [loading, updateLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState("Dave");
+  const [currentUser, setCurrentUser] = useState();
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     updateLoading(false);
-    // verifyTokenValid();
+    verifyTokenValid();
   }, []);
 
-  // verifyTokenValid = async () => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     try {
-  //       const session = await __CheckSession();
-  //       // console.log("session", session);
-  //       this.setState(
-  //         {
-  //           currentUser: session.user,
-  //           authenticated: true,
-  //         },
-  //         () => this.props.history.push("/profile")
-  //       );
-  //     } catch (error) {
-  //       this.setState({ currentUser: null, authenticated: false });
-  //       localStorage.clear();
-  //     }
-  //   }
-  // };
+  const verifyTokenValid = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const session = await __CheckSession();
+        console.log(session.user.id);
+        setCurrentUser(session.user.id);
+        setAuthenticated(true);
+        props.history.push("/explore");
+      } catch (error) {
+        localStorage.clear();
+      }
+    }
+  };
 
-  // const toggleAuth = (value, user, done) => {
-  //   setAuthenticated(value), setCurrentUser(user), () => done();
-  // };
+  const toggleAuthenticated = (value, user) => {
+    setAuthenticated(value);
+    setCurrentUser(user);
+  };
 
   return (
     <main>
@@ -58,13 +57,10 @@ const Router = () => {
           <Route
             path="/login"
             component={(props) => (
-              <Login
-                // toggleAuthenticated={toggleAuthenticated}
-                {...props}
-              />
+              <Login toggleAuthenticated={toggleAuthenticated} {...props} />
             )}
           />
-          <Route
+          <ProtectedRoute
             authenticated={authenticated}
             path="/explore"
             component={(props) => (
@@ -73,7 +69,7 @@ const Router = () => {
               </Layout>
             )}
           />
-          <Route
+          <ProtectedRoute
             authenticated={authenticated}
             path="/profile"
             component={(props) => (
@@ -82,7 +78,7 @@ const Router = () => {
               </Layout>
             )}
           />
-          <Route
+          <ProtectedRoute
             authenticated={authenticated}
             path="/profile/:user_id"
             component={(props) => (
@@ -91,7 +87,7 @@ const Router = () => {
               </Layout>
             )}
           />
-          <Route
+          <ProtectedRoute
             authenticated={authenticated}
             path="/create/post"
             component={(props) => (

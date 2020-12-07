@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
+import { __GetUser } from "../services/UserService";
 
 export default ({ currentUser }) => {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    const user = await __GetUser(currentUser);
+    setUser(user.name);
+  };
+
   return (
     <header className="nav-header">
       <div className="icon">
         <nav>
           <NavLink className="nav-active" to="/profile">
-            {currentUser}
+            {user}
           </NavLink>
           <NavLink
             className="nav-active"
