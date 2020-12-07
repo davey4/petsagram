@@ -1,6 +1,12 @@
 # petsagram
+***
+### Group
 
-#### Group: David Martel, Tyler Klafke, Jady Hom
+David Martel [Github](https://github.com/davey4) | [LinkedIn](https://www.linkedin.com/in/david-martel-8117981b9/)
+
+Tyler Klafke [Github](https://github.com/tklaf) | [LinkedIn]()
+
+Jady Hom [Github](https://github.com/jadyhome) | [LinkedIn](www.linkedin.com/in/jadyhom)
 
 ***
 
