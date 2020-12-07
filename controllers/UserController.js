@@ -1,11 +1,11 @@
 const { User, Post, Followers } = require("../models");
-
 const {
   hashPassword,
   passwordValid,
   createToken,
 } = require("../middleware/index");
 
+// working
 const GetAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
@@ -45,11 +45,13 @@ const FollowUser = async (req, res) => {
 };
 
 const UnfollowUser = async (req, res) => {
+  const user_id = req.params.user_id;
+  const following_id = req.params.user_following_id;
   try {
     await Followers.destroy({
       where: {
-        user_id: req.params.user_following_id,
-        follower_id: req.params.user_id,
+        user_id,
+        following_id,
       },
     });
     res.send({
@@ -90,9 +92,9 @@ const GetFollowing = async (req, res) => {
 // working
 const CreateUser = async (req, res) => {
   try {
-    const { name, email, userName, password } = req.body;
-    const user_name = userName;
-    const password_digest = await hashPassword(password);
+    const { name, email, user_name, password_digest } = req.body;
+    // const user_name = userName;
+    // const password_digest = await hashPassword(password);
     const user = await User.create({ name, email, user_name, password_digest });
     res.send(user);
   } catch (error) {
