@@ -1,5 +1,6 @@
 const { User, Post, Comments, Likes } = require("../models");
 
+// working
 const CreatePost = async (req, res) => {
   try {
     let user_id = parseInt(req.params.user_id);
@@ -12,7 +13,7 @@ const CreatePost = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
@@ -27,16 +28,16 @@ const GetAllPosts = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
-      order: [["created_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
       where: { user_id: req.params.user_id },
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Comments, as: "comments", attributes: [] },
-        { model: Likes, as: "likes", attributes: [] },
+        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: Comments, attributes: [] },
+        { model: Likes, attributes: [] },
       ],
     });
     res.send(post);
@@ -44,7 +45,7 @@ const GetPostsByUserId = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetAllPostsAndOrderByRecent = async (req, res) => {
   try {
     const recents = await Post.findAll({
