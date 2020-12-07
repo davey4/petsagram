@@ -1,4 +1,4 @@
-const { User, Post, Comments, Likes } = require("../models");
+const { User, Post, Comments, Likes, Followers } = require("../models");
 // working
 const CreatePost = async (req, res) => {
   try {
@@ -18,8 +18,8 @@ const GetAllPosts = async (req, res) => {
     const posts = await Post.findAll({
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
-        { model: Comments, attributes: [] },
-        { model: Likes, attributes: [] },
+        { model: Comments },
+        { model: Likes },
       ],
     });
     res.send(posts);
@@ -35,8 +35,8 @@ const GetPostsByUserId = async (req, res) => {
       where: { user_id: req.params.user_id },
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
-        { model: Comments, attributes: [] },
-        { model: Likes, attributes: [] },
+        { model: Comments },
+        { model: Likes },
       ],
     });
     res.send(post);
@@ -51,8 +51,8 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
       order: [["createdAt", "DESC"]],
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
-        { model: Comments, attributes: [] },
-        { model: Likes, attributes: [] },
+        { model: Comments },
+        { model: Likes },
       ],
     });
     res.send(recents);
@@ -60,21 +60,28 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
     throw error;
   }
 };
-// get following include model:user, model:posts
+// working
 const GetPostsOfUserFollowings = async (req, res) => {
   try {
-    const followingPost = await Post.findAll({
-      order: [["createAt", "DESC"]],
-      where: {
-        following_id: req.params.following_id,
-      },
+    const following = await Followers.findAll({
+      where: { user_id: req.params.user_id },
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Post, as: "posts", attributes: [] },
-        { model: Comments, as: "comments", attributes: [] },
+        {
+          model: User,
+          as: "following",
+          attributes: ["id"],
+        },
       ],
     });
-    res.send(followingPost);
+    const posts = [];
+    for (let i = 0; i < following.length; i++) {
+      let userId = following[i].following.id;
+      const post = await Post.findAll({
+        where: { user_id: userId },
+      });
+      posts.push(post);
+    }
+    res.send(posts);
   } catch (error) {
     throw error;
   }
