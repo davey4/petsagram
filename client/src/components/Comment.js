@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default (props) => {
+const Comment = (props) => {
   const [commentor, setCommentor] = useState("");
 
   useEffect(() => {
@@ -15,3 +15,5 @@ export default (props) => {
     </section>
   );
 };
+
+export default Comment;
