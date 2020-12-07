@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Followers.init(
     {
       user_id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "users",
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       following_id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

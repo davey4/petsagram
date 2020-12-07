@@ -1,18 +1,20 @@
 const { User, Post, Followers } = require("../models");
 
-const { hashPassword, passwordValid, createToken } = require("../middleware");
+const {
+  hashPassword,
+  passwordValid,
+  createToken,
+} = require("../middleware/index");
 
 const GetAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll({
-      where: { user_name: req.body.user_name },
-    });
+    const users = await User.findAll();
     res.send(users);
   } catch (error) {
     throw error;
   }
 };
-
+// working
 const GetUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
@@ -27,7 +29,7 @@ const GetUser = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const FollowUser = async (req, res) => {
   const user_id = req.params.user_id;
   const following_id = req.params.user_following_id;
@@ -87,7 +89,7 @@ const GetFollowing = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const CreateUser = async (req, res) => {
   try {
     const { name, email, user_name, password_digest } = req.body;
@@ -99,8 +101,8 @@ const CreateUser = async (req, res) => {
     throw error;
   }
 };
-
-const LoginUser = async (req, res, next) => {
+// working
+const LoginUser = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
@@ -108,12 +110,11 @@ const LoginUser = async (req, res, next) => {
     });
     if (
       user &&
-      // (await passwordValid(req.body.password === user.password_digest))
-      req.body.password_digest === user.password_digest
+      (await passwordValid(req.body.password, user.password_digest))
     ) {
-      const payload = {
+      let payload = {
         id: user.id,
-        // userName = user.user_name
+        name: user.name,
       };
       let token = createToken(payload);
       return res.send({ user, token });
@@ -122,12 +123,12 @@ const LoginUser = async (req, res, next) => {
     throw error;
   }
 };
-
+// working
 const RefreshSession = async (req, res) => {
   try {
     const { token } = res.locals;
-    const user = await User.findbyPk(token.id, {
-      attributes: ["id", "name", "user_name", "email"],
+    const user = await User.findByPk(token.id, {
+      attributes: ["id"], // Find a user by the id encoded in the json web token, only include the id, name and email fields
     });
     res.send({ user, status: "OK" });
   } catch (error) {

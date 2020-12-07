@@ -7,7 +7,7 @@ const APP_SECRET = "mysupersercretkey";
 const hashPassword = async (password) => {
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    return bcrypt.hashedPassword;
+    return hashedPassword;
   } catch (error) {
     throw error;
   }

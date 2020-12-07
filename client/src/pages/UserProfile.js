@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
 import CreatePost from "./CreatePost";
+import { __GetPostsByUserId } from "../services/PostService";
+import {
+  __GetFollowers,
+  __GetFollowing,
+  __GetUser,
+} from "../services/UserService";
 
 const UserProfile = (props) => {
+  const [name, setName] = useState("");
   const [posts, setPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowings] = useState([]);
 
   useEffect(() => {
-    getPostsByUser();
-    getFollowers();
-    getFollowing();
+    getUser();
   }, []);
 
-  const getPostsByUser = async () => {
-    try {
-      // const data =
-      // setPosts(data)
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getFollowers = async () => {
-    try {
-      // const data =
-      // setFollowers(data)
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getFollowing = async () => {
-    try {
-      // const data =
-      // setFollowings(data)
-    } catch (error) {
-      throw error;
-    }
+  const getUser = async () => {
+    const user = await __GetUser(props.currentUser);
+    setName(user.user_name);
+    setPosts(user.Posts);
+    setFollowers(user.followers);
+    setFollowings(user.following);
   };
 
   return (
     <section>
-      <h4>{props.currentUser}'s Profile</h4>
+      <h4>{name}'s Profile</h4>
       <h5>
         Followers: {followers.length} Following: {following.length}
       </h5>
+      {/* <CreatePost currentUser={props.currentUser}/> */}
       <button
         className="margin-left"
         onClick={() => props.history.push("/create/post")}
@@ -53,13 +40,13 @@ const UserProfile = (props) => {
         New Post
       </button>
       <div className="center">
-        {posts.length > 1 ? (
+        {posts ? (
           posts.map((element) => (
             <div key={element.id}>
               <Posts
                 img={element.image}
                 userName={element.userName}
-                descrtiption={element.descrtiption}
+                description={element.description}
                 postId={element.postId}
                 currentUser={props.currentUser}
               />

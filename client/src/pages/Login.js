@@ -5,7 +5,6 @@ import "../styles/Login.css";
 
 import { __LoginUser } from "../services/UserService";
 
-
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,10 +30,10 @@ const Login = (props) => {
         email,
         password,
       };
-      //const loginData = await __LoginUser(data)
-      // props.toggleAuthenticated(true, loginData.user, () =>
+      const loginData = await __LoginUser(data);
+      // console.log(loginData);
+      props.toggleAuthenticated(true, loginData.user.id);
       props.history.push("/explore");
-      // );
     } catch (error) {
       setFormError(true);
     }

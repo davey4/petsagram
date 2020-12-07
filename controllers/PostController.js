@@ -1,23 +1,26 @@
 const { User, Post, Comments, Likes } = require("../models");
 
+// working
 const CreatePost = async (req, res) => {
   try {
-    let userId = parseInt(req.params.user_id);
-    let postBody = { userId, ...req.body };
+    let user_id = parseInt(req.params.user_id);
+    let image = req.body.image;
+    let description = req.body.description;
+    let postBody = { user_id, image, description };
     let post = await Post.create(postBody);
     res.send(post);
   } catch (error) {
     throw error;
   }
 };
-
+// working
 const GetAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Comments, as: "comments", attributes: [] },
-        { model: Likes, as: "likes", attributes: [] },
+        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: Comments, attributes: [] },
+        { model: Likes, attributes: [] },
       ],
     });
     res.send(posts);
@@ -25,16 +28,16 @@ const GetAllPosts = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
-      order: [["created_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
       where: { user_id: req.params.user_id },
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Comments, as: "comments", attributes: [] },
-        { model: Likes, as: "likes", attributes: [] },
+        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: Comments, attributes: [] },
+        { model: Likes, attributes: [] },
       ],
     });
     res.send(post);
@@ -42,15 +45,15 @@ const GetPostsByUserId = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetAllPostsAndOrderByRecent = async (req, res) => {
   try {
     const recents = await Post.findAll({
-      order: [["created_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Comments, as: "comments", attributes: [] },
-        { model: Likes, as: "likes", attributes: [] },
+        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: Comments, attributes: [] },
+        { model: Likes, attributes: [] },
       ],
     });
     res.send(recents);
@@ -58,11 +61,11 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
     throw error;
   }
 };
-
+// get following include model:user, model:posts
 const GetPostsOfUserFollowings = async (req, res) => {
   try {
     const followingPost = await Post.findAll({
-      order: [["create_at", "DESC"]],
+      order: [["createAt", "DESC"]],
       where: {
         following_id: req.params.following_id,
       },

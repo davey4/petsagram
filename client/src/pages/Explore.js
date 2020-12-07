@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
 import TextInput from "../components/TextInput";
+import { __GetAllPostsAndOrderByRecent } from "../services/PostService";
 
 const Explore = (props) => {
   const [posts, setPosts] = useState([]);
@@ -12,8 +13,9 @@ const Explore = (props) => {
 
   const getRecentPosts = async () => {
     try {
-      // const data =
-      // setPosts(data)
+      const data = await __GetAllPostsAndOrderByRecent();
+      console.log(data);
+      setPosts(data);
     } catch (error) {
       throw error;
     }
@@ -41,7 +43,7 @@ const Explore = (props) => {
           />
         </form>
       </div>
-      {posts.length > 1
+      {posts
         ? posts.map((element) => (
             <div key={element.id} onClick={() => goToProfile(element.user_id)}>
               <Posts

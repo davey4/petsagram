@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import TextInput from "./TextInput";
+import { __CreateComment } from "../services/CommentService";
 
 export default (props) => {
   const [comments, setComments] = useState([]);
@@ -23,10 +24,10 @@ export default (props) => {
     setAddComment(target.value);
   };
 
-  const handleAddComment = (e) => {
+  const handleAddComment = async (e) => {
     e.preventDefault();
     try {
-      //   createComment(addComment)
+      // await __CreateComment(props.currentUser, props.postId, createComment)
     } catch (error) {
       throw error;
     }
