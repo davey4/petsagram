@@ -3,13 +3,13 @@ import Comment from "./Comment";
 import TextInput from "./TextInput";
 import { __CreateComment } from "../services/CommentService";
 
-export default (props) => {
+const Posts = (props) => {
   const [comments, setComments] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [description, setAddComment] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  console.log(props.post.id);
+  // console.log(props.post.id);
 
   useEffect(() => {
     setComments(props.post.Comments);
@@ -92,3 +92,5 @@ export default (props) => {
     </section>
   );
 };
+
+export default Posts;

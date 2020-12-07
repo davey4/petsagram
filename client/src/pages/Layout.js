@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "../components/Nav";
 import "../styles/Layout.css";
 
-export default ({ children, currentUser }) => {
+const Layout = ({ children, currentUser }) => {
   return (
     <div className="layout-grid">
       <div className="border"></div>
@@ -14,3 +14,5 @@ export default ({ children, currentUser }) => {
     </div>
   );
 };
+
+export default Layout;
