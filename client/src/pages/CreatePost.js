@@ -5,9 +5,11 @@ import TextInput from "../components/TextInput";
 import "../styles/Posts.css";
 import { __CreatePost } from "../services/PostService";
 
+
 const CreatePost = (props) => {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
+
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ const CreatePost = (props) => {
       const data = { image, description };
       await __CreatePost(data, props.currentUser);
       // props.history.push('/ex')
+
       console.log("clicked");
     } catch (error) {
       throw error;
@@ -43,7 +46,9 @@ const CreatePost = (props) => {
               onChange={handleDescription}
               placeholder="Caption"
             />
+
             <button type="submit">Post</button>
+
           </form>
         </div>
       </div>

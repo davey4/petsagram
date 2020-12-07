@@ -23,8 +23,22 @@ module.exports = (sequelize, DataTypes) => {
   }
   Likes.init(
     {
-      user_id: DataTypes.INTEGER,
-      post_id: DataTypes.INTEGER,
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
+      post_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "posts",
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
@@ -34,3 +48,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Likes;
 };
+//referencing

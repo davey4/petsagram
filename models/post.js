@@ -29,10 +29,22 @@ module.exports = (sequelize, DataTypes) => {
   }
   Post.init(
     {
-      image: DataTypes.STRING,
-      description: DataTypes.STRING,
-      likes_id: DataTypes.INTEGER,
-      user_id: DataTypes.INTEGER,
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
@@ -42,3 +54,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Post;
 };
+//referencing

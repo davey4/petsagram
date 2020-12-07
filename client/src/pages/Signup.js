@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
+
 import { __CreateUser } from "../services/UserService";
+
 
 const Signup = (props) => {
   const [name, setName] = useState("");
@@ -39,7 +41,9 @@ const Signup = (props) => {
           userName,
           password,
         };
+
         // await __CreateUser(data);
+
         props.history.push("/login");
       } catch (error) {
         throw error;

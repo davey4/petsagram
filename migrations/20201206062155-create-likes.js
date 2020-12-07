@@ -10,17 +10,29 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
       post_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "posts",
+          key: "id",
+        },
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
     });
   },
@@ -28,3 +40,4 @@ module.exports = {
     await queryInterface.dropTable("likes");
   },
 };
+//referencing
