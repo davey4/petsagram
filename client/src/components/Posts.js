@@ -9,6 +9,7 @@ export default (props) => {
   const [addComment, setAddComment] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
+  console.log(props.post);
 
   useEffect(() => {
     // getComments()

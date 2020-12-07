@@ -62,7 +62,7 @@ const Explore = (props) => {
                     img={element.image}
                     userName={element.User.user_name}
                     description={element.description}
-                    postId={element.id}
+                    post={element}
                     currentUser={props.currentUser}
                   />
                 </div>
