@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
 import "../styles/Login.css";
+import { __LoginUser } from "../services/UserService";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
