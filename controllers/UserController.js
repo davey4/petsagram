@@ -1,4 +1,3 @@
-
 const { User, Post, Followers } = require("../models");
 
 const { hashPassword, passwordValid, createToken } = require("../middleware");
@@ -6,9 +5,7 @@ const { hashPassword, passwordValid, createToken } = require("../middleware");
 const GetAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-      ],
+      where: { user_name: req.body.user_name },
     });
     res.send(users);
   } catch (error) {
@@ -18,10 +15,9 @@ const GetAllUsers = async (req, res) => {
 
 const GetUser = async (req, res) => {
   try {
-    const user = await User.findbyPk(req.params.user_id, {
+    const user = await User.findByPk(req.params.user_id, {
       include: [
-        { model: User, as: "user", attributes: ["id", "name", "user_name"] },
-        { model: Post, as: "posts" },
+        { model: Post },
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
@@ -33,10 +29,12 @@ const GetUser = async (req, res) => {
 };
 
 const FollowUser = async (req, res) => {
+  const user_id = req.params.user_id;
+  const following_id = req.params.user_following_id;
   try {
     const followers = await Followers.create({
-      user_id: req.params.user_id,
-      follower_id: req.params.user_following_id,
+      user_id,
+      following_id,
     });
     res.send(followers);
   } catch (error) {
@@ -45,11 +43,13 @@ const FollowUser = async (req, res) => {
 };
 
 const UnfollowUser = async (req, res) => {
+  const user_id = req.params.user_id;
+  const following_id = req.params.user_following_id;
   try {
     await Followers.destroy({
       where: {
-        user_id: req.params.user_following_id,
-        follower_id: req.params.user_id,
+        user_id,
+        following_id,
       },
     });
     res.send({
@@ -90,9 +90,9 @@ const GetFollowing = async (req, res) => {
 
 const CreateUser = async (req, res) => {
   try {
-    const { name, email, userName, password } = req.body;
-    const user_name = userName;
-    const password_digest = await hashPassword(password);
+    const { name, email, user_name, password_digest } = req.body;
+    // const user_name = userName;
+    // const password_digest = await hashPassword(password);
     const user = await User.create({ name, email, user_name, password_digest });
     res.send(user);
   } catch (error) {
@@ -104,15 +104,19 @@ const LoginUser = async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
-      raw: true
+      raw: true,
     });
-    if (user && (await passwordValid(req.body.password === user.password_digest))) {
+    if (
+      user &&
+      // (await passwordValid(req.body.password === user.password_digest))
+      req.body.password_digest === user.password_digest
+    ) {
       const payload = {
         id: user.id,
-        userName = user.user_name
+        // userName = user.user_name
       };
-      let token = createToken(payload)
-      return res.send({user, token})
+      let token = createToken(payload);
+      return res.send({ user, token });
     }
   } catch (error) {
     throw error;
@@ -121,11 +125,11 @@ const LoginUser = async (req, res, next) => {
 
 const RefreshSession = async (req, res) => {
   try {
-    const {token} = res.locals
+    const { token } = res.locals;
     const user = await User.findbyPk(token.id, {
-      attributes: ['id', 'name', 'user_name', 'email']
-    })
-    res.send({user, status: 'OK'})
+      attributes: ["id", "name", "user_name", "email"],
+    });
+    res.send({ user, status: "OK" });
   } catch (error) {
     throw error;
   }

@@ -1,5 +1,4 @@
-
-const { User, Post, Comments } = require("../models");
+const { User, Post, Comments, Likes } = require("../models");
 
 const CreatePost = async (req, res) => {
   try {
