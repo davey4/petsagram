@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
-import { __GetUser } from "../services/UserService";
+import {
+  __GetUserByName,
+  __FollowUser,
+  __UnfollowUser,
+} from "../services/UserService";
 
 const ViewProfile = (props) => {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState("");
   const [followers, setFollowers] = useState([]);
@@ -14,9 +20,24 @@ const ViewProfile = (props) => {
 
   const getUser = async () => {
     try {
-      // const data = await __GetUser(user);
-      // setProfile(data)
-      // getPostsByUser(profile.id)
+      console.log(props.userName);
+      const data = await __GetUserByName(props.userName);
+      // console.log(data);
+      setId(data.id);
+      setName(data.user_name);
+      setPosts(data.Posts);
+      setFollowers(data.followers);
+      setFollowings(data.following);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleUnfollow = async (e) => {
+    e.preventDefault();
+    try {
+      await __UnfollowUser(id, props.currentUser);
+      getUser();
     } catch (error) {
       throw error;
     }
@@ -25,37 +46,56 @@ const ViewProfile = (props) => {
   const handleFollow = async (e) => {
     e.preventDefault();
     try {
+      await __FollowUser(props.currentUser, id);
+      getUser();
     } catch (error) {
       throw error;
     }
   };
 
+  console.log(
+    props.currentUser,
+    followers.find((element) => element.id === props.currentUser)
+  );
+
   return (
     <section>
       <div>
-        <h4>Profile</h4>
-        <h5>
-          Followers: {followers.length} Following: {following.length}
-        </h5>
-        <button className="margin-left" onClick={handleFollow}>
-          Follow
-        </button>
+        {name ? (
+          <div>
+            <h4>{name}</h4>
+            <h5>
+              Followers: {followers.length} Following: {following.length}
+            </h5>
+            {followers.find((element) => element.id === props.currentUser) ? (
+              <button className="margin-left" onClick={handleUnfollow}>
+                Unfollow
+              </button>
+            ) : (
+              <button className="margin-left" onClick={handleFollow}>
+                Follow
+              </button>
+            )}
+          </div>
+        ) : (
+          <h3>User not found!</h3>
+        )}
       </div>
       <div className="center">
-        {posts.length > 1 ? (
+        {posts ? (
           posts.map((element) => (
             <div key={element.id}>
               <Posts
                 img={element.image}
-                userName={element.userName}
-                descrtiption={element.descrtiption}
+                userName={name}
+                description={element.description}
                 postId={element.postId}
                 currentUser={props.currentUser}
               />
             </div>
           ))
         ) : (
-          <div>User has no posts</div>
+          <h3>User has no posts</h3>
         )}
       </div>
     </section>

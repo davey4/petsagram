@@ -80,7 +80,7 @@ const Router = (props) => {
           />
           <ProtectedRoute
             authenticated={authenticated}
-            path="/profile/:user_id"
+            path="/profile/view"
             component={(props) => (
               <Layout currentUser={currentUser} authenticated={authenticated}>
                 <ViewProfile {...props} currentUser={currentUser} />
