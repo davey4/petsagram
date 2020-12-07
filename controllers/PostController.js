@@ -1,4 +1,5 @@
-const { User, Post, Comment } = require("../models");
+
+const { User, Post, Comments } = require("../models");
 
 const CreatePost = async (req, res) => {
   try {
@@ -16,6 +17,8 @@ const GetAllPosts = async (req, res) => {
     const posts = await Post.findAll({
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(posts);
@@ -27,9 +30,12 @@ const GetAllPosts = async (req, res) => {
 const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
+      order: [["created_at", "DESC"]],
       where: { user_id: req.params.user_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(post);
@@ -44,6 +50,8 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
       order: [["created_at", "DESC"]],
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
+        { model: Comments, as: "comments", attributes: [] },
+        { model: Likes, as: "likes", attributes: [] },
       ],
     });
     res.send(recents);
@@ -62,7 +70,7 @@ const GetPostsOfUserFollowings = async (req, res) => {
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
         { model: Post, as: "posts", attributes: [] },
-        { model: Comment, as: "comments", attributes: [] },
+        { model: Comments, as: "comments", attributes: [] },
       ],
     });
     res.send(followingPost);

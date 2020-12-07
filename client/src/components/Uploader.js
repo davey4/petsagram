@@ -1,8 +1,10 @@
 // env variables here
-const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
-const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET;
+const CLOUD_NAME = "davey4";
+const UPLOAD_PRESET = "kstt8ubl";
 
 const Uploader = (props) => {
+  console.log(UPLOAD_PRESET);
+
   const widget = window.cloudinary.createUploadWidget(
     {
       cloudName: CLOUD_NAME,

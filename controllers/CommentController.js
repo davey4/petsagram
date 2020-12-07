@@ -1,8 +1,9 @@
-const { User, Comment } = require("../models");
+
+const { User, Comments } = require("../models");
 
 const CreateComment = async (req, res) => {
   try {
-    const comment = await Comment.create({
+    const comment = await Comments.create({
       ...req.body,
       userId: req.body.user_id,
       postId: req.body.post_id,
@@ -15,7 +16,7 @@ const CreateComment = async (req, res) => {
 
 const GetComments = async (req, res) => {
   try {
-    const comment = await Comment.findAll({
+    const comment = await Comments.findAll({
       where: { post_id: req.params.post_id },
       include: [
         { model: User, as: "user", attributes: ["id", "name", "user_name"] },
@@ -30,7 +31,7 @@ const GetComments = async (req, res) => {
 const UpdateComment = async (req, res) => {
   try {
     let commentId = parseInt(req.params.comment_id);
-    let updatedComment = await Comment.update(req.body, {
+    let updatedComment = await Comments.update(req.body, {
       where: { id: commentId },
       returning: true,
     });
@@ -42,7 +43,7 @@ const UpdateComment = async (req, res) => {
 
 const DeleteComment = async (req, res) => {
   try {
-    await Comment.destroy({
+    await Comments.destroy({
       where: { id: req.params.comment_id },
     });
     res.send({ message: `Comment #${req.params.comment_id} deleted.` });
@@ -53,7 +54,7 @@ const DeleteComment = async (req, res) => {
 
 const LikeComment = async (req, res) => {
   try {
-    const like = await Comment.increment(
+    const like = await Comments.increment(
       { likes: 1 },
       { where: { id: req.params.comment_id } }
     );
@@ -65,7 +66,7 @@ const LikeComment = async (req, res) => {
 
 const UnlikeComment = async (req, res) => {
   try {
-    const unlike = await Comment.increment(
+    const unlike = await Comments.increment(
       { likes: -1 },
       { where: { id: req.params.comment_id } }
     );

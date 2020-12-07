@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         onUpdate: "cascade",
       });
+
       Comments.belongsTo(models.Post, {
         foreignKey: "post_id",
         onDelete: "cascade",
