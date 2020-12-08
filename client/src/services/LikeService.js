@@ -1,11 +1,8 @@
 import ApiClient from "./ApiClient";
 
-export const __CreateLike = async (userId, postId, formData) => {
+export const __CreateLike = async (userId, postId) => {
   try {
-    const res = await ApiClient.post(
-      `/likes/create/${postId}/${userId}`,
-      formData
-    );
+    const res = await ApiClient.post(`/likes/create/${postId}/${userId}`);
     return res.data;
   } catch (error) {
     throw error;
