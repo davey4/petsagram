@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import TextInput from "./TextInput";
-import { __CreateComment } from "../services/CommentService";
+import { __CreateComment, __GetComments } from "../services/CommentService";
 
-export default (props) => {
+const Posts = (props) => {
   const [comments, setComments] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [description, setAddComment] = useState("");
+  const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  console.log(comments);
+  // console.log(props.post.id);
 
   useEffect(() => {
     setComments(props.post.Comments);
+    console.log(props.post.Likes);
     setLikes(props.post.Likes);
   }, []);
 
   const handleCommentChange = ({ target }) => {
-    setAddComment(target.value);
+    setDescription(target.value);
   };
 
   const handleAddComment = async (e) => {
     e.preventDefault();
-    // console.log(description);
+    const newComment = { description: description };
     try {
-      await __CreateComment(props.currentUser, props.post.id, description);
+      await __CreateComment(props.currentUser, props.post.id, newComment);
     } catch (error) {
       throw error;
     }
@@ -60,14 +61,16 @@ export default (props) => {
       <div>
         <button>Like</button>
         {displayLikes}
-        <button onClick={() => setClicked(true)}>Comments</button>
-        <button onClick={() => setCreateComment(true)}>Add Comment</button>
+        <button onClick={() => setClicked(!clicked)}>Comments</button>
+        <button onClick={() => setCreateComment(!createComment)}>
+          Add Comment
+        </button>
       </div>
       {createComment ? (
         <form onSubmit={handleAddComment}>
           <TextInput
             type="text"
-            name="comment"
+            name="description"
             value={description}
             onChange={handleCommentChange}
             placeholder="add comment"
@@ -75,20 +78,20 @@ export default (props) => {
           <button>comment</button>
         </form>
       ) : null}
-      {clicked && comments.length > 1 ? (
-        comments.map((element) => (
-          <div id={element.id}>
-            <Comment
-              commentor={element.id}
-              description={element.description}
-              postid={props.postId}
-              currentUser={props.currentUser}
-            />
-          </div>
-        ))
-      ) : (
-        <div>no comments</div>
-      )}
+      {clicked && comments
+        ? comments.map((element) => (
+            <div id={element.id}>
+              <Comment
+                commentor={element.User.user_name}
+                description={element.description}
+                postid={props.postId}
+                currentUser={props.currentUser}
+              />
+            </div>
+          ))
+        : null}
     </section>
   );
 };
+
+export default Posts;

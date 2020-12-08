@@ -3,16 +3,17 @@ import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
 import { __GetUser } from "../services/UserService";
 
-export default ({ currentUser }) => {
+const Nav = ({ currentUser }) => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
     getUser();
-  }, []);
+  });
 
   const getUser = async () => {
     const user = await __GetUser(currentUser);
-    setUser(user.name);
+    // console.log(user);
+    setUser(user.user_name);
   };
 
   return (
@@ -34,3 +35,5 @@ export default ({ currentUser }) => {
     </header>
   );
 };
+
+export default Nav;

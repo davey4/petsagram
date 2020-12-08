@@ -22,6 +22,7 @@ const UserProfile = (props) => {
     const user = await __GetUser(props.currentUser);
     setName(user.user_name);
     setPosts(user.Posts);
+    console.log(user);
     setFollowers(user.followers);
     setFollowings(user.following);
   };

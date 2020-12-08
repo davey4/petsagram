@@ -1,7 +1,12 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 // Integrate this with auth
-export default ({ authenticated, children, component: Component, ...rest }) =>
+const ProtectedRoute = ({
+  authenticated,
+  children,
+  component: Component,
+  ...rest
+}) =>
   authenticated === true ? (
     <Route {...rest} component={Component}>
       {console.log(authenticated)}
@@ -9,3 +14,5 @@ export default ({ authenticated, children, component: Component, ...rest }) =>
   ) : (
     <Redirect to="/" />
   );
+
+export default ProtectedRoute;
