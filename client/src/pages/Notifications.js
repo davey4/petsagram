@@ -8,7 +8,6 @@ import Notification from "../components/Notification";
 
 const Notifications = (props) => {
   const [notifications, setNotifications] = useState([]);
-  //   console.log(props);
 
   useEffect(() => {
     getUser();
@@ -25,7 +24,6 @@ const Notifications = (props) => {
 
   const handleDelete = async (id) => {
     try {
-      //   console.log(id);
       await __DeleteNotification(id);
       const data = await __GetNotifications(props.currentUser);
       setNotifications(data);

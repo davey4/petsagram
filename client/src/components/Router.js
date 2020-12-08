@@ -30,7 +30,6 @@ const Router = (props) => {
     if (token) {
       try {
         const session = await __CheckSession();
-        console.log(session.user.id);
         setCurrentUser(session.user.id);
         setAuthenticated(true);
         props.history.push("/feed");

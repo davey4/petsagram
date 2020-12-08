@@ -21,10 +21,8 @@ const Uploader = (props) => {
       console.log("event", resultEvent);
       try {
         const url = await resultEvent.info.secure_url;
-        console.log(url);
         if (url) {
           props.setImage(url);
-          // await updateRender();
         }
       } catch (err) {
         throw err;
@@ -32,15 +30,9 @@ const Uploader = (props) => {
     }
   };
 
-  const updateRender = async () => {
-    await props.setImage();
-  };
-
   return (
     <div className="uploader">
-      <button className="btn indigo darken-3" onClick={() => widget.open()}>
-        Upload Image
-      </button>
+      <button onClick={() => widget.open()}>Upload Image</button>
     </div>
   );
 };

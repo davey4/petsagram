@@ -11,6 +11,7 @@ import {
   __DeleteLikes,
   __GetLikes,
 } from "../services/LikeService";
+import { __CreateNotification } from "../services/NotificationService";
 
 const Posts = (props) => {
   const [comments, setComments] = useState([]);
@@ -18,6 +19,7 @@ const Posts = (props) => {
   const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
+  console.log(props);
 
   useEffect(() => {
     setComments(props.post.Comments);

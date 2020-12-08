@@ -12,6 +12,17 @@ const {
   createToken,
 } = require("../middleware/index");
 
+const getUserName = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.user_id, {
+      attributes: ["user_name"],
+    });
+    res.send(user);
+  } catch (error) {
+    throw error;
+  }
+};
+
 const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
@@ -152,7 +163,6 @@ const LoginUser = async (req, res) => {
     ) {
       let payload = {
         id: user.id,
-        name: user.name,
       };
       let token = createToken(payload);
       return res.send({ user, token });
@@ -184,4 +194,5 @@ module.exports = {
   LoginUser,
   RefreshSession,
   GetUserByName,
+  getUserName,
 };
