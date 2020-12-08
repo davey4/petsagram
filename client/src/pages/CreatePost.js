@@ -3,7 +3,7 @@ import Uploader from "../components/Uploader";
 import TextInput from "../components/TextInput";
 import "../styles/Posts.css";
 import { __CreatePost } from "../services/PostService";
-import { __GetUser } from "../services/UserService";
+import { __GetUserName } from "../services/UserService";
 
 const CreatePost = (props) => {
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ const CreatePost = (props) => {
   });
 
   const getUser = async () => {
-    const user = await __GetUser(props.currentUser);
+    const user = await __GetUserName(props.currentUser);
     setName(user.user_name);
   };
 
