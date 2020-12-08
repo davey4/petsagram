@@ -20,7 +20,19 @@ const GetUserByName = async (req, res) => {
     const user = await User.findOne({
       where: { user_name: req.params.user_name },
       include: [
-        { model: Post },
+        {
+          model: Post,
+          include: [
+            {
+              model: Comments,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+            {
+              model: Likes,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+          ],
+        },
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
@@ -42,12 +54,10 @@ const GetUser = async (req, res) => {
             {
               model: Comments,
               include: [{ model: User, attributes: ["user_name"] }],
-              // include: [{ model: User, attributes: "user_name" }],
             },
             {
               model: Likes,
               include: [{ model: User, attributes: ["user_name"] }],
-              // include: [{ model: User, attributes: "user_name" }],
             },
           ],
         },
