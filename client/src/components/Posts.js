@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import TextInput from "./TextInput";
 import { __CreateComment, __GetComments } from "../services/CommentService";
+// import { like } from "sequelize/types/lib/operators";
 
 const Posts = (props) => {
   const [comments, setComments] = useState([]);
@@ -13,7 +14,6 @@ const Posts = (props) => {
 
   useEffect(() => {
     setComments(props.post.Comments);
-    console.log(props.post.Likes);
     setLikes(props.post.Likes);
   }, []);
 
@@ -31,26 +31,6 @@ const Posts = (props) => {
     }
   };
 
-  const displayLikes = () => {
-    if (likes.length === 0) {
-      return <div>0 likes</div>;
-    } else if (likes.length === 1) {
-      return <div>`${likes[0]} likes this`</div>;
-    } else if (likes.length === 2) {
-      return (
-        <div>
-          `${likes[0]} and ${likes[1]} like this`
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          `${likes[0]} and ${likes.length - 1} others like this`
-        </div>
-      );
-    }
-  };
-
   return (
     <section>
       <div>
@@ -60,7 +40,18 @@ const Posts = (props) => {
       </div>
       <div>
         <button>Like</button>
-        {displayLikes}
+        {likes.length === 0 && <div>0 likes</div>}
+        {likes.length === 1 && <div>{likes[0].User.user_name} likes this</div>}
+        {likes.length === 2 && (
+          <div>
+            {likes[0].User.user_name} and {likes[1].User.user_name} like this
+          </div>
+        )}
+        {likes.length > 2 && (
+          <div>
+            {likes[0].User.user_name} and {likes.length - 1} others like this
+          </div>
+        )}
         <button onClick={() => setClicked(!clicked)}>Comments</button>
         <button onClick={() => setCreateComment(!createComment)}>
           Add Comment
