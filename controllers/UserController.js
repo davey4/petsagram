@@ -41,10 +41,12 @@ const GetUser = async (req, res) => {
           include: [
             {
               model: Comments,
+              include: [{ model: User, attributes: ["user_name"] }],
               // include: [{ model: User, attributes: "user_name" }],
             },
             {
               model: Likes,
+              include: [{ model: User, attributes: ["user_name"] }],
               // include: [{ model: User, attributes: "user_name" }],
             },
           ],

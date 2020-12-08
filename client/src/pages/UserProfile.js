@@ -48,7 +48,7 @@ const UserProfile = (props) => {
                 img={element.image}
                 userName={name}
                 description={element.description}
-                postId={element.postId}
+                post={element}
                 currentUser={props.currentUser}
               />
             </div>
