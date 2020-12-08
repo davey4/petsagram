@@ -35,8 +35,14 @@ const GetPostsByUserId = async (req, res) => {
       where: { user_id: req.params.user_id },
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
-        { model: Comments },
-        { model: Likes },
+        {
+          model: Comments,
+          include: [{ model: User, attributes: ["id", "user_name"] }],
+        },
+        {
+          model: Likes,
+          include: [{ model: User, attributes: ["id", "user_name"] }],
+        },
       ],
     });
     res.send(post);
@@ -52,9 +58,12 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
         { model: User, attributes: ["id", "name", "user_name"] },
         {
           model: Comments,
-          include: [{ model: User, attributes: ["user_name"] }],
+          include: [{ model: User, attributes: ["id", "user_name"] }],
         },
-        { model: Likes, include: [{ model: User, attributes: ["user_name"] }] },
+        {
+          model: Likes,
+          include: [{ model: User, attributes: ["id", "user_name"] }],
+        },
       ],
     });
     res.send(recents);

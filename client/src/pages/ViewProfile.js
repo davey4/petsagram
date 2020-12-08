@@ -53,11 +53,6 @@ const ViewProfile = (props) => {
     }
   };
 
-  console.log(
-    props.currentUser,
-    followers.find((element) => element.id === props.currentUser)
-  );
-
   return (
     <section>
       <div>
