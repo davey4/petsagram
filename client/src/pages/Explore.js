@@ -32,10 +32,10 @@ const Explore = (props) => {
     console.log(search);
   };
 
-  const goToProfile = (user) => {
-    // console.log(user)
-    // props.history.push(`/profile/${user}`)
-  };
+  // const goToProfile = (user) => {
+  // console.log(user)
+  // props.history.push(`/profile/${user}`)
+  // };
 
   return (
     <section className="center">
@@ -56,7 +56,7 @@ const Explore = (props) => {
             ? posts.map((element) => (
                 <div
                   key={element.id}
-                  onClick={() => goToProfile(element.user_id)}
+                  // onClick={() => goToProfile(element.user_id)}
                 >
                   <Posts
                     img={element.image}

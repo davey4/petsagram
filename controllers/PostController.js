@@ -89,8 +89,19 @@ const GetPostsOfUserFollowings = async (req, res) => {
       let userId = following[i].following.id;
       const post = await Post.findAll({
         where: { user_id: userId },
+        include: [
+          { model: User, attributes: ["id", "name", "user_name"] },
+          {
+            model: Comments,
+            include: [{ model: User, attributes: ["id", "user_name"] }],
+          },
+          {
+            model: Likes,
+            include: [{ model: User, attributes: ["id", "user_name"] }],
+          },
+        ],
       });
-      posts.push(post);
+      post.length > 0 ? posts.push(post) : null;
     }
     res.send(posts);
   } catch (error) {

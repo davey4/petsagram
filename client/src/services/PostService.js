@@ -36,15 +36,9 @@ export const __GetAllPostsAndOrderByRecent = async () => {
   }
 };
 
-export const __GetPostsOfUserFollowings = async (
-  userId,
-  followingId,
-  postId
-) => {
+export const __GetPostsOfUserFollowings = async (userId) => {
   try {
-    const res = await ApiClient.get(
-      `/posts/${userId}/${followingId}/${postId}`
-    );
+    const res = await ApiClient.get(`/posts/${userId}`);
     return res.data;
   } catch (error) {
     throw error;

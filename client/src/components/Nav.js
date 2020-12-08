@@ -23,13 +23,16 @@ const Nav = ({ currentUser }) => {
           <NavLink className="nav-active" to="/explore">
             Explore
           </NavLink>
+          <NavLink className="nav-active" to="/feed">
+            Feed
+          </NavLink>
           <NavLink className="nav-active" to="/profile">
             {user}
           </NavLink>
           <NavLink
             className="nav-active"
             to="/"
-            onClick={() => localStorage.clear}
+            onClick={() => localStorage.clear()}
           >
             Sign out
           </NavLink>

@@ -130,7 +130,7 @@ const Posts = (props) => {
       ) : null}
       {clicked && comments
         ? comments.map((element) => (
-            <div id={element.id}>
+            <div key={element.id}>
               <Comment
                 commentor={element.User.user_name}
                 description={element.description}
