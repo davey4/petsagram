@@ -87,6 +87,11 @@ const Posts = (props) => {
         <div>{props.userName}</div>
         <img src={props.img} alt="post" />
         <div>{props.description}</div>
+        {props.onClick ? (
+          <button onClick={() => props.onClick(props.post.id)}>
+            Delete Post
+          </button>
+        ) : null}
       </div>
       <div>
         {likes.find((element) => element.User.id === props.currentUser) ? (

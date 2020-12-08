@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
-import CreatePost from "./CreatePost";
 import { __GetUser } from "../services/UserService";
+import { __DeletePost, __GetPostsByUserId } from "../services/PostService";
 
 const UserProfile = (props) => {
   const [name, setName] = useState("");
@@ -21,13 +21,22 @@ const UserProfile = (props) => {
     setFollowings(user.following);
   };
 
+  const deletePost = async (id) => {
+    try {
+      await __DeletePost(id);
+      const posts = await __GetPostsByUserId(props.currentUser);
+      setPosts(posts);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <section>
       <h4>{name}'s Profile</h4>
       <h5>
         Followers: {followers.length} Following: {following.length}
       </h5>
-      {/* <CreatePost currentUser={props.currentUser}/> */}
       <button
         className="margin-left"
         onClick={() => props.history.push("/create/post")}
@@ -44,6 +53,7 @@ const UserProfile = (props) => {
                 description={element.description}
                 post={element}
                 currentUser={props.currentUser}
+                onClick={deletePost}
               />
             </div>
           ))
