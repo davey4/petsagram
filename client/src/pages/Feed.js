@@ -12,7 +12,8 @@ const Feed = (props) => {
   const getPosts = async () => {
     try {
       const data = await __GetPostsOfUserFollowings(props.currentUser);
-      setPosts(data[0]);
+      console.log(data);
+      setPosts(data);
     } catch (error) {
       throw error;
     }
@@ -20,8 +21,9 @@ const Feed = (props) => {
 
   return (
     <section className="center">
-      {posts
-        ? posts.map((element) => (
+      <div>
+        {posts ? (
+          posts.map((element) => (
             <div key={element.id}>
               <Posts
                 img={element.image}
@@ -32,7 +34,10 @@ const Feed = (props) => {
               />
             </div>
           ))
-        : null}
+        ) : (
+          <h3>No Posts</h3>
+        )}
+      </div>
     </section>
   );
 };

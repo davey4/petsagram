@@ -70,7 +70,8 @@ const GetPostsOfUserFollowings = async (req, res) => {
         },
       ],
     });
-    const posts = [];
+    let sentPosts;
+    let posts = [];
     for (let i = 0; i < following.length; i++) {
       let userId = following[i].following.id;
       const post = await Post.findAll({
@@ -87,9 +88,11 @@ const GetPostsOfUserFollowings = async (req, res) => {
           },
         ],
       });
-      post.length > 0 ? posts.push(post) : null;
+      post.length > 0
+        ? (sentPosts = posts.concat(post)) && (posts = post)
+        : null;
     }
-    res.send(posts);
+    res.send(sentPosts);
   } catch (error) {
     throw error;
   }

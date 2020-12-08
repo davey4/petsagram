@@ -91,7 +91,7 @@ const UnfollowUser = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetFollowers = async (req, res) => {
   try {
     const followers = await Followers.findAll({
@@ -105,7 +105,7 @@ const GetFollowers = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetFollowing = async (req, res) => {
   try {
     const following = await Followers.findAll({
