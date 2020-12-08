@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TextInput from "../components/TextInput";
-
+import { Button, TextField } from "react-md";
+import "../styles/Login.css";
 import { __CreateUser } from "../services/UserService";
 
 const Signup = (props) => {
@@ -51,11 +51,12 @@ const Signup = (props) => {
       setFormError(true);
     }
   };
+
   return (
-    <section className="signup">
-      <form onSubmit={handleSubmit}>
-        <h3>Sign Up</h3>
-        <TextInput
+    <div className="signup">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h1>Sign Up</h1>
+        <TextField
           placeholder="NAME"
           title="NAME"
           name="name"
@@ -63,15 +64,15 @@ const Signup = (props) => {
           value={name}
           onChange={handleChange}
         />
-        <TextInput
-          placeholder="Email"
+        <TextField
+          placeholder="EMAIL"
           title="EMAIL"
           name="email"
           type="email"
           value={email}
           onChange={handleChange}
         />
-        <TextInput
+        <TextField
           placeholder="USERNAME"
           title="USERNAME"
           name="userName"
@@ -79,22 +80,25 @@ const Signup = (props) => {
           value={userName}
           onChange={handleChange}
         />
-        <TextInput
-          placeholder="Password"
+        <TextField
+          placeholder="PASSWORD"
           title="PASSWORD"
           name="password"
           value={password}
           type="password"
           onChange={handleChange}
         />
-        <button type="submit">Sign Up</button>
-        {formError ? <p>Please fill in all Fields</p> : null}
-        <p>
-          If you already have an account please visit our{" "}
-          {<Link to="/login">Login</Link>} page
+        <div className="signup-button">
+          <Button type="submit" theme="primary" themeType="contained">
+            Sign Up
+          </Button>
+        </div>
+        {formError ? <p>Please fill in all fields</p> : null}
+        <p>Already have an account? Go to our{" "}
+          {<Link to="/login"><strong>Log In</strong></Link>}{" "}page!
         </p>
       </form>
-    </section>
+    </div>
   );
 };
 
