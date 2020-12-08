@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
 import { __GetUser } from "../services/UserService";
-import { __DeletePost, __GetPostsByUserId } from "../services/PostService";
+import {
+  __DeletePost,
+  __GetPostsByUserId,
+  __UpdatePost,
+} from "../services/PostService";
 
 const UserProfile = (props) => {
   const [name, setName] = useState("");
@@ -31,6 +35,14 @@ const UserProfile = (props) => {
     }
   };
 
+  const updatePost = async (id) => {
+    try {
+      // console.log(id)
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <section>
       <h4>{name}'s Profile</h4>
@@ -53,7 +65,7 @@ const UserProfile = (props) => {
                 description={element.description}
                 post={element}
                 currentUser={props.currentUser}
-                onClick={deletePost}
+                deletePost={deletePost}
               />
             </div>
           ))

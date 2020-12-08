@@ -32,7 +32,7 @@ const Router = (props) => {
         console.log(session.user.id);
         setCurrentUser(session.user.id);
         setAuthenticated(true);
-        props.history.push("/explore");
+        props.history.push("/feed");
       } catch (error) {
         localStorage.clear();
       }

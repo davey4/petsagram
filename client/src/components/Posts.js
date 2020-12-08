@@ -87,8 +87,8 @@ const Posts = (props) => {
         <div>{props.userName}</div>
         <img src={props.img} alt="post" />
         <div>{props.description}</div>
-        {props.onClick ? (
-          <button onClick={() => props.onClick(props.post.id)}>
+        {props.deletePost ? (
+          <button onClick={() => props.deletePost(props.post.id)}>
             Delete Post
           </button>
         ) : null}

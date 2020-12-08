@@ -13,7 +13,6 @@ const Feed = (props) => {
     try {
       const data = await __GetPostsOfUserFollowings(props.currentUser);
       setPosts(data[0]);
-      //   console.log(posts[0]);
     } catch (error) {
       throw error;
     }
@@ -23,10 +22,7 @@ const Feed = (props) => {
     <section className="center">
       {posts
         ? posts.map((element) => (
-            <div
-              key={element.id}
-              // onClick={() => goToProfile(element.user_id)}
-            >
+            <div key={element.id}>
               <Posts
                 img={element.image}
                 userName={element.User.user_name}
