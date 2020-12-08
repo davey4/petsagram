@@ -12,7 +12,6 @@ const Feed = (props) => {
   const getPosts = async () => {
     try {
       const data = await __GetPostsOfUserFollowings(props.currentUser);
-      console.log(data);
       setPosts(data);
     } catch (error) {
       throw error;

@@ -1,4 +1,11 @@
-const { User, Post, Followers, Comments, Likes } = require("../models");
+const {
+  User,
+  Post,
+  Followers,
+  Comments,
+  Likes,
+  Notifications,
+} = require("../models");
 const {
   hashPassword,
   passwordValid,
@@ -39,6 +46,7 @@ const GetUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
       include: [
+        { model: Notifications },
         {
           model: Post,
           include: [
