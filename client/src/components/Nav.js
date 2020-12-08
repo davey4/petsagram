@@ -20,6 +20,9 @@ const Nav = ({ currentUser }) => {
     <header className="nav-header">
       <div className="icon">
         <nav>
+          <NavLink className="nav-active" to="/explore">
+            Explore
+          </NavLink>
           <NavLink className="nav-active" to="/profile">
             {user}
           </NavLink>
