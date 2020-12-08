@@ -1,4 +1,4 @@
-const { User, Post, Followers } = require("../models");
+const { User, Post, Followers, Comments, Likes } = require("../models");
 const {
   hashPassword,
   passwordValid,
@@ -19,8 +19,21 @@ const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { user_name: req.params.user_name },
+      order: [["createdAt", "ASC"]],
       include: [
-        { model: Post },
+        {
+          model: Post,
+          include: [
+            {
+              model: Comments,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+            {
+              model: Likes,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+          ],
+        },
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
@@ -36,7 +49,19 @@ const GetUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
       include: [
-        { model: Post },
+        {
+          model: Post,
+          include: [
+            {
+              model: Comments,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+            {
+              model: Likes,
+              include: [{ model: User, attributes: ["user_name"] }],
+            },
+          ],
+        },
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],

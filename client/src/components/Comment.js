@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 const Comment = (props) => {
-  const [commentor, setCommentor] = useState("");
-
-  useEffect(() => {
-    // getUser
-  }, []);
-
   return (
     <section>
       <div>
-        {commentor}: {props.description}
+        {props.commentor}: {props.description}
       </div>
     </section>
   );

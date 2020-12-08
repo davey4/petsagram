@@ -9,7 +9,6 @@ const Posts = (props) => {
   const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  // console.log(props.post.id);
 
   useEffect(() => {
     setComments(props.post.Comments);
@@ -22,31 +21,15 @@ const Posts = (props) => {
 
   const handleAddComment = async (e) => {
     e.preventDefault();
-    const newComment = { "description": description }
+    const newComment = { description: description };
     try {
       await __CreateComment(props.currentUser, props.post.id, newComment);
+      const comments = await __GetComments(props.post.id);
+      setComments(comments);
+      setDescription("");
+      setCreateComment(!createComment);
     } catch (error) {
       throw error;
-    }
-  };
-
-  const displayLikes = () => {
-    if (likes.length === 0) {
-      return <div>0 likes</div>;
-    } else if (likes.length === 1) {
-      return <div>`${likes[0]} likes this`</div>;
-    } else if (likes.length === 2) {
-      return (
-        <div>
-          `${likes[0]} and ${likes[1]} like this`
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          `${likes[0]} and ${likes.length - 1} others like this`
-        </div>
-      );
     }
   };
 
@@ -59,9 +42,22 @@ const Posts = (props) => {
       </div>
       <div>
         <button>Like</button>
-        {displayLikes}
-        <button onClick={() => setClicked(true)}>Comments</button>
-        <button onClick={() => setCreateComment(true)}>Add Comment</button>
+        {likes.length === 0 && <div>0 likes</div>}
+        {likes.length === 1 && <div>{likes[0].User.user_name} likes this</div>}
+        {likes.length === 2 && (
+          <div>
+            {likes[0].User.user_name} and {likes[1].User.user_name} like this
+          </div>
+        )}
+        {likes.length > 2 && (
+          <div>
+            {likes[0].User.user_name} and {likes.length - 1} others like this
+          </div>
+        )}
+        <button onClick={() => setClicked(!clicked)}>Comments</button>
+        <button onClick={() => setCreateComment(!createComment)}>
+          Add Comment
+        </button>
       </div>
       {createComment ? (
         <form onSubmit={handleAddComment}>
@@ -75,20 +71,18 @@ const Posts = (props) => {
           <button>comment</button>
         </form>
       ) : null}
-      {clicked && comments.length > 1 ? (
-        comments.map((element) => (
-          <div id={element.id}>
-            <Comment
-              commentor={element.id}
-              description={element.description}
-              postid={props.postId}
-              currentUser={props.currentUser}
-            />
-          </div>
-        ))
-      ) : (
-        <div>no comments</div>
-      )}
+      {clicked && comments
+        ? comments.map((element) => (
+            <div id={element.id}>
+              <Comment
+                commentor={element.User.user_name}
+                description={element.description}
+                postid={props.postId}
+                currentUser={props.currentUser}
+              />
+            </div>
+          ))
+        : null}
     </section>
   );
 };

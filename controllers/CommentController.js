@@ -6,11 +6,11 @@ const CreateComment = async (req, res) => {
     let post_id = parseInt(req.params.post_id);
     let description = req.body;
     console.log("body", description);
-    let commentBody = { 
+    let commentBody = {
       user_id: user_id,
       post_id: post_id,
-      ...description
-     };
+      ...description,
+    };
     const comment = await Comments.create(commentBody);
     res.send(comment);
   } catch (error) {
@@ -22,7 +22,7 @@ const GetComments = async (req, res) => {
   try {
     const comment = await Comments.findAll({
       where: { post_id: req.params.post_id },
-      include: [{ model: User, attributes: ["id", "name", "user_name"] }],
+      include: [{ model: User, attributes: ["user_name"] }],
     });
     res.send(comment);
   } catch (error) {

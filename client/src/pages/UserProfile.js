@@ -22,6 +22,7 @@ const UserProfile = (props) => {
     const user = await __GetUser(props.currentUser);
     setName(user.user_name);
     setPosts(user.Posts);
+    console.log(user);
     setFollowers(user.followers);
     setFollowings(user.following);
   };
@@ -47,7 +48,7 @@ const UserProfile = (props) => {
                 img={element.image}
                 userName={name}
                 description={element.description}
-                postId={element.postId}
+                post={element}
                 currentUser={props.currentUser}
               />
             </div>

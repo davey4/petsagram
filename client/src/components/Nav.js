@@ -12,7 +12,8 @@ const Nav = ({ currentUser }) => {
 
   const getUser = async () => {
     const user = await __GetUser(currentUser);
-    setUser(user.name);
+    // console.log(user);
+    setUser(user.user_name);
   };
 
   return (
