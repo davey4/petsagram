@@ -102,4 +102,4 @@ const Router = (props) => {
   );
 };
 
-export default Router;
+export default withRouter(Router);

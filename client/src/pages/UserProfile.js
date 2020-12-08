@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
 import CreatePost from "./CreatePost";
-import { __GetPostsByUserId } from "../services/PostService";
-import {
-  __GetFollowers,
-  __GetFollowing,
-  __GetUser,
-} from "../services/UserService";
+import { __GetUser } from "../services/UserService";
 
 const UserProfile = (props) => {
   const [name, setName] = useState("");
@@ -22,7 +17,6 @@ const UserProfile = (props) => {
     const user = await __GetUser(props.currentUser);
     setName(user.user_name);
     setPosts(user.Posts);
-    console.log(user);
     setFollowers(user.followers);
     setFollowings(user.following);
   };
