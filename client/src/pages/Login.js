@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TextInput from "../components/TextInput";
+import { Button, TextField } from "react-md";
 import "../styles/Login.css";
-
 import { __LoginUser } from "../services/UserService";
 
 const Login = (props) => {
@@ -40,38 +39,36 @@ const Login = (props) => {
   };
 
   return (
-    <section className="login">
-      <form onSubmit={handleSubmit}>
-        <h3>Login</h3>
-        <TextInput
-          placeholder="Email"
+    <div className="login">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1>Welcome Back!</h1>
+        <TextField
+          placeholder="EMAIL"
           title="EMAIL"
           name="email"
           type="email"
           value={email}
           onChange={handleChange}
         />
-        <TextInput
-          placeholder="Password"
+        <TextField
+          placeholder="PASSWORD"
           title="PASSWORD"
           name="password"
           value={password}
           type="password"
           onChange={handleChange}
         />
-        <button type="submit">Login</button>
-        {formError ? (
-          <p>
-            Couldn't find a matching Email and/or Password please enter a
-            registered email/password or
-          </p>
-        ) : null}
-        <p>
-          If you are a new user please visit our{" "}
-          {<Link to="/register">SignUp</Link>} page
+        <div className="login-button">
+          <Button type="submit" theme="primary" themeType="contained">
+            Login
+          </Button>
+        </div>
+        {formError ? <p>Please enter a registered Email and Password</p> : null}
+        <p>New to Petsagram? Please visit our{" "}
+          {<Link to="/register"><strong>Sign Up</strong></Link>}{" "}page!
         </p>
       </form>
-    </section>
+    </div>
   );
 };
 
