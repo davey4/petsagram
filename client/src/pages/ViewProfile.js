@@ -10,7 +10,6 @@ const ViewProfile = (props) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [posts, setPosts] = useState([]);
-  const [profile, setProfile] = useState("");
   const [followers, setFollowers] = useState([]);
   const [following, setFollowings] = useState([]);
 

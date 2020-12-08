@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Comment = (props) => {
-  console.log(props);
   return (
     <section>
       <div>
