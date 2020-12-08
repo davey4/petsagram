@@ -9,15 +9,6 @@ export const __CreatePost = async (formData, userId) => {
   }
 };
 
-export const __GetAllPosts = async () => {
-  try {
-    const res = await ApiClient.get("/posts/viewall");
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const __GetPostsByUserId = async (userId) => {
   try {
     const res = await ApiClient.get(`/posts/byuser/${userId}`);
@@ -57,24 +48,6 @@ export const __UpdatePost = async (formData, postId) => {
 export const __DeletePost = async (postId) => {
   try {
     const res = await ApiClient.delete(`/posts/${postId}`);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const __LikePost = async (postId) => {
-  try {
-    const res = await ApiClient.put(`/posts/like/${postId}`);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const __UnlikePost = async (postId) => {
-  try {
-    const res = await ApiClient.put(`/posts/unlike/${postId}`);
     return res.data;
   } catch (error) {
     throw error;

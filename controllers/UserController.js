@@ -5,16 +5,6 @@ const {
   createToken,
 } = require("../middleware/index");
 
-// working
-const GetAllUsers = async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.send(users);
-  } catch (error) {
-    throw error;
-  }
-};
-
 const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
@@ -177,7 +167,6 @@ const RefreshSession = async (req, res) => {
 };
 
 module.exports = {
-  GetAllUsers,
   GetUser,
   FollowUser,
   UnfollowUser,

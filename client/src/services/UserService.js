@@ -1,14 +1,5 @@
 import ApiClient from "./ApiClient";
 
-export const __GetAllUsers = async () => {
-  try {
-    const res = await ApiClient.get("/users/allusers");
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const __GetUserByName = async (userName) => {
   try {
     const res = await ApiClient.get(`/users/name/${userName}`);

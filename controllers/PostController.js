@@ -12,21 +12,7 @@ const CreatePost = async (req, res) => {
     throw error;
   }
 };
-// working
-const GetAllPosts = async (req, res) => {
-  try {
-    const posts = await Post.findAll({
-      include: [
-        { model: User, attributes: ["id", "name", "user_name"] },
-        { model: Comments },
-        { model: Likes },
-      ],
-    });
-    res.send(posts);
-  } catch (error) {
-    throw error;
-  }
-};
+
 // working
 const GetPostsByUserId = async (req, res) => {
   try {
@@ -135,38 +121,11 @@ const DeletePost = async (req, res) => {
   }
 };
 
-const LikePost = async (req, res) => {
-  try {
-    const like = await Post.increment(
-      { likes: 1 },
-      { where: { id: req.params.post_id } }
-    );
-    res.send(like);
-  } catch (error) {
-    throw error;
-  }
-};
-
-const UnlikePost = async (req, res) => {
-  try {
-    const unlike = await Post.increment(
-      { likes: -1 },
-      { where: { id: req.params.post_id } }
-    );
-    res.send(unlike);
-  } catch (error) {
-    throw error;
-  }
-};
-
 module.exports = {
   CreatePost,
-  GetAllPosts,
   GetPostsByUserId,
   GetAllPostsAndOrderByRecent,
   GetPostsOfUserFollowings,
   UpdatePost,
   DeletePost,
-  LikePost,
-  UnlikePost,
 };

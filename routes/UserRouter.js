@@ -2,7 +2,6 @@ const Router = require("express").Router();
 const controller = require("../controllers/UserController");
 const { readToken, verifyJwt } = require("../middleware");
 
-Router.get("/allusers", controller.GetAllUsers);
 Router.get("/:user_id", controller.GetUser);
 Router.get("/name/:user_name", controller.GetUserByName);
 
