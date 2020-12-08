@@ -2,7 +2,6 @@ import ApiClient from "./ApiClient";
 
 export const __CreateComment = async (userId, postId, formData) => {
   try {
-    // console.log(formData);
     const res = await ApiClient.post(
       `/comments/${userId}/post/${postId}`,
       formData

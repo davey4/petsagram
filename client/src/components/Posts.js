@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import TextInput from "./TextInput";
 import { __CreateComment, __GetComments } from "../services/CommentService";
-// import { like } from "sequelize/types/lib/operators";
 
 const Posts = (props) => {
   const [comments, setComments] = useState([]);
@@ -10,7 +9,6 @@ const Posts = (props) => {
   const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  // console.log(props.post.id);
 
   useEffect(() => {
     setComments(props.post.Comments);
@@ -26,6 +24,10 @@ const Posts = (props) => {
     const newComment = { description: description };
     try {
       await __CreateComment(props.currentUser, props.post.id, newComment);
+      const comments = await __GetComments(props.post.id);
+      setComments(comments);
+      setDescription("");
+      setCreateComment(!createComment);
     } catch (error) {
       throw error;
     }

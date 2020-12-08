@@ -19,6 +19,7 @@ const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { user_name: req.params.user_name },
+      order: [["createdAt", "ASC"]],
       include: [
         {
           model: Post,

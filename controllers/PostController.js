@@ -48,7 +48,6 @@ const GetPostsByUserId = async (req, res) => {
 const GetAllPostsAndOrderByRecent = async (req, res) => {
   try {
     const recents = await Post.findAll({
-      order: [["createdAt", "DESC"]],
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
         {
