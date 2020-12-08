@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import TextInput from "./TextInput";
-import { __CreateComment } from "../services/CommentService";
+import { __CreateComment, __GetComments } from "../services/CommentService";
 
 const Posts = (props) => {
   const [comments, setComments] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [description, setAddComment] = useState("");
+  const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
   // console.log(props.post.id);
@@ -17,14 +17,14 @@ const Posts = (props) => {
   }, []);
 
   const handleCommentChange = ({ target }) => {
-    setAddComment(target.value);
+    setDescription(target.value);
   };
 
   const handleAddComment = async (e) => {
     e.preventDefault();
-    // console.log(description);
+    const newComment = { "description": description }
     try {
-      await __CreateComment(props.currentUser, props.post.id, description);
+      await __CreateComment(props.currentUser, props.post.id, newComment);
     } catch (error) {
       throw error;
     }
@@ -67,7 +67,7 @@ const Posts = (props) => {
         <form onSubmit={handleAddComment}>
           <TextInput
             type="text"
-            name="comment"
+            name="description"
             value={description}
             onChange={handleCommentChange}
             placeholder="add comment"
