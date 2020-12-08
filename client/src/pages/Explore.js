@@ -8,6 +8,7 @@ const Explore = (props) => {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [searched, setSearched] = useState(false);
+  console.log(props.name);
 
   useEffect(() => {
     getRecentPosts();
@@ -33,7 +34,7 @@ const Explore = (props) => {
   };
 
   const goToProfile = (user) => {
-    // console.log(user)
+    console.log(user);
     // props.history.push(`/profile/${user}`)
   };
 
@@ -64,6 +65,7 @@ const Explore = (props) => {
                     description={element.description}
                     post={element}
                     currentUser={props.currentUser}
+                    name={props.name}
                   />
                 </div>
               ))

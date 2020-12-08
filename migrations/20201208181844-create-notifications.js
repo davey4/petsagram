@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("likes", {
+    await queryInterface.createTable("notifications", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,29 +16,21 @@ module.exports = {
           key: "id",
         },
       },
-      post_id: {
-        type: Sequelize.INTEGER,
+      message: {
+        type: Sequelize.STRING,
         allowNull: false,
-        onDelete: "CASCADE",
-        references: {
-          model: "posts",
-          key: "id",
-        },
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: new Date(),
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("likes");
+    await queryInterface.dropTable("notifications");
   },
 };
-//referencing

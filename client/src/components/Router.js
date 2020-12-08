@@ -12,6 +12,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import UserProfile from "../pages/UserProfile";
 import ViewProfile from "../pages/ViewProfile";
+import Feed from "../pages/Feed";
+import Notifications from "../pages/Notifications";
 
 const Router = (props) => {
   const [loading, updateLoading] = useState(true);
@@ -28,10 +30,9 @@ const Router = (props) => {
     if (token) {
       try {
         const session = await __CheckSession();
-        console.log(session.user.id);
         setCurrentUser(session.user.id);
         setAuthenticated(true);
-        props.history.push("/explore");
+        props.history.push("/feed");
       } catch (error) {
         localStorage.clear();
       }
@@ -93,6 +94,24 @@ const Router = (props) => {
             component={(props) => (
               <Layout currentUser={currentUser} authenticated={authenticated}>
                 <CreatePost {...props} currentUser={currentUser} />
+              </Layout>
+            )}
+          />
+          <ProtectedRoute
+            authenticated={authenticated}
+            path="/feed"
+            component={(props) => (
+              <Layout currentUser={currentUser} authenticated={authenticated}>
+                <Feed {...props} currentUser={currentUser} />
+              </Layout>
+            )}
+          />
+          <ProtectedRoute
+            authenticated={authenticated}
+            path="/notifications"
+            component={(props) => (
+              <Layout currentUser={currentUser} authenticated={authenticated}>
+                <Notifications {...props} currentUser={currentUser} />
               </Layout>
             )}
           />

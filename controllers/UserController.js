@@ -1,15 +1,23 @@
-const { User, Post, Followers, Comments, Likes } = require("../models");
+const {
+  User,
+  Post,
+  Followers,
+  Comments,
+  Likes,
+  Notifications,
+} = require("../models");
 const {
   hashPassword,
   passwordValid,
   createToken,
 } = require("../middleware/index");
 
-// working
-const GetAllUsers = async (req, res) => {
+const getUserName = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.send(users);
+    const user = await User.findByPk(req.params.user_id, {
+      attributes: ["user_name"],
+    });
+    res.send(user);
   } catch (error) {
     throw error;
   }
@@ -49,6 +57,7 @@ const GetUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
       include: [
+        { model: Notifications },
         {
           model: Post,
           include: [
@@ -101,7 +110,7 @@ const UnfollowUser = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetFollowers = async (req, res) => {
   try {
     const followers = await Followers.findAll({
@@ -115,7 +124,7 @@ const GetFollowers = async (req, res) => {
     throw error;
   }
 };
-
+// working
 const GetFollowing = async (req, res) => {
   try {
     const following = await Followers.findAll({
@@ -154,7 +163,6 @@ const LoginUser = async (req, res) => {
     ) {
       let payload = {
         id: user.id,
-        name: user.name,
       };
       let token = createToken(payload);
       return res.send({ user, token });
@@ -177,7 +185,6 @@ const RefreshSession = async (req, res) => {
 };
 
 module.exports = {
-  GetAllUsers,
   GetUser,
   FollowUser,
   UnfollowUser,
@@ -187,4 +194,5 @@ module.exports = {
   LoginUser,
   RefreshSession,
   GetUserByName,
+  getUserName,
 };

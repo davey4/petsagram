@@ -1,6 +1,6 @@
 // env variables here
-const CLOUD_NAME = "davey4";
-const UPLOAD_PRESET = "kstt8ubl";
+const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
+const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET;
 
 const Uploader = (props) => {
   const widget = window.cloudinary.createUploadWidget(
@@ -22,8 +22,7 @@ const Uploader = (props) => {
       try {
         const url = await resultEvent.info.secure_url;
         if (url) {
-          // await __UploadFile(url);
-          await updateRender();
+          props.setImage(url);
         }
       } catch (err) {
         throw err;
@@ -31,15 +30,9 @@ const Uploader = (props) => {
     }
   };
 
-  const updateRender = async () => {
-    await props.setImage();
-  };
-
   return (
     <div className="uploader">
-      <button className="btn indigo darken-3" onClick={() => widget.open()}>
-        Upload Image
-      </button>
+      <button onClick={() => widget.open()}>Upload Image</button>
     </div>
   );
 };

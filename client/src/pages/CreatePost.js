@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Uploader from "../components/Uploader";
-import Images from "../components/Images";
 import TextInput from "../components/TextInput";
 import "../styles/Posts.css";
 import { __CreatePost } from "../services/PostService";
@@ -25,9 +24,7 @@ const CreatePost = (props) => {
     try {
       const data = { image, description };
       await __CreatePost(data, props.currentUser);
-      // props.history.push('/prolife')
-
-      console.log("clicked");
+      props.history.push("/profile");
     } catch (error) {
       throw error;
     }
@@ -37,8 +34,8 @@ const CreatePost = (props) => {
     setDescription(target.value);
   };
 
-  const handleImage = ({ target }) => {
-    setImage(target.value);
+  const handleImage = (target) => {
+    setImage(target);
   };
 
   return (
@@ -46,7 +43,8 @@ const CreatePost = (props) => {
       <h4>{name}</h4>
       <div className="center">
         <div className="pic-buttons">
-          <Uploader setImage={setImage} />
+          <Uploader setImage={handleImage} />
+          {image ? <img src={image} alt="cloudinary" /> : null}
           <form onSubmit={createPost}>
             <TextInput
               type="text"
