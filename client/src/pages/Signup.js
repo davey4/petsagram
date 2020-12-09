@@ -13,6 +13,7 @@ const Signup = (props) => {
   const [confirm, setConfirm] = useState("");
   const [formError, setFormError] = useState(false);
   const [notEqual, setNotEqual] = useState(false);
+  const [unique, setUnique] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [next, setNext] = useState(false);
 
@@ -69,10 +70,12 @@ const Signup = (props) => {
 
         props.history.push("/login");
       } catch (error) {
-        setFormError(true);
+        setUnique(true);
+        setNext(false);
       }
     } else {
       setFormError(true);
+      setNext(false);
     }
   };
 
@@ -132,12 +135,8 @@ const Signup = (props) => {
               Sign Up
             </Button>
           </div>
-          {formError ? (
-            <p>
-              Please fill in all fields and ensure your Email and User Name are
-              unique
-            </p>
-          ) : null}
+          {formError ? <p>Please fill in all fields</p> : null}
+          {unique ? <p>Email and or User Name already exists</p> : null}
           {notEqual ? <p>Passwords do no match</p> : null}
           <p>
             Already have an account? Go to our{" "}
