@@ -38,7 +38,7 @@ const Nav = ({ currentUser }) => {
           Feed
         </NavLink>
         <NavLink className="nav-active" to="/profile">
-          <img src={avatar} alt={user} />
+          <img className="avatar-icon" src={avatar} alt={user} />
         </NavLink>
         <NavLink
           className="nav-active"
