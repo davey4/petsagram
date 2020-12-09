@@ -13,6 +13,7 @@ import {
   __GetLikes,
 } from "../services/LikeService";
 import { __CreateNotification } from "../services/NotificationService";
+import { __GetUserName } from "../services/UserService";
 
 const Posts = (props) => {
   const [comments, setComments] = useState([]);
@@ -20,15 +21,26 @@ const Posts = (props) => {
   const [description, setDescription] = useState("");
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
-  console.log(props);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     setComments(props.post.Comments);
     setLikes(props.post.Likes);
+    getUser();
   }, []);
 
-  const handleCommentChange = ({ target }) => {
-    setDescription(target.value);
+  const getUser = async () => {
+    const user = await __GetUserName(props.currentUser);
+    setName(user.user_name);
+  };
+
+  const createNotification = async (message) => {
+    try {
+      const newMessage = { message: message };
+      await __CreateNotification(props.post.User.id, newMessage);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const addLike = async (e) => {
@@ -37,6 +49,8 @@ const Posts = (props) => {
       await __CreateLike(props.currentUser, props.post.id);
       const likes = await __GetLikes(props.post.id);
       setLikes(likes);
+      let message = `${name} liked your post!`;
+      createNotification(message);
     } catch (error) {
       throw error;
     }
@@ -60,7 +74,6 @@ const Posts = (props) => {
   };
 
   const deleteComment = async (id) => {
-    // e.preventDefault()
     try {
       await __DeleteComment(id);
       const comments = await __GetComments(props.post.id);
@@ -79,9 +92,15 @@ const Posts = (props) => {
       setComments(comments);
       setDescription("");
       setCreateComment(!createComment);
+      let message = `${name} commented on your post!`;
+      createNotification(message);
     } catch (error) {
       throw error;
     }
+  };
+
+  const handleCommentChange = ({ target }) => {
+    setDescription(target.value);
   };
 
   return (
