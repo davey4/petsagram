@@ -27,10 +27,13 @@ const Posts = (props) => {
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
   const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     setComments(props.post.Comments);
     setLikes(props.post.Likes);
+    // console.log(props.post.User);
+    setAvatar(props.post.User.avatar);
     getUser();
   }, []);
 
@@ -119,6 +122,7 @@ const Posts = (props) => {
               : null
           }
         >
+          <img src={avatar} alt={props.userName} />
           {props.userName}
         </div>
         <img src={props.img} alt="post" />
@@ -194,7 +198,8 @@ const Posts = (props) => {
 
         <div className="description-area">
           <div className="description">
-            <strong>{props.userName}</strong>{"  "}
+            <strong>{props.userName}</strong>
+            {"  "}
             {props.description}
           </div>
         </div>
