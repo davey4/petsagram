@@ -118,13 +118,13 @@ const Posts = (props) => {
             >
               Delete Post
             </Button>
-            <button
+            <Button
               theme="primary"
               themeType="contained"
               onClick={() => props.updatePost(props.post)}
             >
               Update Post
-            </button>
+            </Button>
           </div>
         ) : null}
 
