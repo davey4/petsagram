@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-md";
 import Posts from "../components/Posts";
 import {
   __GetUserByName,
@@ -61,13 +62,23 @@ const ViewProfile = (props) => {
               Followers: {followers.length} Following: {following.length}
             </h5>
             {followers.find((element) => element.id === props.currentUser) ? (
-              <button className="margin-left" onClick={handleUnfollow}>
+              <Button
+                className="unfollow"
+                theme="primary"
+                themeType="contained"
+                onClick={handleUnfollow}
+              >
                 Unfollow
-              </button>
+              </Button>
             ) : (
-              <button className="margin-left" onClick={handleFollow}>
+              <Button
+                className="follow"
+                theme="primary"
+                themeType="contained"
+                onClick={handleFollow}
+              >
                 Follow
-              </button>
+              </Button>
             )}
           </div>
         ) : (

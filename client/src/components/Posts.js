@@ -4,6 +4,7 @@ import {
   FavoriteSVGIcon,
   SendSVGIcon,
   ClearSVGIcon,
+  CreateSVGIcon,
   ChatBubbleSVGIcon,
 } from "@react-md/material-icons";
 import Comment from "./Comment";
@@ -111,36 +112,44 @@ const Posts = (props) => {
   return (
     <div className="posts">
       <div className="postinfo">
-        <div
-          className="name"
-          onClick={
-            props.goToProfile
-              ? () => props.goToProfile(props.post.User.user_name)
-              : null
-          }
-        >
-          {props.userName}
-        </div>
-        <img src={props.img} alt="post" />
-        <div className="description">{props.description}</div>
-        {props.deletePost ? (
-          <div>
-            <Button
-              theme="primary"
-              themeType="contained"
-              onClick={() => props.deletePost(props.post.id)}
-            >
-              Delete Post
-            </Button>
-            <Button
-              theme="primary"
-              themeType="contained"
-              onClick={() => props.updatePost(props.post)}
-            >
-              Update Post
-            </Button>
+        <div className="top-area">
+          <div
+            className="name"
+            onClick={
+              props.goToProfile
+                ? () => props.goToProfile(props.post.User.user_name)
+                : null
+            }
+          >
+            <strong>{props.userName}</strong>
           </div>
-        ) : null}
+          {props.deletePost ? (
+            <div>
+              <Button
+                theme="secondary"
+                themeType="clear"
+                id="icon-button-1"
+                buttonType="icon"
+                onClick={() => props.deletePost(props.post.id)}
+              >
+                <ClearSVGIcon>Delete Post</ClearSVGIcon>
+              </Button>
+              <Button
+                theme="secondary"
+                themeType="clear"
+                id="icon-button-1"
+                buttonType="icon"
+                onClick={() => props.updatePost(props.post)}
+              >
+                <CreateSVGIcon>Update Post</CreateSVGIcon>
+              </Button>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="img-area">
+          <img src={props.img} alt="post" />
+        </div>
 
         <div className="like-comment">
           {likes.find((element) => element.User.id === props.currentUser) ? (
@@ -194,7 +203,8 @@ const Posts = (props) => {
 
         <div className="description-area">
           <div className="description">
-            <strong>{props.userName}</strong>{"  "}
+            <strong>{props.userName}</strong>
+            {"  "}
             {props.description}
           </div>
         </div>
