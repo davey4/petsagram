@@ -21,15 +21,6 @@ export const __GetComments = async (postId) => {
   }
 };
 
-export const __UpdateComment = async (commmentId, formData) => {
-  try {
-    const res = await ApiClient.put(`/comments/${commmentId}`, formData);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const __DeleteComment = async (commmentId) => {
   try {
     const res = await ApiClient.delete(`/comments/${commmentId}`);

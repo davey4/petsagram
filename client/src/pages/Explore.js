@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "react-md";
 import Posts from "../components/Posts";
-import TextInput from "../components/TextInput";
 import ViewProfile from "./ViewProfile";
 import { __GetAllPostsAndOrderByRecent } from "../services/PostService";
 
@@ -29,13 +28,19 @@ const Explore = (props) => {
 
   const searchUsers = (e) => {
     e.preventDefault();
-    setSearched(true);
-    console.log(search);
+    let location = {
+      pathname: "/view/profile",
+      state: search,
+    };
+    props.history.push(location);
   };
 
   const goToProfile = (user) => {
-    console.log(user);
-    // props.history.push(`/profile/${user}`)
+    let location = {
+      pathname: "/view/profile",
+      state: user,
+    };
+    props.history.push(location);
   };
 
   return (
@@ -55,10 +60,7 @@ const Explore = (props) => {
         <div className="allposts">
           {posts
             ? posts.map((element) => (
-                <div className="posts"
-                  key={element.id}
-                  onClick={() => goToProfile(element.user_id)}
-                >
+                <div className="posts" key={element.id}>
                   <Posts
                     img={element.image}
                     userName={element.User.user_name}
@@ -66,14 +68,13 @@ const Explore = (props) => {
                     post={element}
                     currentUser={props.currentUser}
                     name={props.name}
+                    goToProfile={goToProfile}
                   />
                 </div>
               ))
             : null}
         </div>
-      ) : (
-        <ViewProfile userName={search} currentUser={props.currentUser} />
-      )}
+      ) : null}
     </section>
   );
 };

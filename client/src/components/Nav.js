@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
-import { __GetUser } from "../services/UserService";
-import Notifications from "../pages/Notifications";
+import { __GetUserName } from "../services/UserService";
 
 const Nav = ({ currentUser }) => {
   const [user, setUser] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [notifications, setNotifications] = useState("");
 
   useEffect(() => {
@@ -13,15 +13,18 @@ const Nav = ({ currentUser }) => {
   });
 
   const getUser = async () => {
-    const user = await __GetUser(currentUser);
-    // console.log(user);
+    const user = await __GetUserName(currentUser);
     setNotifications(user.Notifications.length);
     setUser(user.user_name);
+    setAvatar(user.avatar);
   };
 
   return (
     <header className="nav-header">
       <nav>
+        <NavLink className="nav-active" to="/messaging">
+          Messages
+        </NavLink>
         <NavLink className="nav-active" to="/notifications">
           Notifications {notifications ? notifications : null}
         </NavLink>
@@ -35,7 +38,7 @@ const Nav = ({ currentUser }) => {
           Feed
         </NavLink>
         <NavLink className="nav-active" to="/profile">
-          {user}
+          <img src={avatar} alt={user} />
         </NavLink>
         <NavLink
           className="nav-active"

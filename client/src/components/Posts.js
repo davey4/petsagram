@@ -42,7 +42,7 @@ const Posts = (props) => {
   const createNotification = async (message) => {
     try {
       const newMessage = { message: message };
-      await __CreateNotification(props.post.User.id, newMessage);
+      await __CreateNotification(props.post.user_id, newMessage);
     } catch (error) {
       throw error;
     }
@@ -111,25 +111,36 @@ const Posts = (props) => {
   return (
     <div className="posts">
       <div className="postinfo">
-        <div className="top-area">
-          <div className="name">
-            <strong>{props.userName}</strong>
-          </div>
-          {props.deletePost ? (
+        <div
+          className="name"
+          onClick={
+            props.goToProfile
+              ? () => props.goToProfile(props.post.User.user_name)
+              : null
+          }
+        >
+          {props.userName}
+        </div>
+        <img src={props.img} alt="post" />
+        <div className="description">{props.description}</div>
+        {props.deletePost ? (
+          <div>
             <Button
-              theme="secondary"
-              themeType="clear"
-              id="icon-button-1"
-              buttonType="icon"
+              theme="primary"
+              themeType="contained"
               onClick={() => props.deletePost(props.post.id)}
             >
-              <ClearSVGIcon>Delete</ClearSVGIcon>
+              Delete Post
             </Button>
-          ) : null}
-        </div>
-        <div className="img-area">
-          <img src={props.img} alt="post" />
-        </div>
+            <Button
+              theme="primary"
+              themeType="contained"
+              onClick={() => props.updatePost(props.post)}
+            >
+              Update Post
+            </Button>
+          </div>
+        ) : null}
 
         <div className="like-comment">
           {likes.find((element) => element.User.id === props.currentUser) ? (
@@ -206,7 +217,7 @@ const Posts = (props) => {
               onChange={handleCommentChange}
               placeholder="Comment"
             />
-            <Button theme="primary" themeType="contained">
+            <Button theme="primary" themeType="contained" type="submit">
               <SendSVGIcon>Submit</SendSVGIcon>
             </Button>
           </form>

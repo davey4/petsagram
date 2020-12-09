@@ -20,7 +20,7 @@ const ViewProfile = (props) => {
   const getUser = async () => {
     try {
       console.log(props.userName);
-      const data = await __GetUserByName(props.userName);
+      const data = await __GetUserByName(props.location.state);
       setId(data.id);
       setName(data.user_name);
       setPosts(data.Posts);

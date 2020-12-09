@@ -14,6 +14,7 @@ import UserProfile from "../pages/UserProfile";
 import ViewProfile from "../pages/ViewProfile";
 import Feed from "../pages/Feed";
 import Notifications from "../pages/Notifications";
+import Messaging from "../pages/Messaging";
 
 const Router = (props) => {
   const [loading, updateLoading] = useState(true);
@@ -81,7 +82,7 @@ const Router = (props) => {
           />
           <ProtectedRoute
             authenticated={authenticated}
-            path="/profile/view"
+            path="/view/profile"
             component={(props) => (
               <Layout currentUser={currentUser} authenticated={authenticated}>
                 <ViewProfile {...props} currentUser={currentUser} />
@@ -112,6 +113,15 @@ const Router = (props) => {
             component={(props) => (
               <Layout currentUser={currentUser} authenticated={authenticated}>
                 <Notifications {...props} currentUser={currentUser} />
+              </Layout>
+            )}
+          />
+          <ProtectedRoute
+            authenticated={authenticated}
+            path="/messaging"
+            component={(props) => (
+              <Layout currentUser={currentUser} authenticated={authenticated}>
+                <Messaging {...props} currentUser={currentUser} />
               </Layout>
             )}
           />

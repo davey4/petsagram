@@ -10,7 +10,9 @@ const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [formError, setFormError] = useState(false);
+  const [notEqual, setNotEqual] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [next, setNext] = useState(false);
 
@@ -28,25 +30,31 @@ const Signup = (props) => {
       case target.name === "password":
         setPassword(target.value);
         break;
+      case target.name === "confirm":
+        setConfirm(target.value);
+        break;
       default:
         break;
     }
   };
 
-  const handleNext = () => {
-    if (name && email && userName && password) {
-      return setNext(true);
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (password === confirm) {
+      if (name && email && userName) {
+        return setNext(true);
+      }
+      return setFormError(true);
     }
-    setFormError(true);
+    setNotEqual(true);
   };
 
   const handleSelectAvatar = (avatar) => {
     setAvatar(avatar);
-    handleSubmit();
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (name && email && userName && password && avatar) {
       try {
         const data = {
@@ -74,6 +82,7 @@ const Signup = (props) => {
         <SelectAvatar
           handleSubmit={handleSubmit}
           setAvatar={handleSelectAvatar}
+          onSubmit={handleSubmit}
         />
       ) : (
         <form className="signup-form" onSubmit={handleNext}>
@@ -110,6 +119,14 @@ const Signup = (props) => {
             type="password"
             onChange={handleChange}
           />
+          <TextField
+            placeholder="CONFIRM PASSWORD"
+            title="CONFIRM PASSWORD"
+            name="confirm"
+            value={confirm}
+            type="password"
+            onChange={handleChange}
+          />
           <div className="signup-button">
             <Button type="submit" theme="primary" themeType="contained">
               Sign Up
@@ -121,6 +138,7 @@ const Signup = (props) => {
               unique
             </p>
           ) : null}
+          {notEqual ? <p>Passwords do no match</p> : null}
           <p>
             Already have an account? Go to our{" "}
             {

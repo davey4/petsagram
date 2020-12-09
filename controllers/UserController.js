@@ -16,6 +16,7 @@ const getUserName = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
       attributes: ["user_name", "avatar"],
+      include: [{ model: Notifications }],
     });
     res.send(user);
   } catch (error) {
@@ -27,7 +28,6 @@ const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { user_name: req.params.user_name },
-      order: [["createdAt", "ASC"]],
       include: [
         {
           model: Post,
@@ -45,6 +45,7 @@ const GetUserByName = async (req, res) => {
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
+      order: [[{ model: Post }, "createdAt", "DESC"]],
     });
     res.send(user);
   } catch (error) {
@@ -74,6 +75,7 @@ const GetUser = async (req, res) => {
         { model: User, as: "followers" },
         { model: User, as: "following" },
       ],
+      order: [[{ model: Post }, "createdAt", "DESC"]],
     });
     res.send(user);
   } catch (error) {
