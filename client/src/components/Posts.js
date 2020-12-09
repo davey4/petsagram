@@ -110,13 +110,22 @@ const Posts = (props) => {
         <img src={props.img} alt="post" />
         <div className="description">{props.description}</div>
         {props.deletePost ? (
-          <Button
-            theme="primary"
-            themeType="contained"
-            onClick={() => props.deletePost(props.post.id)}
-          >
-            Delete Post
-          </Button>
+          <div>
+            <Button
+              theme="primary"
+              themeType="contained"
+              onClick={() => props.deletePost(props.post.id)}
+            >
+              Delete Post
+            </Button>
+            <button
+              theme="primary"
+              themeType="contained"
+              onClick={() => props.updatePost(props.post)}
+            >
+              Update Post
+            </button>
+          </div>
         ) : null}
 
         <div className="likes">

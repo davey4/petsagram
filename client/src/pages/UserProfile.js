@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
 import { __GetUser } from "../services/UserService";
-import {
-  __DeletePost,
-  __GetPostsByUserId,
-  __UpdatePost,
-} from "../services/PostService";
+import { __DeletePost, __GetPostsByUserId } from "../services/PostService";
 
 const UserProfile = (props) => {
   const [name, setName] = useState("");
@@ -35,9 +31,13 @@ const UserProfile = (props) => {
     }
   };
 
-  const updatePost = async (id) => {
+  const updatePost = async (post) => {
     try {
-      // console.log(id)
+      let location = {
+        pathname: "/create/post",
+        state: post,
+      };
+      props.history.push(location);
     } catch (error) {
       throw error;
     }
@@ -66,6 +66,7 @@ const UserProfile = (props) => {
                 post={element}
                 currentUser={props.currentUser}
                 deletePost={deletePost}
+                updatePost={updatePost}
               />
             </div>
           ))
