@@ -6,6 +6,8 @@ import {
   __GetPostsByUserId,
   __UpdatePost,
 } from "../services/PostService";
+import { Button } from "react-md";
+import { FontIcon } from "@react-md/icon";
 
 const UserProfile = (props) => {
   const [name, setName] = useState("");
@@ -44,21 +46,29 @@ const UserProfile = (props) => {
   };
 
   return (
-    <section>
-      <h4>{name}'s Profile</h4>
-      <h5>
-        Followers: {followers.length} Following: {following.length}
-      </h5>
-      <button
-        className="margin-left"
-        onClick={() => props.history.push("/create/post")}
-      >
-        New Post
-      </button>
-      <div className="center">
+    <section className="profile">
+      <div className="profileinfo-section">
+        <h2>{name}</h2>
+        <h4>Posts: {posts.length}</h4>
+        <h4>Followers: {followers.length}</h4>
+        <h4>Following: {following.length}</h4>
+        <Button
+          theme="primary"
+          themeType="contained"
+          className="margin-left"
+          id="icon-button-1"
+          buttonType="icon"
+          aria-label="Add"
+          onClick={() => props.history.push("/create/post")}
+        >
+          {" "}
+          <FontIcon>add</FontIcon>
+        </Button>
+      </div>
+      <div className="post-section">
         {posts ? (
           posts.map((element) => (
-            <div key={element.id}>
+            <div className="post-container" key={element.id}>
               <Posts
                 img={element.image}
                 userName={name}

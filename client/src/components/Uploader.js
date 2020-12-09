@@ -1,4 +1,5 @@
-// env variables here
+import { Button } from "react-md";
+
 const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET;
 
@@ -32,7 +33,13 @@ const Uploader = (props) => {
 
   return (
     <div className="uploader">
-      <button onClick={() => widget.open()}>{props.text}</button>
+      <Button
+        theme="secondary"
+        themeType="contained"
+        onClick={() => widget.open()}
+      >
+        {props.text}
+      </Button>
     </div>
   );
 };
