@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, TextField } from "react-md";
-import { FavoriteSVGIcon, SendSVGIcon } from "@react-md/material-icons";
+import {
+  FavoriteSVGIcon,
+  SendSVGIcon,
+  ClearSVGIcon,
+  ChatBubbleSVGIcon,
+} from "@react-md/material-icons";
 import Comment from "./Comment";
 import {
   __CreateComment,
@@ -106,20 +111,27 @@ const Posts = (props) => {
   return (
     <div className="posts">
       <div className="postinfo">
-        <div className="name">{props.userName}</div>
-        <img src={props.img} alt="post" />
-        <div className="description">{props.description}</div>
-        {props.deletePost ? (
-          <Button
-            theme="primary"
-            themeType="contained"
-            onClick={() => props.deletePost(props.post.id)}
-          >
-            Delete Post
-          </Button>
-        ) : null}
+        <div className="top-area">
+          <div className="name">
+            <strong>{props.userName}</strong>
+          </div>
+          {props.deletePost ? (
+            <Button
+              theme="secondary"
+              themeType="clear"
+              id="icon-button-1"
+              buttonType="icon"
+              onClick={() => props.deletePost(props.post.id)}
+            >
+              <ClearSVGIcon>Delete</ClearSVGIcon>
+            </Button>
+          ) : null}
+        </div>
+        <div className="img-area">
+          <img src={props.img} alt="post" />
+        </div>
 
-        <div className="likes">
+        <div className="like-comment">
           {likes.find((element) => element.User.id === props.currentUser) ? (
             <Button
               theme="secondary"
@@ -141,6 +153,18 @@ const Posts = (props) => {
               <FavoriteSVGIcon>Like</FavoriteSVGIcon>
             </Button>
           )}
+          <Button
+            theme="primary"
+            themeType="contained"
+            id="comment"
+            buttonType="icon"
+            onClick={() => setClicked(!clicked)}
+          >
+            <ChatBubbleSVGIcon>Comment</ChatBubbleSVGIcon>
+          </Button>
+        </div>
+
+        <div className="likes">
           {likes.length === 0 && <div>0 likes</div>}
           {likes.length === 1 && (
             <div>{likes[0].User.user_name} likes this</div>
@@ -156,14 +180,15 @@ const Posts = (props) => {
             </div>
           )}
         </div>
+
+        <div className="description-area">
+          <div className="description">
+            <strong>{props.userName}</strong>{"  "}
+            {props.description}
+          </div>
+        </div>
+
         <div className="comments-button">
-          <Button
-            theme="primary"
-            themeType="contained"
-            onClick={() => setClicked(!clicked)}
-          >
-            Comments
-          </Button>
           <Button
             theme="primary"
             themeType="contained"
