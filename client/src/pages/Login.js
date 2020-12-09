@@ -63,8 +63,14 @@ const Login = (props) => {
           </Button>
         </div>
         {formError ? <p>Please enter a registered Email and Password</p> : null}
-        <p>New to Petsagram? Please visit our{" "}
-          {<Link to="/register"><strong>Sign Up</strong></Link>}{" "}page!
+        <p>
+          New to Petsagram? Please visit our{" "}
+          {
+            <Link to="/register">
+              <strong>Sign Up</strong>
+            </Link>
+          }{" "}
+          page!
         </p>
       </form>
     </div>

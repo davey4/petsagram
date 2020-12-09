@@ -32,7 +32,7 @@ const Uploader = (props) => {
 
   return (
     <div className="uploader">
-      <button onClick={() => widget.open()}>Upload Image</button>
+      <button onClick={() => widget.open()}>{props.text}</button>
     </div>
   );
 };
