@@ -34,7 +34,7 @@ const Explore = (props) => {
   };
 
   const goToProfile = (user) => {
-    console.log(user);
+    // console.log(user);
     // props.history.push(`/profile/${user}`)
   };
 
@@ -55,10 +55,7 @@ const Explore = (props) => {
         <div className="allposts">
           {posts
             ? posts.map((element) => (
-                <div className="posts"
-                  key={element.id}
-                  onClick={() => goToProfile(element.user_id)}
-                >
+                <div className="posts" key={element.id}>
                   <Posts
                     img={element.image}
                     userName={element.User.user_name}
