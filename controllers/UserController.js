@@ -15,7 +15,7 @@ const {
 const getUserName = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
-      attributes: ["user_name"],
+      attributes: ["user_name", "avatar"],
     });
     res.send(user);
   } catch (error) {
@@ -141,10 +141,16 @@ const GetFollowing = async (req, res) => {
 // working
 const CreateUser = async (req, res) => {
   try {
-    const { name, email, userName, password } = req.body;
+    const { name, email, userName, password, avatar } = req.body;
     const user_name = userName;
     const password_digest = await hashPassword(password);
-    const user = await User.create({ name, email, user_name, password_digest });
+    const user = await User.create({
+      name,
+      email,
+      user_name,
+      password_digest,
+      avatar,
+    });
     res.send(user);
   } catch (error) {
     throw error;

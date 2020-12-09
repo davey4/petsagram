@@ -15,6 +15,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           isEmail: true,
         },
@@ -22,8 +23,13 @@ module.exports = {
       user_name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       password_digest: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      avatar: {
         type: Sequelize.STRING,
         allowNull: false,
       },

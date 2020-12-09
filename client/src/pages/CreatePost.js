@@ -43,7 +43,7 @@ const CreatePost = (props) => {
       <h4>{name}</h4>
       <div className="center">
         <div className="pic-buttons">
-          <Uploader setImage={handleImage} />
+          <Uploader setImage={handleImage} text="Upload Image" />
           {image ? <img src={image} alt="cloudinary" /> : null}
           <form onSubmit={createPost}>
             <TextInput
