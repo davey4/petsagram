@@ -37,7 +37,7 @@ const Posts = (props) => {
   const createNotification = async (message) => {
     try {
       const newMessage = { message: message };
-      await __CreateNotification(props.post.User.id, newMessage);
+      await __CreateNotification(props.post.user_id, newMessage);
     } catch (error) {
       throw error;
     }

@@ -11,15 +11,12 @@ const CreatePost = (props) => {
   const [description, setDescription] = useState("");
   const [id, setId] = useState("");
 
-  // console.log(props);
-
   useEffect(() => {
     getUser();
     if (props.location.state) {
       setImage(props.location.state.image);
       setDescription(props.location.state.description);
       setId(props.location.state.id);
-      // console.log(props.location);
     }
   }, []);
 

@@ -17,7 +17,6 @@ const CreatePost = async (req, res) => {
 const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
-      order: [["createdAt", "DESC"]],
       where: { user_id: req.params.user_id },
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
@@ -30,6 +29,7 @@ const GetPostsByUserId = async (req, res) => {
           include: [{ model: User, attributes: ["id", "user_name"] }],
         },
       ],
+      order: [[{ model: Post }, "createdAt", "DESC"]],
     });
     res.send(post);
   } catch (error) {
@@ -40,6 +40,7 @@ const GetPostsByUserId = async (req, res) => {
 const GetAllPostsAndOrderByRecent = async (req, res) => {
   try {
     const recents = await Post.findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         { model: User, attributes: ["id", "name", "user_name"] },
         {
@@ -92,7 +93,13 @@ const GetPostsOfUserFollowings = async (req, res) => {
         ? (sentPosts = posts.concat(post)) && (posts = post)
         : null;
     }
-    res.send(sentPosts);
+    res.send(
+      sentPosts.sort((a, b) => {
+        let c = new Date(a.createdAt);
+        let d = new Date(b.createdAt);
+        return d - c;
+      })
+    );
   } catch (error) {
     throw error;
   }
