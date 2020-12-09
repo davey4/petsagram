@@ -4,7 +4,6 @@ import Avatar from "../components/Avatar";
 
 const SetAvatar = (props) => {
   const [avatars, setAvatars] = useState([]);
-  console.log(props);
 
   useEffect(() => {
     getAvatars();
@@ -20,6 +19,7 @@ const SetAvatar = (props) => {
   return (
     <section>
       <h1>Select an Avatar</h1>
+      <button onClick={props.onSubmit}>Set Avatar</button>
       <div>
         {avatars.map((element, i) => (
           <div key={i} onClick={() => props.setAvatar(avatars[i])}>

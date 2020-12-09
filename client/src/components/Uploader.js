@@ -18,7 +18,6 @@ const Uploader = (props) => {
 
   const checkUpload = async (resultEvent) => {
     if (resultEvent.event === "success") {
-      console.log("event", resultEvent);
       try {
         const url = await resultEvent.info.secure_url;
         if (url) {
