@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Button, TextField } from "react-md";
+import { FavoriteSVGIcon, SendSVGIcon } from "@react-md/material-icons";
 import Comment from "./Comment";
-import TextInput from "./TextInput";
 import {
   __CreateComment,
   __GetComments,
@@ -103,66 +104,103 @@ const Posts = (props) => {
   };
 
   return (
-    <section>
-      <div>
-        <div>{props.userName}</div>
+    <div className="posts">
+      <div className="postinfo">
+        <div className="name">{props.userName}</div>
         <img src={props.img} alt="post" />
-        <div>{props.description}</div>
+        <div className="description">{props.description}</div>
         {props.deletePost ? (
-          <button onClick={() => props.deletePost(props.post.id)}>
+          <Button
+            theme="primary"
+            themeType="contained"
+            onClick={() => props.deletePost(props.post.id)}
+          >
             Delete Post
-          </button>
+          </Button>
         ) : null}
-      </div>
-      <div>
-        {likes.find((element) => element.User.id === props.currentUser) ? (
-          <button onClick={unLike}>UnLike</button>
-        ) : (
-          <button onClick={addLike}>Like</button>
-        )}
-        {likes.length === 0 && <div>0 likes</div>}
-        {likes.length === 1 && <div>{likes[0].User.user_name} likes this</div>}
-        {likes.length === 2 && (
-          <div>
-            {likes[0].User.user_name} and {likes[1].User.user_name} like this
-          </div>
-        )}
-        {likes.length > 2 && (
-          <div>
-            {likes[0].User.user_name} and {likes.length - 1} others like this
-          </div>
-        )}
-        <button onClick={() => setClicked(!clicked)}>Comments</button>
-        <button onClick={() => setCreateComment(!createComment)}>
-          Add Comment
-        </button>
-      </div>
-      {createComment ? (
-        <form onSubmit={handleAddComment}>
-          <TextInput
-            type="text"
-            name="description"
-            value={description}
-            onChange={handleCommentChange}
-            placeholder="add comment"
-          />
-          <button>comment</button>
-        </form>
-      ) : null}
-      {clicked && comments
-        ? comments.map((element) => (
-            <div key={element.id}>
-              <Comment
-                commentor={element.User.user_name}
-                description={element.description}
-                comment={element}
-                currentUser={props.currentUser}
-                onClick={deleteComment}
-              />
+
+        <div className="likes">
+          {likes.find((element) => element.User.id === props.currentUser) ? (
+            <Button
+              theme="secondary"
+              themeType="contained"
+              id="icon-button-1"
+              buttonType="icon"
+              onClick={unLike}
+            >
+              <FavoriteSVGIcon>Unlike</FavoriteSVGIcon>
+            </Button>
+          ) : (
+            <Button
+              theme="primary"
+              themeType="contained"
+              id="icon-button-1"
+              buttonType="icon"
+              onClick={addLike}
+            >
+              <FavoriteSVGIcon>Like</FavoriteSVGIcon>
+            </Button>
+          )}
+          {likes.length === 0 && <div>0 likes</div>}
+          {likes.length === 1 && (
+            <div>{likes[0].User.user_name} likes this</div>
+          )}
+          {likes.length === 2 && (
+            <div>
+              {likes[0].User.user_name} and {likes[1].User.user_name} like this
             </div>
-          ))
-        : null}
-    </section>
+          )}
+          {likes.length > 2 && (
+            <div>
+              {likes[0].User.user_name} and {likes.length - 1} others like this
+            </div>
+          )}
+        </div>
+        <div className="comments-button">
+          <Button
+            theme="primary"
+            themeType="contained"
+            onClick={() => setClicked(!clicked)}
+          >
+            Comments
+          </Button>
+          <Button
+            theme="primary"
+            themeType="contained"
+            onClick={() => setCreateComment(!createComment)}
+          >
+            Add Comment
+          </Button>
+        </div>
+        {createComment ? (
+          <form className="comment-form" onSubmit={handleAddComment}>
+            <TextField
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleCommentChange}
+              placeholder="Comment"
+            />
+            <Button theme="primary" themeType="contained">
+              <SendSVGIcon>Submit</SendSVGIcon>
+            </Button>
+          </form>
+        ) : null}
+        {clicked && comments
+          ? comments.map((element) => (
+              <div className="comments" key={element.id}>
+                <Comment
+                  commentor={element.User.user_name}
+                  description={element.description}
+                  comment={element}
+                  currentUser={props.currentUser}
+                  onClick={deleteComment}
+                />
+              </div>
+            ))
+          : null}
+      </div>
+    </div>
   );
 };
 
