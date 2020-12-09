@@ -24,8 +24,8 @@ app.get("/", (req, res) => res.send({ msg: "Petsagram Server Working" }));
 app.use("/api", AppRouter);
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
-  //   socket.emit("news", { hello: "world" });
+  // console.log(socket.id);
+  socket.emit("news", "world");
   //   socket.on("my other event", (data) => {
   // console.log(data);
   //   });

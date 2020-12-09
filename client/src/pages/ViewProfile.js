@@ -4,7 +4,9 @@ import {
   __GetUserByName,
   __FollowUser,
   __UnfollowUser,
+  __GetUserName,
 } from "../services/UserService";
+import { __CreateNotification } from "../services/NotificationService";
 
 const ViewProfile = (props) => {
   const [id, setId] = useState("");
@@ -12,20 +14,35 @@ const ViewProfile = (props) => {
   const [posts, setPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowings] = useState([]);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     getUser();
+    getCurrentUserName();
   }, []);
+
+  const getCurrentUserName = async () => {
+    const user = await __GetUserName(props.currentUser);
+    setUserName(user.user_name);
+  };
 
   const getUser = async () => {
     try {
-      console.log(props.userName);
       const data = await __GetUserByName(props.location.state);
       setId(data.id);
       setName(data.user_name);
       setPosts(data.Posts);
       setFollowers(data.followers);
       setFollowings(data.following);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const createNotification = async (message) => {
+    try {
+      const newMessage = { message: message };
+      await __CreateNotification(id, newMessage);
     } catch (error) {
       throw error;
     }
@@ -45,6 +62,8 @@ const ViewProfile = (props) => {
     e.preventDefault();
     try {
       await __FollowUser(props.currentUser, id);
+      let message = `${userName} started following you!`;
+      createNotification(message);
       getUser();
     } catch (error) {
       throw error;
