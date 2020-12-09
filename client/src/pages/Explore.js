@@ -39,7 +39,7 @@ const Explore = (props) => {
   };
 
   return (
-    <div className="explore">
+    <section className="explore">
       <div className="searchbar">
         <form className="searchform" onSubmit={searchUsers}>
           <TextField
@@ -74,7 +74,7 @@ const Explore = (props) => {
       ) : (
         <ViewProfile userName={search} currentUser={props.currentUser} />
       )}
-    </div>
+    </section>
   );
 };
 

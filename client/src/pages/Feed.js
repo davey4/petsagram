@@ -19,7 +19,7 @@ const Feed = (props) => {
   };
 
   return (
-    <div className="feed">
+    <section className="feed">
       <div className="feed-posts">
         {posts ? (
           posts.map((element) => (
@@ -37,7 +37,7 @@ const Feed = (props) => {
           <h3>No Posts</h3>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
