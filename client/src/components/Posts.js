@@ -28,10 +28,13 @@ const Posts = (props) => {
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
   const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     setComments(props.post.Comments);
     setLikes(props.post.Likes);
+    // console.log(props.post.User);
+    setAvatar(props.post.User.avatar);
     getUser();
   }, []);
 

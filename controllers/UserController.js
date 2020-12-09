@@ -32,6 +32,7 @@ const GetUserByName = async (req, res) => {
         {
           model: Post,
           include: [
+            { model: User, attributes: ["avatar"] },
             {
               model: Comments,
               include: [{ model: User, attributes: ["id", "user_name"] }],
@@ -62,6 +63,7 @@ const GetUser = async (req, res) => {
         {
           model: Post,
           include: [
+            { model: User, attributes: ["avatar"] },
             {
               model: Comments,
               include: [{ model: User, attributes: ["id", "user_name"] }],
