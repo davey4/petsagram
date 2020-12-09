@@ -18,6 +18,14 @@ const Feed = (props) => {
     }
   };
 
+  const goToProfile = (user) => {
+    let location = {
+      pathname: "/view/profile",
+      state: user,
+    };
+    props.history.push(location);
+  };
+
   return (
     <div className="feed">
       <div className="feed-posts">
@@ -30,6 +38,7 @@ const Feed = (props) => {
                 description={element.description}
                 post={element}
                 currentUser={props.currentUser}
+                goToProfile={goToProfile}
               />
             </div>
           ))
