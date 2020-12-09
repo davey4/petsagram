@@ -21,29 +21,27 @@ const Nav = ({ currentUser }) => {
 
   return (
     <header className="nav-header">
-      <div className="icon">
-        <nav>
-          <NavLink className="nav-active" to="/notifications">
-            Notifications {notifications ? notifications : null}
-          </NavLink>
-          <NavLink className="nav-active" to="/explore">
-            Explore
-          </NavLink>
-          <NavLink className="nav-active" to="/feed">
-            Feed
-          </NavLink>
-          <NavLink className="nav-active" to="/profile">
-            {user}
-          </NavLink>
-          <NavLink
-            className="nav-active"
-            to="/"
-            onClick={() => localStorage.clear()}
-          >
-            Sign out
-          </NavLink>
-        </nav>
-      </div>
+      <nav>
+        <NavLink className="nav-active" to="/notifications">
+          Notifications {notifications ? notifications : null}
+        </NavLink>
+        <NavLink className="nav-active" to="/explore">
+          Explore
+        </NavLink>
+        <NavLink className="nav-active" to="/feed">
+          Feed
+        </NavLink>
+        <NavLink className="nav-active" to="/profile">
+          {user}
+        </NavLink>
+        <NavLink
+          className="nav-active"
+          to="/"
+          onClick={() => localStorage.clear()}
+        >
+          Sign Out
+        </NavLink>
+      </nav>
     </header>
   );
 };

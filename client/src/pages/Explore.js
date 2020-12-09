@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { TextField } from "react-md";
 import Posts from "../components/Posts";
 import TextInput from "../components/TextInput";
 import ViewProfile from "./ViewProfile";
@@ -39,23 +40,23 @@ const Explore = (props) => {
   };
 
   return (
-    <section className="center">
+    <div className="explore">
+      <div className="searchbar">
+        <form className="searchform" onSubmit={searchUsers}>
+          <TextField
+            type="text"
+            name="search"
+            value={search}
+            onChange={handleChange}
+            placeholder="SEARCH USERS"
+          />
+        </form>
+      </div>
       {!searched ? (
-        <div>
-          <div>
-            <form onSubmit={searchUsers}>
-              <TextInput
-                type="text"
-                name="search"
-                value={search}
-                onChange={handleChange}
-                placeholder="SEARCH USERS"
-              />
-            </form>
-          </div>
+        <div className="allposts">
           {posts
             ? posts.map((element) => (
-                <div
+                <div className="posts"
                   key={element.id}
                   onClick={() => goToProfile(element.user_id)}
                 >
@@ -74,7 +75,7 @@ const Explore = (props) => {
       ) : (
         <ViewProfile userName={search} currentUser={props.currentUser} />
       )}
-    </section>
+    </div>
   );
 };
 
