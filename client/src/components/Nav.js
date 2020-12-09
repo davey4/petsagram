@@ -22,6 +22,9 @@ const Nav = ({ currentUser }) => {
   return (
     <header className="nav-header">
       <nav>
+        <NavLink className="nav-active" to="/messaging">
+          Messages
+        </NavLink>
         <NavLink className="nav-active" to="/notifications">
           Notifications {notifications ? notifications : null}
         </NavLink>

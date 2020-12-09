@@ -28,13 +28,19 @@ const Explore = (props) => {
 
   const searchUsers = (e) => {
     e.preventDefault();
-    setSearched(true);
-    console.log(search);
+    let location = {
+      pathname: "/view/profile",
+      state: search,
+    };
+    props.history.push(location);
   };
 
   const goToProfile = (user) => {
-    // console.log(user);
-    // props.history.push(`/profile/${user}`)
+    let location = {
+      pathname: "/view/profile",
+      state: user,
+    };
+    props.history.push(location);
   };
 
   return (
@@ -62,14 +68,13 @@ const Explore = (props) => {
                     post={element}
                     currentUser={props.currentUser}
                     name={props.name}
+                    goToProfile={goToProfile}
                   />
                 </div>
               ))
             : null}
         </div>
-      ) : (
-        <ViewProfile userName={search} currentUser={props.currentUser} />
-      )}
+      ) : null}
     </div>
   );
 };

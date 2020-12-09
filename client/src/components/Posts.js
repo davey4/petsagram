@@ -106,7 +106,16 @@ const Posts = (props) => {
   return (
     <div className="posts">
       <div className="postinfo">
-        <div className="name">{props.userName}</div>
+        <div
+          className="name"
+          onClick={
+            props.goToProfile
+              ? () => props.goToProfile(props.post.User.user_name)
+              : null
+          }
+        >
+          {props.userName}
+        </div>
         <img src={props.img} alt="post" />
         <div className="description">{props.description}</div>
         {props.deletePost ? (
