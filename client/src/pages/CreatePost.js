@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Button, TextField } from "react-md";
 import Uploader from "../components/Uploader";
-import TextInput from "../components/TextInput";
 import "../styles/Posts.css";
 import { __CreatePost, __UpdatePost } from "../services/PostService";
 import { __GetUserName } from "../services/UserService";
@@ -54,23 +54,28 @@ const CreatePost = (props) => {
   };
 
   return (
-    <section>
-      <h4>{name}</h4>
-      <div className="center">
-        <div className="pic-buttons">
-          <Uploader setImage={handleImage} text="Upload Image" />
-          {image ? <img src={image} alt="cloudinary" /> : null}
-          <form onSubmit={createPost}>
-            <TextInput
+    <section className="create-post">
+          <h4>{name}</h4>
+      <div className="create-section">
+        <div className="create">
+          <div className="uploader">
+            <Uploader setImage={handleImage} text="Upload Image" />
+            {image ? <img src={image} alt="cloudinary" /> : null}
+          </div>
+          <form className="create-form" onSubmit={createPost}>
+            <TextField
               type="text"
               name="description"
               value={description}
               onChange={handleDescription}
-              placeholder="Caption"
+              placeholder="Description"
             />
-
-            <button type="submit">Post</button>
           </form>
+          <div className="post-button">
+            <Button type="submit" theme="secondary" themeType="contained">
+              Post
+            </Button>
+          </div>
         </div>
       </div>
     </section>

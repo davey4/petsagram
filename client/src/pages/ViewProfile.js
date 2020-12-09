@@ -52,7 +52,7 @@ const ViewProfile = (props) => {
   };
 
   return (
-    <section>
+    <section className="viewprofile">
       <div>
         {name ? (
           <div>
