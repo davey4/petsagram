@@ -19,11 +19,11 @@ const Feed = (props) => {
   };
 
   return (
-    <section className="center">
-      <div>
+    <div className="feed">
+      <div className="feed-posts">
         {posts ? (
           posts.map((element) => (
-            <div key={element.id}>
+            <div className="posts" key={element.id}>
               <Posts
                 img={element.image}
                 userName={element.User.user_name}
@@ -37,7 +37,7 @@ const Feed = (props) => {
           <h3>No Posts</h3>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

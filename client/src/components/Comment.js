@@ -1,17 +1,20 @@
 import React from "react";
+import { Button, ClearSVGIcon } from "react-md";
 
 const Comment = (props) => {
   return (
-    <section>
-      <div>
-        {props.commentor}: {props.description}
-        {props.currentUser === props.comment.user_id ? (
-          <button onClick={() => props.onClick(props.comment.id)}>
-            delete comment
-          </button>
-        ) : null}
-      </div>
-    </section>
+    <div className="comments-info">
+      {props.commentor}: {props.description}
+      {props.currentUser === props.comment.user_id ? (
+        <Button
+          theme="primary"
+          themeType="contained"
+          onClick={() => props.onClick(props.comment.id)}
+        >
+          <ClearSVGIcon />
+        </Button>
+      ) : null}
+    </div>
   );
 };
 
