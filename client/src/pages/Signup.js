@@ -40,15 +40,21 @@ const Signup = (props) => {
     setFormError(true);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (name && email && userName && password) {
+  const handleSelectAvatar = (avatar) => {
+    setAvatar(avatar);
+    handleSubmit();
+  };
+
+  const handleSubmit = async () => {
+    // e.preventDefault();
+    if (name && email && userName && password && avatar) {
       try {
         const data = {
           name,
           email,
           userName,
           password,
+          avatar,
         };
 
         await __CreateUser(data);
@@ -65,7 +71,10 @@ const Signup = (props) => {
   return (
     <div className="signup">
       {next ? (
-        <SelectAvatar handleSubmit={handleSubmit} setAvatar={setAvatar} />
+        <SelectAvatar
+          handleSubmit={handleSubmit}
+          setAvatar={handleSelectAvatar}
+        />
       ) : (
         <form className="signup-form" onSubmit={handleNext}>
           <h1>Sign Up</h1>
