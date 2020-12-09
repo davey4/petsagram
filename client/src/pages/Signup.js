@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "react-md";
 import "../styles/Login.css";
 import { __CreateUser } from "../services/UserService";
+import SelectAvatar from "./SelectAvatar";
 
 const Signup = (props) => {
   const [name, setName] = useState("");
@@ -10,6 +11,8 @@ const Signup = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(false);
+  const [avatar, setAvatar] = useState("");
+  const [next, setNext] = useState(false);
 
   const handleChange = ({ target }) => {
     switch (true) {
@@ -30,6 +33,13 @@ const Signup = (props) => {
     }
   };
 
+  const handleNext = () => {
+    if (name && email && userName && password) {
+      return setNext(true);
+    }
+    setFormError(true);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (name && email && userName && password) {
@@ -45,7 +55,7 @@ const Signup = (props) => {
 
         props.history.push("/login");
       } catch (error) {
-        throw error;
+        setFormError(true);
       }
     } else {
       setFormError(true);
@@ -54,50 +64,65 @@ const Signup = (props) => {
 
   return (
     <div className="signup">
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
-        <TextField
-          placeholder="NAME"
-          title="NAME"
-          name="name"
-          type="text"
-          value={name}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="EMAIL"
-          title="EMAIL"
-          name="email"
-          type="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="USERNAME"
-          title="USERNAME"
-          name="userName"
-          type="text"
-          value={userName}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="PASSWORD"
-          title="PASSWORD"
-          name="password"
-          value={password}
-          type="password"
-          onChange={handleChange}
-        />
-        <div className="signup-button">
-          <Button type="submit" theme="primary" themeType="contained">
-            Sign Up
-          </Button>
-        </div>
-        {formError ? <p>Please fill in all fields</p> : null}
-        <p>Already have an account? Go to our{" "}
-          {<Link to="/login"><strong>Log In</strong></Link>}{" "}page!
-        </p>
-      </form>
+      {next ? (
+        <SelectAvatar handleSubmit={handleSubmit} setAvatar={setAvatar} />
+      ) : (
+        <form className="signup-form" onSubmit={handleNext}>
+          <h1>Sign Up</h1>
+          <TextField
+            placeholder="NAME"
+            title="NAME"
+            name="name"
+            type="text"
+            value={name}
+            onChange={handleChange}
+          />
+          <TextField
+            placeholder="EMAIL"
+            title="EMAIL"
+            name="email"
+            type="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <TextField
+            placeholder="USERNAME"
+            title="USERNAME"
+            name="userName"
+            type="text"
+            value={userName}
+            onChange={handleChange}
+          />
+          <TextField
+            placeholder="PASSWORD"
+            title="PASSWORD"
+            name="password"
+            value={password}
+            type="password"
+            onChange={handleChange}
+          />
+          <div className="signup-button">
+            <Button type="submit" theme="primary" themeType="contained">
+              Sign Up
+            </Button>
+          </div>
+          {formError ? (
+            <p>
+              Please fill in all fields and ensure your Email and User Name are
+              unique
+            </p>
+          ) : null}
+          <p>
+            Already have an account? Go to our{" "}
+            {
+              <Link to="/login">
+                <strong>Log In</strong>
+              </Link>
+            }{" "}
+            page!
+          </p>
+        </form>
+      )}
     </div>
   );
 };
