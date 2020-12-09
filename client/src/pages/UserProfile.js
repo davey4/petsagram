@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Posts from "../components/Posts";
+import { Button } from "react-md";
+import { FontIcon } from "@react-md/icon";
 import { __GetUser } from "../services/UserService";
 import { __DeletePost, __GetPostsByUserId } from "../services/PostService";
 
