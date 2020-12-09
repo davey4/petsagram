@@ -28,6 +28,9 @@ const Nav = ({ currentUser }) => {
         <NavLink className="nav-active" to="/explore">
           Explore
         </NavLink>
+        <div className="logo">
+          <h2>🐾</h2>
+        </div>
         <NavLink className="nav-active" to="/feed">
           Feed
         </NavLink>
