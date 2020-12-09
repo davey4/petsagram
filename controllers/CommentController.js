@@ -29,21 +29,7 @@ const GetComments = async (req, res) => {
     throw error;
   }
 };
-//working
-const UpdateComment = async (req, res) => {
-  try {
-    let comment_id = parseInt(req.params.comment_id);
-    let description = req.body.description;
-    let commentBody = { comment_id, description };
-    let updatedComment = await Comments.update(commentBody, {
-      where: { id: comment_id },
-      returning: true,
-    });
-    res.send(updatedComment);
-  } catch (error) {
-    throw error;
-  }
-};
+
 //working
 const DeleteComment = async (req, res) => {
   try {
@@ -83,7 +69,6 @@ const UnlikeComment = async (req, res) => {
 module.exports = {
   CreateComment,
   GetComments,
-  UpdateComment,
   DeleteComment,
   LikeComment,
   UnlikeComment,
