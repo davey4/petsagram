@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { BadgedButton } from "@react-md/badge";
 import "../styles/Nav.css";
 import { __GetUserName } from "../services/UserService";
 
@@ -26,7 +27,7 @@ const Nav = ({ currentUser }) => {
           Messages
         </NavLink>
         <NavLink className="nav-active" to="/notifications">
-          Notifications {notifications ? notifications : null}
+          <BadgedButton>{notifications ? notifications : null}</BadgedButton>
         </NavLink>
         <NavLink className="nav-active" to="/explore">
           Explore

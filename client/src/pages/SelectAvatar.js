@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-md";
 import Avatar from "../components/Avatar";
 import { __GetAvatars } from "../services/UserService";
 
@@ -15,15 +16,18 @@ const SetAvatar = (props) => {
   };
 
   return (
-    <section>
-      <h1>Select an Avatar</h1>
-      <button onClick={props.onSubmit}>Set Avatar</button>
-      <div>
+    <section class="select-avatar">
+      <div className="choose-avatar">
         {avatars.map((element, i) => (
-          <div key={i} onClick={() => props.setAvatar(element.avatar)}>
+          <div className="allavatars" key={i} onClick={() => props.setAvatar(element.avatar)}>
             <Avatar img={element.avatar} />
           </div>
         ))}
+      </div>
+      <div className="set-avatar-button">
+        <Button theme="primary" themeType="contained" onClick={props.onSubmit}>
+          Choose Avatar
+        </Button>
       </div>
     </section>
   );

@@ -50,7 +50,7 @@ const UserProfile = (props) => {
   return (
     <section className="profile">
       <div className="profileinfo-section">
-        <img src={avatar} alt={name} />
+        <img src={avatar} alt={name} className="profile-avatar" />
         <h2>{name}</h2>
         <h4>Posts: {posts.length}</h4>
         <h4>Followers: {followers.length}</h4>
@@ -84,7 +84,7 @@ const UserProfile = (props) => {
             </div>
           ))
         ) : (
-          <h3>User has no posts</h3>
+          <h1 className="heading">User has no posts</h1>
         )}
       </div>
     </section>

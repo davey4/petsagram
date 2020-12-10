@@ -5,6 +5,7 @@
   "dependencies": {
     "@react-md/app-bar": "^2.4.2",
     "@react-md/avatar": "^2.4.2",
+    "@react-md/badge": "^2.4.2",
     "@react-md/button": "^2.4.2",
     "@react-md/dialog": "^2.4.2",
     "@react-md/icon": "^2.4.2",

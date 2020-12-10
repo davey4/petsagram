@@ -116,6 +116,18 @@ const Posts = (props) => {
     <div className="posts">
       <div className="postinfo">
         <div className="top-area">
+          <div className="profile-avatar">
+            <img
+              className="avatar-icon"
+              src={avatar}
+              alt={props.userName}
+              onClick={
+                props.goToProfile
+                  ? () => props.goToProfile(props.post.User.user_name)
+                  : null
+              }
+            />
+          </div>
           <div
             className="name"
             onClick={
@@ -125,10 +137,9 @@ const Posts = (props) => {
             }
           >
             <strong>{props.userName}</strong>
-            <img src={avatar} alt={props.userName} />
           </div>
           {props.deletePost ? (
-            <div>
+            <div className="delete-update">
               <Button
                 theme="secondary"
                 themeType="clear"
@@ -158,8 +169,8 @@ const Posts = (props) => {
         <div className="like-comment">
           {likes.find((element) => element.User.id === props.currentUser) ? (
             <Button
-              theme="secondary"
-              themeType="contained"
+              theme="primary"
+              themeType="clear"
               id="icon-button-1"
               buttonType="icon"
               onClick={unLike}
@@ -168,8 +179,8 @@ const Posts = (props) => {
             </Button>
           ) : (
             <Button
-              theme="primary"
-              themeType="contained"
+              theme="secondary"
+              themeType="clear"
               id="icon-button-1"
               buttonType="icon"
               onClick={addLike}
@@ -178,8 +189,8 @@ const Posts = (props) => {
             </Button>
           )}
           <Button
-            theme="primary"
-            themeType="contained"
+            theme="secondary"
+            themeType="clear"
             id="comment"
             buttonType="icon"
             onClick={() => setClicked(!clicked)}

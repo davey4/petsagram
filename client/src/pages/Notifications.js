@@ -33,10 +33,11 @@ const Notifications = (props) => {
   };
 
   return (
-    <section className="center">
+    <section className="notifications">
+      <h1 className="heading">Notifications</h1>
       {notifications.length > 0 ? (
         notifications.map((element) => (
-          <div key={element.id}>
+          <div className="notifs" key={element.id}>
             <Notification
               message={element.message}
               id={element.id}
@@ -45,7 +46,7 @@ const Notifications = (props) => {
           </div>
         ))
       ) : (
-        <h3>No New Notifications</h3>
+        <h1 className="heading">No New Notifications</h1>
       )}
     </section>
   );

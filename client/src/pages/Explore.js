@@ -45,6 +45,7 @@ const Explore = (props) => {
 
   return (
     <section className="explore">
+      <h1 className="heading">Explore</h1>
       <div className="searchbar">
         <form className="searchform" onSubmit={searchUsers}>
           <TextField
@@ -60,7 +61,7 @@ const Explore = (props) => {
         <div className="allposts">
           {posts
             ? posts.map((element) => (
-                <div className="posts" key={element.id}>
+                <div className="post-container" key={element.id}>
                   <Posts
                     img={element.image}
                     userName={element.User.user_name}

@@ -9,8 +9,8 @@ const Messaging = (props) => {
   //   });
   // }, []);
   return (
-    <section>
-      <div>Messaging</div>
+    <section className="message-section">
+      <h1 className="heading">Messages</h1>
     </section>
   );
 };

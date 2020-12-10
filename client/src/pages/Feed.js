@@ -28,10 +28,11 @@ const Feed = (props) => {
 
   return (
     <section className="feed">
+      <h1 className="heading">Feed</h1>
       <div className="feed-posts">
         {posts ? (
           posts.map((element) => (
-            <div className="posts" key={element.id}>
+            <div className="post-container" key={element.id}>
               <Posts
                 img={element.image}
                 userName={element.User.user_name}
@@ -43,7 +44,7 @@ const Feed = (props) => {
             </div>
           ))
         ) : (
-          <h3>No Posts</h3>
+          <h1 className="heading">No Posts</h1>
         )}
       </div>
     </section>
