@@ -50,7 +50,7 @@ Get started by signing up!
 ***
 
 ### Component Hierarchy Diagram
-![Component Hierarchy Diagram](assets/ComponentHierarchy.png)
+![Component Hierarchy Diagram](assets/updated-componentdiagram.png)
 
 ***
 
