@@ -2,7 +2,8 @@
   "development": {
     "database": "petsagram_development",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "test": {
     "database": "petsagram_test",
