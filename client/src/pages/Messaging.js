@@ -34,7 +34,7 @@ const Messaging = () => {
       id: yourId,
     };
     setMessage("");
-    socketRef.current.emit("send message", messageObject);
+    socketRef.current.emit("message", messageObject);
   }
 
   function handleChange(e) {
