@@ -189,7 +189,7 @@ img {
   height: 125px;
 }
 
-.border {
+.selected {
   border: 2px solid#ffe57f;
 }
 /* Choosing Avatar */
