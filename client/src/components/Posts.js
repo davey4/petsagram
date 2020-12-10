@@ -117,7 +117,16 @@ const Posts = (props) => {
       <div className="postinfo">
         <div className="top-area">
           <div className="profile-avatar">
-            <img className="avatar-icon" src={avatar} alt={props.userName} />
+            <img
+              className="avatar-icon"
+              src={avatar}
+              alt={props.userName}
+              onClick={
+                props.goToProfile
+                  ? () => props.goToProfile(props.post.User.user_name)
+                  : null
+              }
+            />
           </div>
           <div
             className="name"
@@ -160,7 +169,7 @@ const Posts = (props) => {
         <div className="like-comment">
           {likes.find((element) => element.User.id === props.currentUser) ? (
             <Button
-              theme="secondary"
+              theme="primary"
               themeType="contained"
               id="icon-button-1"
               buttonType="icon"
@@ -170,8 +179,8 @@ const Posts = (props) => {
             </Button>
           ) : (
             <Button
-              theme="primary"
-              themeType="contained"
+              theme="secondary"
+              themeType="outline"
               id="icon-button-1"
               buttonType="icon"
               onClick={addLike}
