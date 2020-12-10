@@ -40,12 +40,7 @@ const Messaging = () => {
   function handleChange(e) {
     setMessage(e.target.value);
   }
-  // useEffect(() => {
-  //   socket.on("connection", (arg) => {
-  //     console.log("connected"); // world
-  //   });
-  // }, []);
-  // testing
+
   return (
     <section className="message-section">
       <h1 className="heading">Messages</h1>
