@@ -28,10 +28,13 @@ const Posts = (props) => {
   const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
   const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     setComments(props.post.Comments);
     setLikes(props.post.Likes);
+    // console.log(props.post.User);
+    setAvatar(props.post.User.avatar);
     getUser();
   }, []);
 
@@ -113,6 +116,9 @@ const Posts = (props) => {
     <div className="posts">
       <div className="postinfo">
         <div className="top-area">
+          <div className="profile-avatar">
+            <img className="avatar-icon" src={avatar} alt={props.userName} />
+          </div>
           <div
             className="name"
             onClick={
@@ -124,7 +130,7 @@ const Posts = (props) => {
             <strong>{props.userName}</strong>
           </div>
           {props.deletePost ? (
-            <div>
+            <div className="delete-update">
               <Button
                 theme="secondary"
                 themeType="clear"

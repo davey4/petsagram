@@ -19,7 +19,7 @@ const GetPostsByUserId = async (req, res) => {
     const post = await Post.findAll({
       where: { user_id: req.params.user_id },
       include: [
-        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: User, attributes: ["id", "name", "user_name", "avatar"] },
         {
           model: Comments,
           include: [{ model: User, attributes: ["id", "user_name"] }],
@@ -42,7 +42,7 @@ const GetAllPostsAndOrderByRecent = async (req, res) => {
     const recents = await Post.findAll({
       order: [["createdAt", "DESC"]],
       include: [
-        { model: User, attributes: ["id", "name", "user_name"] },
+        { model: User, attributes: ["id", "name", "user_name", "avatar"] },
         {
           model: Comments,
           include: [{ model: User, attributes: ["id", "user_name"] }],
@@ -78,7 +78,7 @@ const GetPostsOfUserFollowings = async (req, res) => {
       const post = await Post.findAll({
         where: { user_id: userId },
         include: [
-          { model: User, attributes: ["id", "name", "user_name"] },
+          { model: User, attributes: ["id", "name", "user_name", "avatar"] },
           {
             model: Comments,
             include: [{ model: User, attributes: ["id", "user_name"] }],
