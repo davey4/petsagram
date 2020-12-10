@@ -48,7 +48,7 @@ const Router = (props) => {
   return (
     <main>
       {loading ? (
-        <h3>Page Loading....</h3>
+        <h1 className="heading">Page Loading....</h1>
       ) : (
         <Switch>
           <Route exact path="/" component={() => <Home />} />
