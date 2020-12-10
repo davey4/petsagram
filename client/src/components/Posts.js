@@ -125,6 +125,7 @@ const Posts = (props) => {
             }
           >
             <strong>{props.userName}</strong>
+            <img src={avatar} alt={props.userName} />
           </div>
           {props.deletePost ? (
             <div>

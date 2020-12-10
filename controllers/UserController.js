@@ -5,12 +5,24 @@ const {
   Comments,
   Likes,
   Notifications,
+  Avatars,
 } = require("../models");
 const {
   hashPassword,
   passwordValid,
   createToken,
 } = require("../middleware/index");
+
+const getAvatars = async (req, res) => {
+  try {
+    const avatars = await Avatars.findAll({
+      attributes: ["avatar"],
+    });
+    res.send(avatars);
+  } catch (error) {
+    throw error;
+  }
+};
 
 const getUserName = async (req, res) => {
   try {
@@ -28,6 +40,7 @@ const GetUserByName = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { user_name: req.params.user_name },
+      attributes: ["avatar", "user_name", "id", "name"],
       include: [
         {
           model: Post,
@@ -58,6 +71,7 @@ const GetUserByName = async (req, res) => {
 const GetUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.user_id, {
+      attributes: ["avatar", "user_name", "id", "name"],
       include: [
         { model: Notifications },
         {
@@ -186,7 +200,7 @@ const RefreshSession = async (req, res) => {
   try {
     const { token } = res.locals;
     const user = await User.findByPk(token.id, {
-      attributes: ["id"], // Find a user by the id encoded in the json web token, only include the id, name and email fields
+      attributes: ["id"],
     });
     res.send({ user, status: "OK" });
   } catch (error) {
@@ -195,6 +209,7 @@ const RefreshSession = async (req, res) => {
 };
 
 module.exports = {
+  getAvatars,
   GetUser,
   FollowUser,
   UnfollowUser,

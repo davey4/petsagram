@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-md";
-import { FontIcon } from "@react-md/icon";
 import Posts from "../components/Posts";
 import { Button } from "react-md";
 import { FontIcon } from "@react-md/icon";
@@ -12,6 +10,7 @@ const UserProfile = (props) => {
   const [posts, setPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowings] = useState([]);
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     getUser();
@@ -23,6 +22,7 @@ const UserProfile = (props) => {
     setPosts(user.Posts);
     setFollowers(user.followers);
     setFollowings(user.following);
+    setAvatar(user.avatar);
   };
 
   const deletePost = async (id) => {
@@ -50,6 +50,7 @@ const UserProfile = (props) => {
   return (
     <section className="profile">
       <div className="profileinfo-section">
+        <img src={avatar} alt={name} />
         <h2>{name}</h2>
         <h4>Posts: {posts.length}</h4>
         <h4>Followers: {followers.length}</h4>
