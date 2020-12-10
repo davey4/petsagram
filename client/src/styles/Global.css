@@ -21,13 +21,15 @@ h2 {
 /* Post Section */
 .top-area {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .name {
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 90px;
   cursor: pointer;
 }
 
@@ -35,7 +37,6 @@ img {
   object-fit: cover;
   height: 300px;
   width: 300px;
-  margin-top: 10px;
 }
 
 .like-comment,
@@ -53,13 +54,14 @@ img {
 .post-section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 20px;
 }
 
 .posts {
   display: grid;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .feed-posts {
@@ -93,10 +95,86 @@ img {
 }
 
 .comments-info {
-  margin: 20px 0 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin-top: 10px;
+}
+
+.comment {
+  margin-top: 14px;
+}
+
+.delete-comment {
+  margin-left: 10px;
 }
 
 .margin-left {
   margin-left: 5%;
 }
 /* Comment Form & Button */
+
+/* Notification Area */
+.notifs {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.notification-area {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  border: 2px solid #424242;
+}
+
+.notification {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  color: #424242;
+}
+
+.notif-message {
+  margin-right: 20px;
+}
+
+.delete-notif-button {
+  margin-top: 7px;
+}
+
+/* Notification Area */
+
+/* Choosing Avatar */
+.set-avatar-button {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin-top: 30px;
+}
+
+.choose-avatar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 30px;
+}
+
+.allavatars {
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.the-avatar {
+  width: 125px;
+  height: 125px;
+}
+
+.yellowBorder {
+  background-color: #ffe57f;
+}
+
+.noBorder {
+  background-color: none;
+}
+/* Choosing Avatar */
