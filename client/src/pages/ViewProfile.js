@@ -16,6 +16,7 @@ const ViewProfile = (props) => {
   const [followers, setFollowers] = useState([]);
   const [following, setFollowings] = useState([]);
   const [userName, setUserName] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     getUser();
@@ -35,6 +36,7 @@ const ViewProfile = (props) => {
       setPosts(data.Posts);
       setFollowers(data.followers);
       setFollowings(data.following);
+      setAvatar(data.avatar);
       // console.log(data);
     } catch (error) {
       throw error;
@@ -78,6 +80,7 @@ const ViewProfile = (props) => {
         <div>
           <div>
             <div>
+              <img src={avatar} alt={name} />
               <h4>{name}</h4>
               <h5>
                 Followers: {followers.length} Following: {following.length}
