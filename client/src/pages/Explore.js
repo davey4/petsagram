@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "react-md";
 import Posts from "../components/Posts";
-import ViewProfile from "./ViewProfile";
 import { __GetAllPostsAndOrderByRecent } from "../services/PostService";
 
 const Explore = (props) => {

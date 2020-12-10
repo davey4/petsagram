@@ -29,21 +29,3 @@ export const __DeleteComment = async (commmentId) => {
     throw error;
   }
 };
-
-export const __LikeComment = async (commmentId) => {
-  try {
-    const res = await ApiClient.put(`/comments/like/${commmentId}`);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const __UnlikeComment = async (commmentId) => {
-  try {
-    const res = await ApiClient.put(`/comments/unlike/${commmentId}`);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
