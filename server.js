@@ -1,13 +1,13 @@
 const AppRouter = require("./routes/AppRouter");
-const express = require("express");
 const PORT = process.env.PORT || 3001;
+const express = require("express");
+const http = require("http")
 const app = express();
 
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const server = http.createServer(app);
+const socket = require("socket.io")
+const io = socket(server);
 
-// const server = require("http").createServer(app);
-// const io = require("socket.io")(server);
 
 // Require Middleware
 const logger = require("morgan");
@@ -31,15 +31,15 @@ io.on("connection", function (socket) {
     console.log("user disconnected");
   });
 
-  // When the server receives our custom 'send-chat' event it simply
-  // emits the message globally to all of the other sockets.
-  socket.on("send-chat", function (msg) {
-    console.log(msg);
-    io.emit("receive-chat", msg);
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+  socket.emit("your id", socket.id);
+  socket.on("send message", (body) => {
+    io.emit("message", body);
+    // console.log(data);
   });
 });
 
-app.get("/", (req, res) => res.send({ msg: "Petsagram Server Working" }));
-app.use("/api", AppRouter);
+server.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));
 
-http.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));
