@@ -4,8 +4,6 @@ import Pusher from "pusher-js";
 const Messaging = () => {
   const [message, setMessage] = useState("hello");
 
-  Pusher.logToConsole = true;
-
   let pusher = new Pusher("846611c5a7b391a138dd", {
     cluster: "mt1",
   });
