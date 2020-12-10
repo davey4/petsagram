@@ -42,34 +42,8 @@ const DeleteComment = async (req, res) => {
   }
 };
 
-const LikeComment = async (req, res) => {
-  try {
-    const like = await Comments.increment(
-      { likes: 1 },
-      { where: { id: req.params.comment_id } }
-    );
-    res.send(like);
-  } catch (error) {
-    throw error;
-  }
-};
-
-const UnlikeComment = async (req, res) => {
-  try {
-    const unlike = await Comments.increment(
-      { likes: -1 },
-      { where: { id: req.params.comment_id } }
-    );
-    res.send(unlike);
-  } catch (error) {
-    throw error;
-  }
-};
-
 module.exports = {
   CreateComment,
   GetComments,
   DeleteComment,
-  LikeComment,
-  UnlikeComment,
 };
