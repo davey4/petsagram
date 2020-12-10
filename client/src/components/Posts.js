@@ -33,7 +33,6 @@ const Posts = (props) => {
   useEffect(() => {
     setComments(props.post.Comments);
     setLikes(props.post.Likes);
-    // console.log(props.post.User);
     setAvatar(props.post.User.avatar);
     getUser();
   }, []);
