@@ -18,6 +18,7 @@ const GetPostsByUserId = async (req, res) => {
   try {
     const post = await Post.findAll({
       where: { user_id: req.params.user_id },
+      order: [["createdAt", "DESC"]],
       include: [
         { model: User, attributes: ["id", "name", "user_name", "avatar"] },
         {
@@ -29,7 +30,6 @@ const GetPostsByUserId = async (req, res) => {
           include: [{ model: User, attributes: ["id", "user_name"] }],
         },
       ],
-      order: [[{ model: Post }, "createdAt", "DESC"]],
     });
     res.send(post);
   } catch (error) {
@@ -71,7 +71,6 @@ const GetPostsOfUserFollowings = async (req, res) => {
         },
       ],
     });
-    let sentPosts;
     let posts = [];
     for (let i = 0; i < following.length; i++) {
       let userId = following[i].following.id;
