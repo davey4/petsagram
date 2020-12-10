@@ -179,6 +179,10 @@ img {
   height: 125px;
 }
 
+.border {
+  border: 2px solid#ffe57f;
+}
+
 .yellowBorder {
   background-color: #ffe57f;
 }
