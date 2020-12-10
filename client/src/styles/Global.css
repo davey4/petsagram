@@ -179,15 +179,8 @@ img {
   height: 125px;
 }
 
-.border {
+.selected {
   border: 2px solid#ffe57f;
 }
 
-.yellowBorder {
-  background-color: #ffe57f;
-}
-
-.noBorder {
-  background-color: none;
-}
 /* Choosing Avatar */

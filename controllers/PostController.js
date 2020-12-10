@@ -89,12 +89,10 @@ const GetPostsOfUserFollowings = async (req, res) => {
           },
         ],
       });
-      post.length > 0
-        ? (sentPosts = posts.concat(post)) && (posts = post)
-        : null;
+      post.length > 0 ? (posts = posts.concat(post)) : null;
     }
     res.send(
-      sentPosts.sort((a, b) => {
+      posts.sort((a, b) => {
         let c = new Date(a.createdAt);
         let d = new Date(b.createdAt);
         return d - c;
