@@ -19,6 +19,7 @@
 
 h1 {
   font-size: 54px;
+  font-family: 'Bree Serif', serif;
   color: #424242;
   text-align: center;
 }
@@ -37,6 +38,7 @@ p {
   padding: 20px;
   color: #424242;
   line-height: 1.5;
+  font-family: 'Bree Serif', serif;
 }
 
 a {

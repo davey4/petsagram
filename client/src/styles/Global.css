@@ -1,6 +1,12 @@
 /* Profile Section */
 h2 {
   font-size: 32px;
+  font-family: 'Bree Serif', serif;
+}
+
+h4 {
+  font-size: 18px;
+  font-family: 'Bree Serif', serif;
 }
 
 .profile {
@@ -30,6 +36,7 @@ h2 {
   margin-top: 10px;
   margin-left: 15px;
   margin-right: 85px;
+  font-family: 'Bree Serif', serif;
   cursor: pointer;
 }
 
@@ -48,6 +55,7 @@ img {
 .description {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: 'Bree Serif', serif;
 }
 
 #comment {
@@ -87,6 +95,7 @@ img {
 
 /* Explore Section */
 .heading {
+  font-family: 'Bree Serif', serif;
   font-size: 28px;
 }
 
@@ -111,7 +120,8 @@ img {
 }
 
 .comment {
-  margin-top: 14px;
+  margin-top: 12px;
+  font-family: 'Bree Serif', serif;
 }
 
 .delete-comment {
@@ -181,13 +191,5 @@ img {
 
 .border {
   border: 2px solid#ffe57f;
-}
-
-.yellowBorder {
-  background-color: #ffe57f;
-}
-
-.noBorder {
-  background-color: none;
 }
 /* Choosing Avatar */
