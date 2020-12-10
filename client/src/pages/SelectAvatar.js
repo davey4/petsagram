@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-md";
-import axios from "axios";
 import Avatar from "../components/Avatar";
+import { __GetAvatars } from "../services/UserService";
 
 const SetAvatar = (props) => {
   const [avatars, setAvatars] = useState([]);
@@ -11,22 +11,16 @@ const SetAvatar = (props) => {
   }, []);
 
   const getAvatars = async () => {
-    const response = await axios.get(
-      "https://serene-woodland-97273.herokuapp.com/api/avatars"
-    );
-    setAvatars(response.data);
+    const response = await __GetAvatars();
+    setAvatars(response);
   };
 
   return (
     <section class="select-avatar">
       <div className="choose-avatar">
         {avatars.map((element, i) => (
-          <div
-            className="allavatars"
-            key={i}
-            onClick={() => props.setAvatar(avatars[i])}
-          >
-            <Avatar img={element} />
+          <div className="allavatars" key={i} onClick={() => props.setAvatar(element.avatar)}>
+            <Avatar img={element.avatar} />
           </div>
         ))}
       </div>

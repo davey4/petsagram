@@ -55,7 +55,7 @@ const CreatePost = (props) => {
 
   return (
     <section className="create-post">
-          <h4>{name}</h4>
+      <h4>{name}</h4>
       <div className="create-section">
         <div className="create">
           <div className="uploader">
@@ -65,7 +65,7 @@ const CreatePost = (props) => {
           <form className="create-form" onSubmit={createPost}>
             <TextField
               type="text"
-              name="description"
+              name="caption"
               value={description}
               onChange={handleDescription}
               placeholder="Description"
