@@ -37,6 +37,11 @@ img {
   object-fit: cover;
   height: 300px;
   width: 300px;
+  margin-top: 2px;
+}
+
+.img-area {
+  margin-top: 5px;
 }
 
 .like-comment,
@@ -51,7 +56,8 @@ img {
 }
 
 .allposts,
-.post-section {
+.post-section,
+.feed-posts {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -81,8 +87,12 @@ img {
 /* Post Section */
 
 /* Explore Section */
+.heading {
+  font-size: 28px;
+}
+
 .searchbar {
-  width: 50%;
+  width: 40%;
   padding: 20px;
   margin: 0 auto;
 }
@@ -125,7 +135,7 @@ img {
   justify-content: center;
   align-items: center;
   margin: 20px;
-  border: 2px solid #424242;
+  background-color: #ffe57f;
 }
 
 .notification {

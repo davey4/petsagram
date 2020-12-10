@@ -77,39 +77,38 @@ const ViewProfile = (props) => {
   return (
     <section className="viewprofile">
       {name ? (
-        <div>
-          <div>
-            <div>
-              <img src={avatar} alt={name} />
-              <h4>{name}</h4>
-              <h5>
-                Followers: {followers.length} Following: {following.length}
-              </h5>
-              {followers.find((element) => element.id === props.currentUser) ? (
-                <Button
-                  className="unfollow"
-                  theme="primary"
-                  themeType="contained"
-                  onClick={handleUnfollow}
-                >
-                  Unfollow
-                </Button>
-              ) : (
-                <Button
-                  className="follow"
-                  theme="primary"
-                  themeType="contained"
-                  onClick={handleFollow}
-                >
-                  Follow
-                </Button>
-              )}
-            </div>
+        <div className="viewall">
+          <div className="profileinfo-section">
+            <img src={avatar} alt={name} className="profile-avatar" />
+            <h2>{name}</h2>
+            <h4>Posts: {posts.length}</h4>
+            <h4>Followers: {followers.length}</h4>
+            <h4>Following: {following.length}</h4>
+            {followers.find((element) => element.id === props.currentUser) ? (
+              <Button
+                className="unfollow"
+                theme="secondary"
+                themeType="contained"
+                onClick={handleUnfollow}
+              >
+                Unfollow
+              </Button>
+            ) : (
+              <Button
+                className="follow"
+                theme="primary"
+                themeType="contained"
+                onClick={handleFollow}
+              >
+                Follow
+              </Button>
+            )}
           </div>
-          <div className="center">
+
+          <div className="allposts">
             {posts.length > 0 ? (
               posts.map((element) => (
-                <div key={element.id}>
+                <div className="post-container" key={element.id}>
                   <Posts
                     img={element.image}
                     userName={name}
@@ -120,12 +119,12 @@ const ViewProfile = (props) => {
                 </div>
               ))
             ) : (
-              <h3>User has no posts</h3>
+              <h1 className="heading">User has no posts</h1>
             )}
           </div>
         </div>
       ) : (
-        <h3>User not found!</h3>
+        <h1 className="heading">User not found!</h1>
       )}
     </section>
   );
