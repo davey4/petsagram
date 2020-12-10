@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 
 const Messaging = (props) => {
   // useEffect(() => {
-  //   socket.on("hello", (arg) => {
-  //     console.log(arg); // world
+  //   socket.on("connection", (arg) => {
+  //     console.log("connected"); // world
   //   });
   // }, []);
   return (
