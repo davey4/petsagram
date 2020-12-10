@@ -8,6 +8,7 @@ const Messaging = (props) => {
   //     console.log("connected"); // world
   //   });
   // }, []);
+  // testing
   return (
     <section className="message-section">
       <h1 className="heading">Messages</h1>
