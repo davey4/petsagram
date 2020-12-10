@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Pusher from "pusher-js";
-import { Button, TextField } from "react-md";
 
 const Messaging = () => {
-  // useState = [message, setMessage] = useState("hello");
+  const [message, setMessage] = useState("hello");
 
   Pusher.logToConsole = true;
 
@@ -11,19 +10,21 @@ const Messaging = () => {
     cluster: "mt1",
   });
 
-  let channel = pusher.subscribe("my-channel");
+  let channel = pusher.subscribe("frightened-prize-648");
+
   channel.bind("my-event", function (data) {
-    alert(JSON.stringify(data));
+    console.log(JSON.stringify(data));
   });
 
-  channel.bind("sent message", () => {
-    // console.log("hello");
+  channel.bind("client-message", (data, metadata) => {
+    console.log(data, metadata.user_id);
   });
 
   return (
-    <section className="message-section">
-      <h1 className="heading">Messages</h1>
-      <h1 className="heading">Under Construction</h1>
+    <section>
+      <div>
+        <h1 className="heading">Direct Messaging Coming Soon!</h1>
+      </div>
     </section>
   );
 };

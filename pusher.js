@@ -9,9 +9,4 @@ const pusher = new Pusher({
   cluster: PUSHER_CLUSTER,
   useTLS: true,
 });
-
-pusher.trigger("my-channel", "my-event", {
-  message: "hello world",
-});
-
 module.exports = pusher;
