@@ -5,12 +5,24 @@ const {
   Comments,
   Likes,
   Notifications,
+  Avatars,
 } = require("../models");
 const {
   hashPassword,
   passwordValid,
   createToken,
 } = require("../middleware/index");
+
+const getAvatars = async (req, res) => {
+  try {
+    const avatars = await Avatars.findAll({
+      attributes: ["avatar"],
+    });
+    res.send(avatars);
+  } catch (error) {
+    throw error;
+  }
+};
 
 const getUserName = async (req, res) => {
   try {
@@ -195,6 +207,7 @@ const RefreshSession = async (req, res) => {
 };
 
 module.exports = {
+  getAvatars,
   GetUser,
   FollowUser,
   UnfollowUser,

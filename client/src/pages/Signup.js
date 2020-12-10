@@ -65,14 +65,11 @@ const Signup = (props) => {
           password,
           avatar,
         };
-
-        await __CreateUser(data);
-
-        props.history.push("/login");
-      } catch (error) {
-        setUnique(true);
         setNext(false);
-      }
+        setUnique(true);
+        await __CreateUser(data);
+        props.history.push("/login");
+      } catch (error) {}
     } else {
       setFormError(true);
       setNext(false);
