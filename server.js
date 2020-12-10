@@ -3,9 +3,11 @@ const PORT = process.env.PORT || 3001;
 const express = require("express");
 const http = require("http")
 const app = express();
+
 const server = http.createServer(app);
 const socket = require("socket.io")
 const io = socket(server);
+
 
 // Require Middleware
 const logger = require("morgan");
@@ -21,9 +23,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize Middleware
+io.on("connection", function (socket) {
+  console.log("a user connected");
 
-app.get("/", (req, res) => res.send({ msg: "Petsagram Server Working" }));
-app.use("/api", AppRouter);
+  // 'disconnect' is an event sockets produce automatically.
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
+
 
 io.on("connection", (socket) => {
   console.log(socket.id);
@@ -35,3 +42,4 @@ io.on("connection", (socket) => {
 });
 
 server.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));
+

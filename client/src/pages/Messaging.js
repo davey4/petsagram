@@ -41,10 +41,11 @@ const Messaging = () => {
     setMessage(e.target.value);
   }
   // useEffect(() => {
-  //   socket.on("hello", (arg) => {
-  //     console.log(arg); // world
+  //   socket.on("connection", (arg) => {
+  //     console.log("connected"); // world
   //   });
   // }, []);
+  // testing
   return (
     <section className="message-section">
       <h1 className="heading">Messages</h1>
