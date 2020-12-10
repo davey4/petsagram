@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
+    "pusher": "^4.0.2",
     "sequelize": "^6.3.5",
     "socket.io": "^3.0.4"
   },
