@@ -80,7 +80,10 @@ User's Feed Page
 Explore Page
 ![Explore Page](assets/explorepage.png)
 
-User's Profile Page
+View User Profile
+![View User Profile](assets/viewprofile.png)
+
+Current User's Profile Page
 ![Profile Page](assets/profilepage.png)
 
 Upload Post
