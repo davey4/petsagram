@@ -41,6 +41,7 @@ Get started by signing up!
 * Users will be able to follow other users.
 * Users will be able to create posts.
 * Users will be able to like and comment on posts.
+* Users will be able to see notifications.
 
 ***
 
