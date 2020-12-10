@@ -29,7 +29,7 @@ h2 {
   align-items: center;
   margin-top: 10px;
   margin-left: 15px;
-  margin-right: 90px;
+  margin-right: 85px;
   cursor: pointer;
 }
 
@@ -44,7 +44,6 @@ img {
   margin-top: 5px;
 }
 
-.like-comment,
 .likes,
 .description {
   margin-top: 10px;

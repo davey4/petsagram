@@ -170,7 +170,7 @@ const Posts = (props) => {
           {likes.find((element) => element.User.id === props.currentUser) ? (
             <Button
               theme="primary"
-              themeType="contained"
+              themeType="clear"
               id="icon-button-1"
               buttonType="icon"
               onClick={unLike}
@@ -180,7 +180,7 @@ const Posts = (props) => {
           ) : (
             <Button
               theme="secondary"
-              themeType="outline"
+              themeType="clear"
               id="icon-button-1"
               buttonType="icon"
               onClick={addLike}
@@ -189,8 +189,8 @@ const Posts = (props) => {
             </Button>
           )}
           <Button
-            theme="primary"
-            themeType="contained"
+            theme="secondary"
+            themeType="clear"
             id="comment"
             buttonType="icon"
             onClick={() => setClicked(!clicked)}
