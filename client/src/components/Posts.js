@@ -230,7 +230,13 @@ const Posts = (props) => {
                 onChange={handleCommentChange}
                 placeholder="Comment"
               />
-              <Button theme="primary" themeType="contained" type="submit">
+              <Button
+                theme="secondary"
+                themeType="clear"
+                id="comment"
+                buttonType="icon"
+                type="submit"
+              >
                 <SendSVGIcon>Submit</SendSVGIcon>
               </Button>
             </form>
