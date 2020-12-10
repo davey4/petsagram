@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-md";
-import { FontIcon } from "@react-md/icon";
 import Posts from "../components/Posts";
 import { Button } from "react-md";
 import { FontIcon } from "@react-md/icon";

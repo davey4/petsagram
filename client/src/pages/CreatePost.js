@@ -70,12 +70,12 @@ const CreatePost = (props) => {
               onChange={handleDescription}
               placeholder="Description"
             />
-          </form>
           <div className="post-button">
             <Button type="submit" theme="secondary" themeType="contained">
               Post
             </Button>
           </div>
+          </form>
         </div>
       </div>
     </section>
