@@ -25,7 +25,6 @@ const Posts = (props) => {
   const [comments, setComments] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [description, setDescription] = useState("");
-  const [createComment, setCreateComment] = useState(false);
   const [likes, setLikes] = useState([]);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -99,7 +98,6 @@ const Posts = (props) => {
       const comments = await __GetComments(props.post.id);
       setComments(comments);
       setDescription("");
-      setCreateComment(!createComment);
       let message = `${name} commented on your post!`;
       createNotification(message);
     } catch (error) {
@@ -222,32 +220,22 @@ const Posts = (props) => {
             {props.description}
           </div>
         </div>
+        {clicked ? (
+          <div>
+            <form className="comment-form" onSubmit={handleAddComment}>
+              <TextField
+                type="text"
+                name="description"
+                value={description}
+                onChange={handleCommentChange}
+                placeholder="Comment"
+              />
+              <Button theme="primary" themeType="contained" type="submit">
+                <SendSVGIcon>Submit</SendSVGIcon>
+              </Button>
+            </form>
 
-        <div className="comments-button">
-          <Button
-            theme="primary"
-            themeType="contained"
-            onClick={() => setCreateComment(!createComment)}
-          >
-            Add Comment
-          </Button>
-        </div>
-        {createComment ? (
-          <form className="comment-form" onSubmit={handleAddComment}>
-            <TextField
-              type="text"
-              name="description"
-              value={description}
-              onChange={handleCommentChange}
-              placeholder="Comment"
-            />
-            <Button theme="primary" themeType="contained" type="submit">
-              <SendSVGIcon>Submit</SendSVGIcon>
-            </Button>
-          </form>
-        ) : null}
-        {clicked && comments
-          ? comments.map((element) => (
+            {comments.map((element) => (
               <div className="comments" key={element.id}>
                 <Comment
                   commentor={element.User.user_name}
@@ -257,8 +245,9 @@ const Posts = (props) => {
                   onClick={deleteComment}
                 />
               </div>
-            ))
-          : null}
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );

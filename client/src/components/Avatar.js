@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const Avatar = (props) => {
-  const [border, setBorder] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   return (
-    <div onClick={() => setBorder(!border)}>
+    <div onClick={() => setSelected(!selected)}>
       <img
-        className={border ? "the-avatar border" : "the-avatar"}
+        className={selected ? "the-avatar selected" : "the-avatar"}
         src={props.img}
         alt="avatar"
       />
