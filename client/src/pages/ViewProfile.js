@@ -35,6 +35,7 @@ const ViewProfile = (props) => {
       setPosts(data.Posts);
       setFollowers(data.followers);
       setFollowings(data.following);
+      // console.log(data);
     } catch (error) {
       throw error;
     }
@@ -73,54 +74,56 @@ const ViewProfile = (props) => {
 
   return (
     <section className="viewprofile">
-      <div>
-        {name ? (
+      {name ? (
+        <div>
           <div>
-            <h4>{name}</h4>
-            <h5>
-              Followers: {followers.length} Following: {following.length}
-            </h5>
-            {followers.find((element) => element.id === props.currentUser) ? (
-              <Button
-                className="unfollow"
-                theme="primary"
-                themeType="contained"
-                onClick={handleUnfollow}
-              >
-                Unfollow
-              </Button>
+            <div>
+              <h4>{name}</h4>
+              <h5>
+                Followers: {followers.length} Following: {following.length}
+              </h5>
+              {followers.find((element) => element.id === props.currentUser) ? (
+                <Button
+                  className="unfollow"
+                  theme="primary"
+                  themeType="contained"
+                  onClick={handleUnfollow}
+                >
+                  Unfollow
+                </Button>
+              ) : (
+                <Button
+                  className="follow"
+                  theme="primary"
+                  themeType="contained"
+                  onClick={handleFollow}
+                >
+                  Follow
+                </Button>
+              )}
+            </div>
+          </div>
+          <div className="center">
+            {posts.length > 0 ? (
+              posts.map((element) => (
+                <div key={element.id}>
+                  <Posts
+                    img={element.image}
+                    userName={name}
+                    description={element.description}
+                    post={element}
+                    currentUser={props.currentUser}
+                  />
+                </div>
+              ))
             ) : (
-              <Button
-                className="follow"
-                theme="primary"
-                themeType="contained"
-                onClick={handleFollow}
-              >
-                Follow
-              </Button>
+              <h3>User has no posts</h3>
             )}
           </div>
-        ) : (
-          <h3>User not found!</h3>
-        )}
-      </div>
-      <div className="center">
-        {posts ? (
-          posts.map((element) => (
-            <div key={element.id}>
-              <Posts
-                img={element.image}
-                userName={name}
-                description={element.description}
-                post={element}
-                currentUser={props.currentUser}
-              />
-            </div>
-          ))
-        ) : (
-          <h3>User has no posts</h3>
-        )}
-      </div>
+        </div>
+      ) : (
+        <h3>User not found!</h3>
+      )}
     </section>
   );
 };
