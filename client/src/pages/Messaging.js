@@ -1,71 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Button, TextField } from "react-md";
-import { io } from "socket.io-client";
-// const socket = io("http://localhost:3001");
+import React, { useState } from "react";
+import Pusher from "pusher-js";
 
 const Messaging = () => {
-  const [yourId, setYourId] = useState();
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("hello");
 
-  const socketRef = useRef();
+  Pusher.logToConsole = true;
 
-  useEffect(() => {
-    socketRef.current = io.connect("/");
+  let pusher = new Pusher("846611c5a7b391a138dd", {
+    cluster: "mt1",
+  });
 
-    socketRef.current.on("your id", (id) => {
-      setYourId(id);
-    });
+  let channel = pusher.subscribe("frightened-prize-648");
 
-    socketRef.current.on("message", (message) => {
-      console.log("here");
-      receivedMessage(message);
-    });
-  }, []);
+  channel.bind("my-event", function (data) {
+    console.log(JSON.stringify(data));
+  });
 
-  function receivedMessage(message) {
-    setMessages((oldMsgs) => [...oldMsgs, message]);
-  }
-
-  function sendMessage(e) {
-    e.preventDefault();
-    const messageObject = {
-      body: message,
-      id: yourId,
-    };
-    setMessage("");
-    socketRef.current.emit("message", messageObject);
-  }
-
-  function handleChange(e) {
-    setMessage(e.target.value);
-  }
+  channel.bind("client-message", (data, metadata) => {
+    console.log(data, metadata.user_id);
+  });
 
   return (
-    <section className="message-section">
-      <h1 className="heading">Messages</h1>
-
-      {messages.map((message, index) => {
-        if (message.id === yourId) {
-          return (
-            <div className="my-message" key={index}>
-              <h4>{message.body}</h4>
-            </div>
-          );
-        }
-        return (
-          <div className="other-message" key={index}>
-            <h4>{message.body}</h4>
-          </div>
-        );
-      })}
-
-      <form onSubmit={sendMessage}>
-        <TextField value={message} onChange={handleChange} placeholder="..." />
-        <Button theme="primary" themeType="contained">
-          Send
-        </Button>
-      </form>
+    <section>
+      <div>
+        <h1 className="heading">Direct Messaging Coming Soon!</h1>
+      </div>
     </section>
   );
 };
