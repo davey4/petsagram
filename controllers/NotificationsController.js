@@ -5,7 +5,6 @@ const CreateNotification = async (req, res) => {
     const user_id = parseInt(req.params.user_id);
     const message = req.body;
     let body = { user_id: user_id, ...message };
-    console.log(body);
     const notification = await Notifications.create(body);
     res.send(notification);
   } catch (error) {

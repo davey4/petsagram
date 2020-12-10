@@ -5,7 +5,6 @@ const CreateComment = async (req, res) => {
     let user_id = parseInt(req.params.user_id);
     let post_id = parseInt(req.params.post_id);
     let description = req.body;
-    console.log("body", description);
     let commentBody = {
       user_id: user_id,
       post_id: post_id,
