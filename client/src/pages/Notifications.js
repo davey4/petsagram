@@ -33,10 +33,10 @@ const Notifications = (props) => {
   };
 
   return (
-    <section className="center">
+    <section className="notifications">
       {notifications.length > 0 ? (
         notifications.map((element) => (
-          <div key={element.id}>
+          <div className="notifs" key={element.id}>
             <Notification
               message={element.message}
               id={element.id}
