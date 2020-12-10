@@ -1,6 +1,12 @@
 /* Profile Section */
 h2 {
   font-size: 32px;
+  font-family: 'Bree Serif', serif;
+}
+
+h4 {
+  font-size: 16px;
+  font-family: 'Bree Serif', serif;
 }
 
 .profile {
@@ -30,6 +36,7 @@ h2 {
   margin-top: 10px;
   margin-left: 15px;
   margin-right: 85px;
+  font-family: 'Bree Serif', serif;
   cursor: pointer;
 }
 
@@ -48,10 +55,11 @@ img {
 .description {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: 'Bree Serif', serif;
 }
 
 #comment {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .allposts,
@@ -87,6 +95,7 @@ img {
 
 /* Explore Section */
 .heading {
+  font-family: 'Bree Serif', serif;
   font-size: 28px;
 }
 
@@ -111,7 +120,8 @@ img {
 }
 
 .comment {
-  margin-top: 14px;
+  margin-top: 12px;
+  font-family: 'Bree Serif', serif;
 }
 
 .delete-comment {
@@ -182,5 +192,4 @@ img {
 .selected {
   border: 2px solid#ffe57f;
 }
-
 /* Choosing Avatar */
