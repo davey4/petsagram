@@ -14,8 +14,8 @@ const Home = () => {
           <h1>petsagram</h1>
           <article>
             <p>
-              Petstagram is an online photo-sharing app that allows you to share
-              your favorite photos of your pets to your followers. Petstagram
+              Petsagram is an online photo-sharing app that allows you to share
+              your favorite photos of your pets to your followers. Petsagram
               will allow you to follow any of the users on our application by
               simply searching for their usernames. You'll be able to like and
               comment on anyone's post right on the picture of the pet.
