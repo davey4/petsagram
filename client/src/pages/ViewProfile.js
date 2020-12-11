@@ -37,7 +37,6 @@ const ViewProfile = (props) => {
       setFollowers(data.followers);
       setFollowings(data.following);
       setAvatar(data.avatar);
-      // console.log(data);
     } catch (error) {
       throw error;
     }
